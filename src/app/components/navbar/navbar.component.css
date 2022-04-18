@@ -16,3 +16,8 @@ a:hover{
     background-color: rgb(184, 227, 250);
     color: rgb(255, 255, 255);
 }
+
+.logoYL{
+    height:50px;
+    cursor:pointer;
+}

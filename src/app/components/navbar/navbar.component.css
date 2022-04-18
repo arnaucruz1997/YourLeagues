@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap'); 
+
+
+.spacer{
+    flex: 1 1 auto;
+}
+a {
+    font-size: 18px;
+    font-family: Lato;
+}
+a:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(13, 189, 243);
+}
+.mat-toolbar {
+    background-color: rgb(184, 227, 250);
+    color: rgb(255, 255, 255);
+}

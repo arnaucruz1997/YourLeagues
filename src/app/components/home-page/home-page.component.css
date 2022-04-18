@@ -1,0 +1,56 @@
+#home{
+    background-color: rgb(184, 227, 250);
+    position:relative;
+    background-size: cover;
+    background-position: center center;
+    min-height: 95vh;
+}
+.row {
+    display: flex;
+    height: 100%;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+  
+.col-left {
+    flex: 70%;
+
+    
+}
+.col-right {
+    flex: 30%;
+
+}
+.textbox{
+    margin-left:10%;
+    margin-top: 1%;
+    margin-right: 10%;
+    color:white;
+    font-size: 30px;
+    font-family: Lato;
+    text-align: justify;
+    text-justify: inter-word;
+}
+#logo{
+    margin-left: 5%;
+
+}
+#btn{
+    margin-top: 5%;
+
+}
+.mat-raised-button {
+
+    width: 60%;
+    height: 45px;
+    font-size: 18px;
+    font-family: Lato;
+}
+#register{
+    background-color: rgb(13, 189, 243);
+    color: rgb(255, 255, 255);
+}
+#login{
+    background-color: rgb(255, 255, 255);
+    color: rgb(13, 189, 243);
+}

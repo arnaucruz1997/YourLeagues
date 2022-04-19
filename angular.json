@@ -100,6 +100,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "YourLeagues:build:production",
+            "firebaseProject": "yourleagues-46263",
+            "firebaseHostingSite": "yourleagues-46263"
+          }
         }
       }
     }

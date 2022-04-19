@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "yourleagues-46263"
+  },
+  "targets": {
+    "yourleagues-46263": {
+      "hosting": {
+        "YourLeagues": [
+          "yourleagues-46263"
+        ]
+      }
+    }
   }
 }

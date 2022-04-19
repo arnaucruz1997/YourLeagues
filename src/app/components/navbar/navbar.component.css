@@ -21,3 +21,14 @@ a:hover{
     height:50px;
     cursor:pointer;
 }
+.iconExit{
+    line-height: 12px;
+
+}
+.material-icons{
+    font-size: 26px;
+}
+.userImg{
+    height:50px;
+    border-radius: 50%;
+}

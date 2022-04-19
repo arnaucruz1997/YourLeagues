@@ -2,7 +2,6 @@
 <section id="login"> 
     <div class="row justify-content-center">
         <div class="card login-card">
-            <img class="card-img-top" src="holder.js/100x180/" alt="">
             <div class="card-body">
                 <h1 class="card-title text-center">Iniciar Sessió</h1>
                 <div class="container">
@@ -10,15 +9,16 @@
                         <div class="mb-3 row">
                             <label for="email" class="col-sm-1-12 col-form-label">E-mail</label>
                             <div class="col-sm-1-12">
-                                <input type="email" class="form-control" name="email" id="email">
+                                <input type="email" class="form-control" placeholder="Introdueix el teu email." #email required>
                             </div>
+
                             <label for="password" class="col-sm-1-12 col-form-label">Contrasenya</label>
                             <div class="col-sm-1-12">
-                                <input type="password" class="form-control" name="password" id="password">
+                                <input type="password" class="form-control" placeholder="Introdueix la teva contrasenya."#password required>
                             </div>
                         </div>
                         <div class="row justify-content-center">
-                            <button type="submit" class="btn btn-primary">Iniciar sessió</button>
+                            <input type="button" class="btn btn-primary" value="Iniciar sessió" (click)="authService.login(email.value,password.value)">
                         </div>
                         <div class="mb-3 row" style="margin-top: 5%;">
                             <p class="text-center">Si encara no estas registrat clica <a class="linkRegister">aquí</a>.</p>

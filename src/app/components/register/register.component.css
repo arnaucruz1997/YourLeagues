@@ -1,0 +1,28 @@
+#register{
+    background-color: rgb(184, 227, 250);
+    position:relative;
+    background-size: cover;
+    background-position: center center;
+    min-height: 95vh;
+    padding-top: 5%;
+}
+
+.login-card {
+    max-width: 500px;
+}
+
+.btn {
+    background-color: rgb(13, 189, 243);
+    color: rgb(255, 255, 255);
+    border-color: rgb(13, 189, 243);
+}
+
+.col-sm-1-12 {
+    padding-left:0;
+    padding-right:0;
+}
+
+.linkRegister{
+    color:rgb(13, 189, 243);
+    cursor: pointer;
+}

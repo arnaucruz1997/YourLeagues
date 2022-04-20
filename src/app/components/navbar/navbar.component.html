@@ -8,8 +8,8 @@
   <a mat-button>Qui som?</a>
   <a mat-button>Contacte</a>
   <a mat-button>Competicions</a>
-  <a mat-button>Registrar-se</a>
-  <a mat-button routerLink="login">Iniciar sessió</a>
+  <a mat-button [routerLink]="['/register']">Registrar-se</a>
+  <a mat-button [routerLink]="['/login']">Iniciar sessió</a>
 
 </mat-toolbar>
 <ng-template #loggedIn>

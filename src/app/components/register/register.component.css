@@ -26,3 +26,11 @@
     color:rgb(13, 189, 243);
     cursor: pointer;
 }
+
+select:required:invalid {
+    color: gray;
+}
+
+textarea {
+    height: 150px;
+  }

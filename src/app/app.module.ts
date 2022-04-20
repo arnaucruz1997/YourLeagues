@@ -20,6 +20,11 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AuthService } from './services/auth.service';
 import { AngularFireModule } from '@angular/fire/compat';
 import { RegisterComponent } from './components/register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StepperPositionDirective } from './utils/stepper-position.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
 
 
 @NgModule({
@@ -29,9 +34,11 @@ import { RegisterComponent } from './components/register/register.component';
     HomePageComponent,
     LoginComponent,
     RegisterComponent,
+    StepperPositionDirective,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MatToolbarModule,
     MatIconModule,
@@ -39,6 +46,9 @@ import { RegisterComponent } from './components/register/register.component';
     MatCardModule,
     MatFormFieldModule,
     MatStepperModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

@@ -1,15 +1,145 @@
 <app-navbar></app-navbar>
 <section id="register">
-    <mat-horizontal-stepper>
-        <mat-step label="Primero">
-            <p>primero</p>
-        </mat-step>
-        <mat-step label="segundo">
-            <p>segundo</p>
-        </mat-step>
-        <mat-step label="tercero">
-            <p>tercero</p>
-        </mat-step>
-    </mat-horizontal-stepper>
+    <div class="row justify-content-center">
+        <div class="card login-card">
+            <div class="card-body">
+                <h1 class="card-title text-center">Registre</h1>
+                    <mat-horizontal-stepper appStepperPosition="bottom">
+                        <form novalidate [formGroup]="user">
+                            <!--STEP 1-->
+                            <mat-step>
+                                <div class="container">
+                                        <div class="mb-3 row">
+                                            <label for="nom" class="col-sm-1-12 col-form-label">Nom</label>
+                                            <div class="col-sm-1-12">
+                                                <input type="text" class="form-control" placeholder="Introdueix el teu nom." formControlName="nom">
+                                            </div>
+
+                                            <label for="cognoms" class="col-sm-1-12 col-form-label">Cognoms</label>
+                                            <div class="col-sm-1-12">
+                                                <input type="text" class="form-control" placeholder="Introdueix els teus cognoms." formControlName="cognoms">
+                                            </div>
+
+                                            <label for="email" class="col-sm-1-12 col-form-label">E-mail</label>
+                                            <div class="col-sm-1-12">
+                                                <input type="email" class="form-control" placeholder="Introdueix el teu email." formControlName="email">
+                                            </div>
+
+                                            <label for="password" class="col-sm-1-12 col-form-label">Contrasenya</label>
+                                            <div class="col-sm-1-12">
+                                                <input type="password" class="form-control" placeholder="Introdueix la teva contrasenya." formControlName="password">
+                                            </div>
+
+                                            <label for="password2" class="col-sm-1-12 col-form-label">Repetir contrasenya</label>
+                                            <div class="col-sm-1-12">
+                                                <input type="password" class="form-control" placeholder="Repeteix la teva contrasenya." formControlName="confirmPassword">
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <button mat-button matStepperNext class="btn btn-primary">Següent</button>
+                                        </div>
+                                </div>
+                            </mat-step>
+                            <!--STEP 2-->
+                            <mat-step>
+                                <div class="container">
+                                    <div class="mb-3 row">
+                                        <label for="dni" class="col-sm-1-12 col-form-label">DNI</label>
+                                        <div class="col-sm-1-12">
+                                            <input type="text" class="form-control" placeholder="Introdueix el teu dni." formControlName="dni">
+                                        </div>
+
+                                        <label for="date" class="col-sm-1-12 col-form-label">Data de naixement</label>
+                                        <div class="col-sm-1-12">
+                                            <input type="date" class="form-control" placeholder="Introdueix la teva data de naixement." formControlName="date">
+                                        </div>
+
+                                        <label for="sexe" class="col-sm-1-12 col-form-label">Sexe</label>
+                                        <div class="col-sm-1-12">
+                                            <select class="form-select" formControlName="sexe">
+                                                <option value="" disabled selected>Selecciona el teu sexe</option>
+                                                <option>Home</option>
+                                                <option>Dona</option>
+                                            </select>
+                                        </div>
+
+                                        <label for="localitat" class="col-sm-1-12 col-form-label">Localitat</label>
+                                        <div class="col-sm-1-12">
+                                            <input type="text" class="form-control" placeholder="Introdueix la teva localitat." formControlName="localitat">
+                                        </div>
+
+                                        <label for="rol" class="col-sm-1-12 col-form-label">Rol (Organitzador/Jugador)</label>
+                                        <div class="col-sm-1-12">
+                                            <select class="form-select" formControlName="rol">
+                                                <option value="" disabled selected>Selecciona el Rol</option>
+                                                <option>Organitzador</option>
+                                                <option>Jugador</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <button mat-button matStepperNext class="btn btn-primary">Següent</button>
+                                    </div>
+                                </div>
+                            </mat-step>
+                        </form>
+                        <form novalidate [formGroup]="jugador">
+                            <!--STEP 3 (JUGADOR)-->
+                            <mat-step *ngIf="(user.controls['rol'].value === 'Jugador'); else organitzador">
+                                <div class="container">
+                                    <div class="mb-3 row">
+                                        <label for="altura" class="col-sm-1-12 col-form-label">Altura (cm)</label>
+                                        <div class="col-sm-1-12">
+                                            <input type="number" class="form-control" placeholder="Introdueix la teva altura en cm." formControlName="altura">
+                                        </div>
+
+                                        <label for="pes" class="col-sm-1-12 col-form-label">Pes (kg)</label>
+                                        <div class="col-sm-1-12">
+                                            <input type="number" class="form-control" placeholder="Introdueix el teu pes en kg." formControlName="pes">
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <input type="button" class="btn btn-primary" value="Finalitzar" (click)="authService.register(user.value,jugador.value,org.value)">
+                                    </div>
+                                </div>
+                            </mat-step>
+                        </form>
+                        <form novalidate [formGroup]="org">
+                            <!--STEP 3 (ORGANITZADOR)-->
+                            <ng-template #organitzador>
+                                <mat-step>
+                                    <div class="container">
+                                        <div class="mb-3 row">
+                                            <label for="orgName" class="col-sm-1-12 col-form-label">Nom de la organització</label>
+                                            <div class="col-sm-1-12">
+                                                <input type="text" class="form-control" placeholder="Introdueix el nom de la teva organització." formControlName="orgName">
+                                            </div>
+
+                                            <label for="orgEmail" class="col-sm-1-12 col-form-label">E-mail de la organització</label>
+                                            <div class="col-sm-1-12">
+                                                <input type="email" class="form-control" placeholder="Introdueix el e-mail de la teva organització." formControlName="orgEmail">
+                                            </div>
+
+                                            <label for="orgTelefon" class="col-sm-1-12 col-form-label">Telèfon de la organització</label>
+                                            <div class="col-sm-1-12">
+                                                <input type="text" class="form-control" placeholder="Introdueix el telèfon de la teva organització." formControlName="orgTelefon">
+                                            </div>
+
+                                            <label for="orgDesc" class="col-sm-1-12 col-form-label">Descripció de la organització</label>
+                                            <div class="col-sm-1-12">
+                                                <textarea rows="5" class="form-control" placeholder="Introdueix la descripció de la teva organització." formControlName="orgDesc"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <input type="button" class="btn btn-primary" value="Finalitzar" (click)="authService.register(user.value,jugador.value,org.value)">
+                                        </div>
+                                    </div>
+                                </mat-step>   
+                            </ng-template>
+                        </form>
+                    </mat-horizontal-stepper>
+            </div>
+        </div>
+    </div>
 </section>
 

@@ -1,32 +1,40 @@
-<app-navbar></app-navbar>
-<section id="home" *ngIf="!(authService.isLoggedIn); else loggedIn">
-    <div class="row">
-        <div class="col-left">
-            <img src="../../../assets/imgs/yourleagues4.png" id="logo">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-left">
-            <div class="textbox">
-                <p>Organitza els teus torneigos i lligues amb la millor aplicació per a crear competicions, creació de calendari automàtic, processament automàtic de resultats,                
-                    Gestiona els teus equips i inscriu-te a les competicions creades per altes usuaris de la comunitat.
-                </p>
+<mat-spinner *ngIf="!(userService.loaded) && (authService.isLoggedIn); else cargado">
+    
+</mat-spinner>
+<ng-template #cargado>
+    <app-navbar></app-navbar>
+    <section id="home" *ngIf="!(authService.isLoggedIn); else loggedIn">
+        <div class="row">
+            <div class="col-left">
+                <img src="../../../assets/imgs/yourleagues4.png" id="logo">
             </div>
         </div>
-        <div class="col-right">
-            <div id="btn">
-                <button mat-raised-button id="login" [routerLink]="['/login']">Iniciar sessió</button>
+        <div class="row">
+            <div class="col-left">
+                <div class="textbox">
+                    <p>Organitza els teus torneigos i lligues amb la millor aplicació per a crear competicions, creació de calendari automàtic, processament automàtic de resultats,                
+                        Gestiona els teus equips i inscriu-te a les competicions creades per altes usuaris de la comunitat.
+                    </p>
+                </div>
             </div>
-            <div id="btn">
-                <button mat-raised-button id="register" [routerLink]="['/register']">Registra't</button>
-            </div>         
+            <div class="col-right">
+                <div id="btn">
+                    <button mat-raised-button id="login" [routerLink]="['/login']">Iniciar sessió</button>
+                </div>
+                <div id="btn">
+                    <button mat-raised-button id="register" [routerLink]="['/register']">Registra't</button>
+                </div>         
+            </div>
         </div>
-    </div>
-</section>
-<ng-template #loggedIn>
-<section id="home">
-    <h1>ESTAS CONECTAT</h1>
-</section>
+    </section>
+    <ng-template #loggedIn>
+    <section id="home">
+        <h1>ESTAS CONECTAT: {{userService.usuari.rol}}</h1>
+        <div class="row justify-content-center">
+            <input type="button" class="btn btn-primary" value="Finalitzar">
+        </div>
+    </section>
+    </ng-template>
+    
 </ng-template>
-
 

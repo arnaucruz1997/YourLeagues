@@ -1,5 +1,5 @@
 export interface UserData {
-    id: string;
+    uid: string;
     email: string;
 }
 export interface User {

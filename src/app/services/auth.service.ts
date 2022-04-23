@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Jugador, Organitzador, User, UserData } from '../models/user';
-import * as firebase from '@firebase/app';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {Router} from '@angular/router';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument,} from '@angular/fire/compat/firestore';
-import { registerLocaleData } from '@angular/common';
-import { userInfo } from 'os';
+import {AngularFirestore, AngularFirestoreCollection,} from '@angular/fire/compat/firestore';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -41,26 +39,28 @@ export class AuthService {
     }).catch(err =>{
       alert('L\'usuari introduït no es correcte');
     });
-
   }
+
   logout(){
     return this.afAuth.signOut().then(()=>{
       this.router.navigate([''])
     });
   }
   register(user: any, jugador:any, organitzador:any){
-    console.log(user);
-    console.log(jugador);
-    console.log(organitzador);
-    return this.afAuth .createUserWithEmailAndPassword(user.email, user.password).then((success) => {
+    return this.afAuth .createUserWithEmailAndPassword(user.get('email').value, user.get('password').value).then((success) => {
       this.insertUser(success.user?.uid,user,jugador,organitzador);
+      this.setUserData(success.user);
+      this.userData = success.user;
+      localStorage.setItem('user', JSON.stringify(this.userData));
+      JSON.parse(localStorage.getItem('user')!);
       this.router.navigate(['']);
     })
     .catch((error) => {
       window.alert(error.message);
     });
   }
-  get isLoggedIn(): boolean{
+
+  get isLoggedIn(){
     const user = JSON.parse(localStorage.getItem('user')!);
     if (user==null){
       return false;
@@ -68,27 +68,36 @@ export class AuthService {
       return true;
     }
   }
+   get UserId() {
+    if(this.isLoggedIn){
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      return user['uid'];
+    }else{
+      return null;
+    }
+
+  }
   setUserData(user: any){
     const userData: UserData = {
-      id: user.id,
+      uid: user.uid,
       email: user.email,
     };
   }
-  insertUser(id: any, user: any, jugador:any, organitzador:any){
-    console.log(jugador.altura);
-    if (user.rol == 'Jugador'){
+
+  insertUser(id: any, user: FormGroup, jugador:FormGroup, organitzador:FormGroup){
+    if (user.get('rol').value == 'Jugador'){
       const userInfo:Jugador = {
         id: id,
-        email: user.email,
-        nom: user.nom,
-        cognoms: user.cognoms,
-        dni: user.dni,
-        date: user.date,
-        sexe: user.sexe,
-        localitat: user.localitat,
-        rol: user.rol,
-        altura: jugador.altura,
-        pes: jugador.pes,
+        email: user.get('email').value,
+        nom: user.get('nom').value,
+        cognoms: user.get('cognoms').value,
+        dni: user.get('dni').value,
+        date: user.get('date').value,
+        sexe: user.get('sexe').value,
+        localitat: user.get('localitat').value,
+        rol: user.get('rol').value,
+        altura: jugador.get('altura').value,
+        pes: jugador.get('pes').value,
       }
       this.userCollectionJugador.add(userInfo).catch((error) => {
         window.alert(error.message);
@@ -96,25 +105,22 @@ export class AuthService {
     }else{
       const userInfo:Organitzador = {
         id: id,
-        email: user.email,
-        nom: user.nom,
-        cognoms: user.cognoms,
-        dni: user.dni,
-        date: user.date,
-        sexe: user.sexe,
-        localitat: user.localitat,
-        rol: user.rol,
-        orgName: organitzador.orgName,
-        orgEmail: organitzador.orgEmail,
-        orgTelefon: organitzador.orgTelefon,
-        orgDesc: organitzador.orgDesc,
+        email: user.get('email').value,
+        nom: user.get('nom').value,
+        cognoms: user.get('cognoms').value,
+        dni: user.get('dni').value,
+        date: user.get('date').value,
+        sexe: user.get('sexe').value,
+        localitat: user.get('localitat').value,
+        rol: user.get('rol').value,
+        orgName: organitzador.get('orgName').value,
+        orgEmail: organitzador.get('orgEmail').value,
+        orgTelefon: organitzador.get('orgTelefon').value,
+        orgDesc: organitzador.get('orgDesc').value,
       }
       this.userCollectionOrganitzador.add(userInfo).catch((error) => {
         window.alert(error.message);
       });
     }
-  }
-  findUserData(user: any){
-    user.id
   }
 }

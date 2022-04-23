@@ -1,3 +1,4 @@
+
 #register{
     background-color: rgb(184, 227, 250);
     position:relative;
@@ -20,6 +21,7 @@
 .col-sm-1-12 {
     padding-left:0;
     padding-right:0;
+    margin-bottom: 2%;
 }
 
 .linkRegister{
@@ -33,4 +35,16 @@ select:required:invalid {
 
 textarea {
     height: 150px;
-  }
+}
+
+.formfield{
+    width:100%;
+    height:15 px;
+}
+
+::ng-deep.mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: rgb(13, 189, 243);
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: rgb(13, 189, 243) !important;
+}

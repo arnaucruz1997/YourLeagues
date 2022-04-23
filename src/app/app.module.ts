@@ -24,6 +24,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StepperPositionDirective } from './utils/stepper-position.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from  '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 
 
 
@@ -45,10 +49,14 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
+    MatInputModule,
     MatStepperModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFirestoreModule,
+    MatSnackBarModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

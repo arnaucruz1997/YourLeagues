@@ -40,8 +40,11 @@ export class UploadService {
       this.storage.upload(imgurl,file)
     }
   }
-  getProfileImage(url:string): Observable<any>{
-    console.log(url);
-    return this.storage.ref(url).getDownloadURL();
+  getProfileImage(url:string){
+    this.storage.ref(url).getDownloadURL().subscribe(
+      (data) =>{
+        this.downloadURL = data;
+      }
+    );
   }
 }

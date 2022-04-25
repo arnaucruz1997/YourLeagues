@@ -20,7 +20,7 @@
       <a mat-button routerLink="">Home</a>
       <a mat-button>Buscar Competicions</a>
       <div class="spacer"></div>
-      <img class="userImg" src={{uploadService.getProfileImage(this.usuari.img) | async}}>
+      <img class="userImg" src={{uploadService.downloadURL}}>
         <a mat-button>{{this.usuari.nom}}</a>
         <a mat-button>Equips</a>
         <a mat-button>Competicions</a>

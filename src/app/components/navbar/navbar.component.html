@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" *ngIf="!(authService.isLoggedIn); else loggedIn">
+<mat-toolbar color="primary" *ngIf="!(authService.isLoggedIn); else loggedJugador">
   <span></span>
   <span *ngIf="!(router.url === '/')">
       <img src="../../../assets/imgs/YL.png" class="logoYL" routerLink="">
@@ -10,21 +10,36 @@
   <a mat-button>Competicions</a>
   <a mat-button [routerLink]="['/register']">Registrar-se</a>
   <a mat-button [routerLink]="['/login']">Iniciar sessió</a>
-
 </mat-toolbar>
-<ng-template #loggedIn >
-    <mat-toolbar color="primary" style="background-color: rgb(13, 189, 243);  color: rgb(255, 255, 255);">
-      <span>
-          <img src="../../../assets/imgs/YLBlanco.png" class="logoYL" routerLink="">
-      </span>
-        <a mat-button routerLink="">Home</a>
-        <a mat-button>Buscar Competicions</a>
-        <div class="spacer"></div>
-        <img class="userImg" src="../../../assets/imgs/maleuser.jpg">
-          <a mat-button>{{userService.usuari.nom}}</a>
-          <a mat-button>Equips</a>
-          <a mat-button>Competicions</a>
-          <a mat-button>Partits</a>
-          <a mat-button (click)="authService.logout()"><mat-icon class="iconExit">exit_to_app</mat-icon></a>
-    </mat-toolbar> 
+
+<ng-template #loggedJugador>
+  <mat-toolbar color="primary" style="background-color: rgb(13, 189, 243);  color: rgb(255, 255, 255);">
+    <span>
+        <img src="../../../assets/imgs/YLBlanco.png" class="logoYL" routerLink="">
+    </span>
+      <a mat-button routerLink="">Home</a>
+      <a mat-button>Buscar Competicions</a>
+      <div class="spacer"></div>
+      <img class="userImg" src={{uploadService.getProfileImage(this.usuari.img) | async}}>
+        <a mat-button>{{this.usuari.nom}}</a>
+        <a mat-button>Equips</a>
+        <a mat-button>Competicions</a>
+        <a mat-button>Partits</a>
+        <a mat-button (click)="authService.logout()"><mat-icon class="iconExit">exit_to_app</mat-icon></a>
+  </mat-toolbar> 
+</ng-template>
+
+<ng-template #loggedOrg>
+  <mat-toolbar color="primary" style="background-color: rgb(13, 189, 243);  color: rgb(255, 255, 255);">
+    <span>
+        <img src="../../../assets/imgs/YLBlanco.png" class="logoYL" routerLink="">
+    </span>
+      <a mat-button routerLink="">Home</a>
+      <div class="spacer"></div>
+      <img class="userImg">
+        <a mat-button>{{this.usuari.nom}}</a>
+        <a mat-button>Competicions</a>
+        <a mat-button>Partits</a>
+        <a mat-button (click)="authService.logout()"><mat-icon class="iconExit">exit_to_app</mat-icon></a>
+  </mat-toolbar> 
 </ng-template>

@@ -1,31 +1,23 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection,} from '@angular/fire/compat/firestore';
+import { Observable, take } from 'rxjs';
 import { User } from '../models/user';
 import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  usuari:User;
+  usuari:Observable<User>;
   uid:string;
-  loaded:boolean = false;
   constructor(
     public afs: AngularFirestore, 
     private authService:AuthService
     ) {
   }
 
-  async getUserData() {
-    if(this.authService.isLoggedIn){
+  getUserData(): Observable<any>{
+      console.log("xd1");
       this.uid = this.authService.UserId;
-      console.log("UID: ",this.uid);
-      await this.afs.collection('usuaris', ref => ref.where('id','==',this.uid)).valueChanges().subscribe(
-        (data:any[]) =>{
-          this.usuari = data[0];
-          this.loaded=true;
-          console.log(this.loaded);
-        }
-      );
-    }
+      return this.afs.collection('usuaris', ref => ref.where('id','==',this.uid)).valueChanges().pipe(take(1));
   }
 }

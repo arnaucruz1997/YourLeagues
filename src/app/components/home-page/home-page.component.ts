@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 @Component({
@@ -7,12 +9,20 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  constructor(public authService:AuthService, public userService:UserService) { 
+  usuari:User;
+  constructor(
+    public authService:AuthService, 
+    public userService:UserService,
+    public route:ActivatedRoute,
+    ) { 
 
   }
   async ngOnInit() {
-    console.log("inicio home");
-    this.userService.getUserData();
+    this.route.data.subscribe(
+      data => {
+        this.usuari = data['user'][0];
+      }
+    )
   }
 
 }

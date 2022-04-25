@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper, MatStepperNext } from '@angular/material/stepper';
 import { Jugador } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { UploadImageComponent } from '../upload-image/upload-image.component';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  @ViewChild(UploadImageComponent) uploadComponent!: UploadImageComponent;
+  ficheroVacio: File = null;
   user: FormGroup;
   jugador: FormGroup;
   org: FormGroup;
-  constructor(public authService:AuthService, private snackBar:MatSnackBar) { }
+  constructor(public authService:AuthService, private snackBar:MatSnackBar,) { }
 
   ngOnInit(): void {
     this.user = new FormGroup({
@@ -48,6 +51,12 @@ export class RegisterComponent implements OnInit {
           Validators.maxLength(150)])),
     });
   }
+  getImageUrl(){
+    return this.uploadComponent.uploadService.uploadurl;
+  }
+  getFile(){
+    return this.uploadComponent.uploadService.selectedImage;
+  }
   private controlValuesAreEqual(password:string,confirmPassword:string): ValidatorFn{
     return (control:AbstractControl): ValidationErrors | null => {
       const formGroup = control as FormGroup
@@ -80,14 +89,14 @@ export class RegisterComponent implements OnInit {
       }
     }else if(step =='jugador'){
       if(this.firstStepValid() && this.secondStepValid() && this.jugador.valid){
-        this.authService.register(this.user,this.jugador,this.org);
+        this.authService.register(this.user,this.jugador,this.org,this.getImageUrl(),this.getFile());
       }else{
         this.snackBar.open('Les dades no són correctes','x');
       }
     }else if(step == 'organitzador'){
 
       if(this.firstStepValid() && this.secondStepValid() && this.org.valid){
-        this.authService.register(this.user,this.jugador,this.org);
+        this.authService.register(this.user,this.jugador,this.org,'./../assets/imgs/maleuser.jpg',null);
       }else{
         this.snackBar.open('Les dades no són correctes','x');
       }

@@ -12,11 +12,13 @@ export interface User {
     sexe: string;
     localitat: string;
     rol: string;
+    img: string;
 }
 
 export interface Jugador extends User{
     altura: number;
     pes:number;
+    equips:[id:string];
  }
 
 export interface Organitzador extends User{

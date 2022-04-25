@@ -1,0 +1,12 @@
+.avatar-preview{
+    height:200px;
+    border-radius: 50%;
+}
+.image-upload>input{
+    display:none;
+}
+.icono-upload-img{
+    font-size: 30px;
+    cursor: pointer;
+    color:rgb(13, 189, 243);
+}

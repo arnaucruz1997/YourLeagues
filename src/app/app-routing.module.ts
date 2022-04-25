@@ -5,9 +5,10 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
+import { UserResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
-  { path: '', component:HomePageComponent },
+  { path: '', component:HomePageComponent, resolve: {user : UserResolver}},
   { path: 'login', component:LoginComponent, canActivate:[AuthGuard], },
   { path: 'register', component:RegisterComponent, canActivate:[AuthGuard], },
 ];

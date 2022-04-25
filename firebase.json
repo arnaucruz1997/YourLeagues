@@ -5,6 +5,7 @@
   },
   "hosting": [
     {
+      "target":"YourLeagues",
       "public": "./dist/your-leagues",
       "ignore": [
         "firebase.json",
@@ -51,8 +52,5 @@
         }
       ]
     }
-  ],
-  "storage": {
-    "rules": "storage.rules"
-  }
+  ]
 }

@@ -1,0 +1,9 @@
+<div class="text-center">
+    <img src={{uploadService.imgurl}} class="avatar-preview">
+    <div class="row justify-content-center image-upload">
+        <label for="file-input">
+            <mat-icon class="icono-upload-img">add_a_photo</mat-icon>
+        </label>
+        <input type="file" id="file-input" (change)="uploadService.onFileSelected($event)"/>
+    </div>
+</div>

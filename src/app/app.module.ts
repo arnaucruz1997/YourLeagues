@@ -27,7 +27,10 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from  '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { UploadImageComponent } from './components/upload-image/upload-image.component'
+import { DatePipe } from '@angular/common';
+import { UserResolver } from './resolvers/user.resolver';
 
 
 
@@ -39,6 +42,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
     LoginComponent,
     RegisterComponent,
     StepperPositionDirective,
+    UploadImageComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
   ],
-  providers: [AuthService],
+  providers: [AuthService, DatePipe, UserResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

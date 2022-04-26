@@ -1,0 +1,42 @@
+#home{
+    background-color: rgb(184, 227, 250);
+    position:relative;
+    background-size: cover;
+    background-position: center center;
+    min-height: 95vh;
+}
+.team-item{
+    background-color: rgb(248,248,248);
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.team-item-invitation{
+    background-color: rgb(248,248,248);
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.teams{
+    background-color: rgb(80,178,230);
+}
+
+.team{
+    margin-bottom: 20px;
+}
+
+.accept-button{
+    color:chartreuse;
+    font-size: 35px;
+}
+.decline-button{
+    color:red;
+    font-size: 35px;
+}
+.view-button{
+    color:rgb(80,178,230);
+    font-size: 35px;
+}
+.row{
+    display: flex;
+    align-items: center;
+}

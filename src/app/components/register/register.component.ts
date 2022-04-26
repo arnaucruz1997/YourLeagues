@@ -82,7 +82,6 @@ export class RegisterComponent implements OnInit {
       }
     }else if(step =='second'){
       if(this.secondStepValid()){
-
         stepper.next();
       }else{
         this.snackBar.open('Les dades no són correctes','x');

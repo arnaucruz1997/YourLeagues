@@ -16,7 +16,6 @@ export class UserService {
   }
 
   getUserData(): Observable<any>{
-      console.log("xd1");
       this.uid = this.authService.UserId;
       return this.afs.collection('usuaris', ref => ref.where('id','==',this.uid)).valueChanges().pipe(take(1));
   }

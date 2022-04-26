@@ -18,7 +18,7 @@ export interface User {
 export interface Jugador extends User{
     altura: number;
     pes:number;
-    equips:[id:string];
+    equips:string[];
  }
 
 export interface Organitzador extends User{

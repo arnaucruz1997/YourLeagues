@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import {MatToolbarModule, } from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -26,11 +25,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from  '@angular/material/select';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UploadImageComponent } from './components/upload-image/upload-image.component'
 import { DatePipe } from '@angular/common';
 import { UserResolver } from './resolvers/user.resolver';
+import { MyTeamsComponent } from './components/my-teams/my-teams.component';
+import { CreateTeamComponent } from './components/create-team/create-team.component';
+
+
 
 
 
@@ -43,6 +46,9 @@ import { UserResolver } from './resolvers/user.resolver';
     RegisterComponent,
     StepperPositionDirective,
     UploadImageComponent,
+    MyTeamsComponent,
+    CreateTeamComponent,
+
   ],
   imports: [
     BrowserModule,

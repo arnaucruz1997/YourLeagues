@@ -10,7 +10,6 @@ export class UserResolver implements Resolve<any> {
     }
 
   resolve(route:ActivatedRouteSnapshot,state:RouterStateSnapshot):Observable<any> {
-    console.log("lol",this.userService.getUserData());
     return this.userService.getUserData();
   }
 }

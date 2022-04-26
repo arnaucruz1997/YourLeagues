@@ -24,9 +24,9 @@ export class NavbarComponent implements OnInit {
       this.route.data.subscribe(
         data => {
           this.usuari = data['user'][0];
+          this.uploadService.getImage(this.usuari.img);
         }
       );
-      this.uploadService.getProfileImage(this.usuari.img);
       //await this.uploadService.getProfileImage(this.userService.usuari.img);
   }
 }

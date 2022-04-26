@@ -98,7 +98,6 @@ export class AuthService {
   }
 
   insertUser(id: any, user: FormGroup, jugador:FormGroup, organitzador:FormGroup, imgurl:string){
-    const sex = user.get('sexe').value
     if (user.get('rol').value == 'Jugador'){
       const userInfo:Jugador = {
         id: id,
@@ -113,9 +112,10 @@ export class AuthService {
         img: imgurl,
         altura: jugador.get('altura').value,
         pes: jugador.get('pes').value,
-        equips: [null],
+        equips: [],
       }
-      this.userCollectionJugador.add(userInfo).catch((error) => {
+
+      this.userCollectionJugador.doc(id).set(userInfo).catch((error) => {
         window.alert(error.message);
       });
     }else{

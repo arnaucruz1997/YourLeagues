@@ -33,3 +33,9 @@ a:hover{
     width:50px;
     border-radius: 50%;
 }
+.app-toolbar {
+    position: sticky;
+    position: -webkit-sticky; 
+    top: 0;
+    z-index: 1000;
+}

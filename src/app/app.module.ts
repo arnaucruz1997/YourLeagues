@@ -26,12 +26,19 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from  '@angular/material/select';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs'
+import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 import { UploadImageComponent } from './components/upload-image/upload-image.component'
 import { DatePipe } from '@angular/common';
 import { UserResolver } from './resolvers/user.resolver';
 import { MyTeamsComponent } from './components/my-teams/my-teams.component';
 import { CreateTeamComponent } from './components/create-team/create-team.component';
+import { TeamComponent } from './components/team/team.component';
+import { InvitePlayerComponent } from './components/invite-player/invite-player.component';
+
+
 
 
 
@@ -48,6 +55,8 @@ import { CreateTeamComponent } from './components/create-team/create-team.compon
     UploadImageComponent,
     MyTeamsComponent,
     CreateTeamComponent,
+    TeamComponent,
+    InvitePlayerComponent,
 
   ],
   imports: [
@@ -67,6 +76,9 @@ import { CreateTeamComponent } from './components/create-team/create-team.compon
     ReactiveFormsModule,
     AngularFirestoreModule,
     MatSnackBarModule,
+    MatTableModule,
+    MatTabsModule,
+    MatDividerModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

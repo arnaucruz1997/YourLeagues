@@ -1,0 +1,16 @@
+.formfield{
+    width: 100%;
+}
+.btn {
+    background-color: rgb(13, 189, 243);
+    color: rgb(255, 255, 255);
+    border-color: rgb(13, 189, 243);
+}
+.row{
+    display: flex;
+    align-items: center;
+}
+.titles-invitation{
+    text-align: left !important;
+    color: rgb(121, 121, 121) !important;
+}

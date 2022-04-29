@@ -28,6 +28,13 @@
                                             <mat-error *ngIf="team.invalid">{{getErrors('abreviacio')}}</mat-error>
                                         </mat-form-field>
                                     </div>
+                                    <div class="col-sm-1-12">
+                                        <mat-form-field appearance="legacy" class="formfield">
+                                            <mat-label>Dorsal</mat-label>
+                                            <input matInput type="number" min="1" max="99" placeholder="Introdueix el teu dorsal." formControlName="dorsal">
+                                            <mat-error *ngIf="team.invalid">{{getErrors('dorsal')}}</mat-error>
+                                        </mat-form-field>
+                                    </div>
                                 </div>
                                 <div class = "col-sm-6 text-center">
                                     <h1 class="tittle-inputs">Imatge del equip</h1>

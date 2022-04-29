@@ -7,13 +7,13 @@
                     <h1>Els meus equips</h1>
                 </div>
                 <div class="col">
-                    <button [routerLink]="['/create-team']">Crear equip</button>
+                    <button mat-button class="btn btn-primary" [routerLink]="['/create-team']" >Crear equip</button>
                 </div>
             </div>
             <div class="card teams">
                 <div class="card-body">
                     <div class="card team" *ngFor="let equip of equips">
-                        <div class ="row card-body team-item">
+                        <div class ="row card-body team-item" [routerLink]="['/my-teams/',equip.id]">
                             <div class="col-sm-1" *ngIf="(equip.capita == this.usuari['id'])">
                                 <img src="../../../assets/imgs/captain.png">
                             </div>

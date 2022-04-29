@@ -1,0 +1,91 @@
+<app-navbar></app-navbar>
+<section id="home">
+    <div class="row justify-content-center">
+        <div style="max-width:1000px">
+            <div class ="row">
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-1 align-self-center" style="margin-bottom:1%; margin-top:1%;">
+                    <img src="../../../assets/imgs/maleuser.jpg">
+                </div>
+                <div class="col-sm-4 align-self-center">
+                    <h1>Els meus equips</h1>
+                </div>
+            </div>
+            <div class ="row">
+                <div class="col-sm-3">
+                    <div class="card wrap-card-lateral">
+                        <div class="card-body">
+                            <div class="card" (click)="tabGroup.selectedIndex=0">
+                                <div class="card-body card-lateral">
+                                    <div class ="row">
+                                        <div class=" col-sm-1"></div>
+                                        <div class="col-sm-2 align-self-center">
+                                            <mat-icon style="margin-top:5px;" >group</mat-icon>
+                                        </div>
+                                        <div class="col-sm-8 align-self-center">
+                                            <div class="align-self-center">Jugadors</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="margin-top:5%;" (click)="tabGroup.selectedIndex=1">
+                                <div class="card-body card-lateral">
+                                    <div class ="row">
+                                        <div class=" col-sm-1"></div>
+                                        <div class="col-sm-2 align-self-center">
+                                            <mat-icon style="margin-top:5px;" >leaderboard</mat-icon>
+                                        </div>
+                                        <div class="col-sm-8 align-self-center">
+                                            <div class="align-self-center">Competicions</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="margin-top:5%;" (click)="tabGroup.selectedIndex=2">
+                                <div class="card-body card-lateral">
+                                    <div class ="row">
+                                        <div class=" col-sm-1"></div>
+                                        <div class="col-sm-2 align-self-center">
+                                            <mat-icon style="margin-top:5px;" >group_add</mat-icon>
+                                        </div>
+                                        <div class="col-sm-8 align-self-center">
+                                            <div class="align-self-center">Invitar Jugador </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="card teaminfo">
+                        <div class="card-body">
+                            <mat-tab-group class="tabteaminfo text-center" mat-align-tabs="center" #tabGroup>
+                                <mat-tab label="First">
+                                    <ng-template mat-tab-label>
+                                        <mat-icon class="icono-tab">group</mat-icon>
+                                         Jugadors
+                                    </ng-template>
+                                </mat-tab>
+                                <mat-tab label="Second">
+                                    <ng-template mat-tab-label>
+                                        <mat-icon class="icono-tab">leaderboard</mat-icon>
+                                        Competicions
+                                    </ng-template>
+                                </mat-tab>
+                                <mat-tab label="Third">
+                                    <ng-template mat-tab-label>
+                                        <mat-icon class="icono-tab">group_add</mat-icon>
+                                        Invitar Jugador
+                                    </ng-template>
+                                    <invite-player [parent]="this"></invite-player>
+                                </mat-tab>
+                              </mat-tab-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

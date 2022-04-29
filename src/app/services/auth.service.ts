@@ -101,7 +101,7 @@ export class AuthService {
     if (user.get('rol').value == 'Jugador'){
       const userInfo:Jugador = {
         id: id,
-        email: user.get('email').value,
+        email: user.get('email').value.toLowerCase(),
         nom: user.get('nom').value,
         cognoms: user.get('cognoms').value,
         dni: user.get('dni').value,
@@ -113,6 +113,7 @@ export class AuthService {
         altura: jugador.get('altura').value,
         pes: jugador.get('pes').value,
         equips: [],
+        invitacions:[],
       }
 
       this.userCollectionJugador.doc(id).set(userInfo).catch((error) => {

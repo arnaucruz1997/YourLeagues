@@ -4,8 +4,10 @@ export interface Equip {
     abreviacio: string;
     img: string;
     capita: string;
-    jugadors: string[];
+    jugadors: any[];
+    invitacions: string[];
     competicions: string[];
+  
 
 }
 

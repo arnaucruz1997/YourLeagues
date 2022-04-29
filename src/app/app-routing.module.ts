@@ -8,6 +8,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserResolver } from './resolvers/user.resolver';
 import { MyTeamsComponent } from './components/my-teams/my-teams.component';
 import { CreateTeamComponent } from './components/create-team/create-team.component';
+import { TeamComponent } from './components/team/team.component';
+import { InvitePlayerComponent } from './components/invite-player/invite-player.component';
 
 const routes: Routes = [
   { path: '', component:HomePageComponent, resolve: {user : UserResolver}},
@@ -15,6 +17,7 @@ const routes: Routes = [
   { path: 'register', component:RegisterComponent, canActivate:[AuthGuard], },
   { path: 'my-teams', component:MyTeamsComponent, resolve: {user : UserResolver}},
   { path: 'create-team', component:CreateTeamComponent, resolve: {user : UserResolver}},
+  { path: 'my-teams/:id', component:TeamComponent, resolve:{user: UserResolver}},
 ];
 
 @NgModule({

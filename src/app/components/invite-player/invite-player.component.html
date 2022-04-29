@@ -1,0 +1,44 @@
+<div class="card-body">
+    <form novalidate [formGroup]="invitePlayer">
+        <div class>
+            <h5 class="titles-invitation">Invitar Jugador</h5>
+            <div class="mb-3 row" style="margin-top:1%">
+                <div class="col-sm-2">
+
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field appearance="legacy" class="formfield">
+                        <mat-label>Email del jugador</mat-label>
+                        <input matInput type="email" placeholder="Introdueix el email del jugador." formControlName="email">
+                        <mat-error *ngIf="invitePlayer.invalid">{{getErrors('email')}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class = "col-sm-2">
+                    <button mat-button class="btn btn-primary" (click)="invite(invitePlayer)">Invitar</button>
+                </div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div>
+            <h5 class="titles-invitation">Invitacions</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let invitacio of parent.invitacions" >
+                        <tr>
+                            <td>{{invitacio.nom}}</td>
+                            <td>{{invitacio.email}}</td>
+                            <td><mat-icon (click)="deleteInvitation(invitacio.id)" class="icono-tab">delete</mat-icon></td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+     </form>
+</div>

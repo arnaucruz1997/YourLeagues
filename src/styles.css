@@ -4,3 +4,12 @@
     background-color: rgb(13, 189, 243) !important;
     color: rgb(255, 255, 255) !important;
 }
+
+  /* ink bar style */
+  .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+    background-color: rgb(13, 189, 243) !important;
+  } 
+.mat-tab-label.mat-tab-label-active {
+    background-color: transparent;
+    color: rgb(13, 189, 243);
+}

@@ -21,6 +21,7 @@ export class CreateTeamComponent implements OnInit {
     this.team = new FormGroup({
       nom: new FormControl('',Validators.compose([Validators.required,Validators.pattern(/^[a-z A-Z.]+$/),Validators.minLength(3),Validators.maxLength(30)])),
       abreviacio: new FormControl('',Validators.compose([Validators.required,Validators.pattern(/^[A-Z]+$/),,Validators.minLength(3),Validators.maxLength(3)])),
+      dorsal: new FormControl('',Validators.compose([Validators.required,Validators.pattern(/^[0-9]+$/),,Validators.min(1),Validators.max(99)])),
     });
   }
   getErrors (formName:string):string{
@@ -51,6 +52,20 @@ export class CreateTeamComponent implements OnInit {
       }
       else if(this.team.get(formName).hasError('maxlength')){
         errors.push("El camp abreviació ha de tenir 3 caràcters.");
+      } 
+    }
+    else if(formName =='dorsal'){
+      if(this.team.get(formName).hasError('required')){
+        errors.push("El camp dorsal està buit.");
+      }
+      else if(this.team.get(formName).hasError('pattern')){
+        errors.push("El camp dorsal solament pot contenir números.");
+      }
+      else if(this.team.get(formName).hasError('min')){
+        errors.push("El número de dorsal mínim es el 1.");
+      }
+      else if(this.team.get(formName).hasError('max')){
+        errors.push("El número de dorsal màxim es el 99");
       } 
     }
     console.log("errores:",errors);

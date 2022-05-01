@@ -30,7 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-container *ngFor="let invitacio of parent.invitacions" >
+                    <ng-container *ngFor="let invitacio of parent?.invitacions"  >
                         <tr>
                             <td>{{invitacio.nom}}</td>
                             <td>{{invitacio.email}}</td>

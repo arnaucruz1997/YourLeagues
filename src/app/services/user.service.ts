@@ -24,6 +24,19 @@ export class UserService {
     return this.afs.collection('usuaris', ref => ref.where('email','==',email.toLowerCase())).valueChanges().pipe(take(1));
   }
   findUserById(listIds:any[]): Observable<any>{
-    return this.afs.collection('usuaris', ref => ref.where(documentId(),'in',listIds)).valueChanges();
+    if( listIds.length == 0){
+      return of();
+    }else{
+      return this.afs.collection('usuaris', ref => ref.where(documentId(),'in',listIds)).valueChanges();
+    }
+  }
+  getUserInvitations(listIds:any[]): Observable<any>{
+    console.log("xdddd");
+    if( listIds.length == 0){
+      return of();
+    }else{
+      return this.afs.collection('equips', ref => ref.where(documentId(),'in',listIds)).valueChanges();
+    }
+
   }
 }

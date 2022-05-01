@@ -2,7 +2,6 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { error } from 'console';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -42,21 +41,32 @@ export class InvitePlayerComponent implements OnInit {
   invite(invitePlayer:FormGroup) {
     this.userService.findUserByEmail(invitePlayer.get('email').value).subscribe(
       (data) =>{
-        if(data.length==0){
-          this.snackbar.open('Aquest usuari no existeix','x');
-        }else{
-          let trobat = false;
-          for(let i =0; i<data[0]['invitacions'].length; i++){
-            if(data[0]['invitacions'][i]==this.parent.teamId){
-              trobat = true;
-            }
+        let trobat2
+        for(let i =0; i<data[0]['equips'].length; i++){
+          if(data[0]['equips'][i]==this.parent.teamId){
+            trobat2 = true;
           }
-          if(!trobat){
-            this.teamService.updateTeamInvitacions(this.parent.teamId,data[0]['id']);
-            this.teamService.updateUserInvitacions(data[0]['id'],this.parent.teamId);
-            this.snackbar.open('Invitació enviada','x');
+        }
+        if(trobat2){
+          this.snackbar.open('Aquest usuari ja està dins l\' equip','x');
+        }else{
+          if(data.length==0){
+            this.snackbar.open('Aquest usuari no existeix','x');
           }else{
-            this.snackbar.open('Aquest usuari ja esta a la llista d\' invitacions','x');
+            let trobat = false;
+            for(let i =0; i<data[0]['invitacions'].length; i++){
+              if(data[0]['invitacions'][i]==this.parent.teamId){
+                trobat = true;
+              }
+            }
+            if(!trobat){
+              this.teamService.updateTeamInvitacions(this.parent.teamId,data[0]['id']);
+              this.teamService.updateUserInvitacions(data[0]['id'],this.parent.teamId);
+              this.parent.getInvitations();
+              this.snackbar.open('Invitació enviada','x');
+            }else{
+              this.snackbar.open('Aquest usuari ja esta a la llista d\' invitacions','x');
+            }
           }
         }
       },
@@ -64,7 +74,15 @@ export class InvitePlayerComponent implements OnInit {
     );
   }
   deleteInvitation(id:string){
-    this.teamService.deleteTeamInvitacio(this.parent.teamId,id);
-    this.teamService.deleteUserInvitacio(id,this.parent.teamId);
+    this.teamService.deleteTeamInvitacio(this.parent.teamId,id).then(
+      data =>{console.log("he entrado aqui");
+      this.parent.getInvitations();
+    }
+    );
+    this.teamService.deleteUserInvitacio(id,this.parent.teamId).then(
+      data =>{console.log("he entrado aqui2");
+      this.parent.getInvitations();
+    }
+    );
   }
 }

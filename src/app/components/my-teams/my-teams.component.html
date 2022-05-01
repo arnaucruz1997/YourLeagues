@@ -38,38 +38,19 @@
             <h1>Invitacions</h1>
             <div class="card teams">
                 <div class="card-body">
-                    <div class="card team">
+                    <div class="card team" *ngFor="let equip of equipsInvitacions">
                         <div class ="row card-body team-item-invitation">
                             <div class="col-sm-1">
                                 <img src="../../../assets/imgs/maleuser.jpg">
                             </div>
                             <div class="col-sm-8">
-                                <h2>Celta De Vigo</h2>
+                                <h2>{{equip.nom}}</h2>
                             </div>
                             <div class="col-sm-1">
                                 <mat-icon class="decline-button">close</mat-icon>
                             </div>
                             <div class="col-sm-1">
-                                <mat-icon class="accept-button">check</mat-icon>
-                            </div>
-                            <div class="col-sm-1">
-                                <mat-icon class="view-button">visibility</mat-icon>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card team">
-                        <div class ="row card-body team-item-invitation">
-                            <div class="col-sm-1">
-                                <img src="../../../assets/imgs/maleuser.jpg">
-                            </div>
-                            <div class="col-sm-8">
-                                <h2>Celta De Vigo</h2>
-                            </div>
-                            <div class="col-sm-1">
-                                <mat-icon class="decline-button">close</mat-icon>
-                            </div>
-                            <div class="col-sm-1">
-                                <mat-icon class="accept-button">check</mat-icon>
+                                <mat-icon class="accept-button" (click)="openDialog(equip.id)">check</mat-icon>
                             </div>
                             <div class="col-sm-1">
                                 <mat-icon class="view-button">visibility</mat-icon>

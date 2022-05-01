@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { documentId, DocumentReference, FieldValue} from '@angular/fire/firestore';
 import { Router, RouterLink } from '@angular/router';
 import firebase from 'firebase/compat/app';
-import { Observable, take } from 'rxjs';
+import { Observable, of, take } from 'rxjs';
 import { Equip } from '../models/equip';
 import { AuthService } from './auth.service';
 import { UploadService } from './upload.service';
@@ -59,9 +59,9 @@ export class TeamService {
       'invitacions': firebase.firestore.FieldValue.arrayUnion(value)
     })
   }
-  deleteUserInvitacio(id: string, value:string){
+  deleteUserInvitacio(id: string, value:string): Promise<any>{
     let user = this.afs.collection('usuaris').doc(id);
-    user.update({
+    return user.update({
       'invitacions': firebase.firestore.FieldValue.arrayRemove(value)
     })
   }
@@ -71,17 +71,38 @@ export class TeamService {
       'invitacions': firebase.firestore.FieldValue.arrayUnion(value)
     })
   }
-  deleteTeamInvitacio(id: string, value:string){
+  deleteTeamInvitacio(id: string, value:string): Promise<any>{
     let user = this.afs.collection('equips').doc(id);
-    user.update({
+    return user.update({
       'invitacions': firebase.firestore.FieldValue.arrayRemove(value)
     })
   }
 
   getUserTeams(equipsId:any[]): Observable<any>{
-    return this.afs.collection('equips', ref => ref.where(documentId(), "in", equipsId)).valueChanges();
+    if( equipsId.length == 0){
+      return of();
+    }else{
+      return this.afs.collection('equips', ref => ref.where(documentId(), "in", equipsId)).valueChanges();
+    }
   }
-  getTeamById(id:string){
+  getTeamById(id:string): Observable<any>{
     return this.afs.collection('equips', ref => ref.where(documentId(), "==", id)).valueChanges();
+  }
+
+  addUserToTeam(id_usuari:string, id_team:string, dorsal:any){
+    let dorsalxnumber = {
+      dorsal:dorsal,
+      id:id_usuari
+    }
+    let user = this.afs.collection('equips').doc(id_team);
+    user.update({
+      'jugadors': firebase.firestore.FieldValue.arrayUnion(dorsalxnumber)
+    })
+  }
+  addTeamToUser(id_usuari:string, id_team:string){
+    let user = this.afs.collection('usuaris').doc(id_usuari);
+    user.update({
+      'equips': firebase.firestore.FieldValue.arrayUnion(id_team)
+    })
   }
 }

@@ -9,7 +9,7 @@
                     <img src="../../../assets/imgs/maleuser.jpg">
                 </div>
                 <div class="col-sm-4 align-self-center">
-                    <h1>Els meus equips</h1>
+                    <h1>{{equip?.nom}}</h1>
                 </div>
             </div>
             <div class ="row">
@@ -67,6 +67,7 @@
                                         <mat-icon class="icono-tab">group</mat-icon>
                                          Jugadors
                                     </ng-template>
+                                    <list-players [parent]="this"></list-players>
                                 </mat-tab>
                                 <mat-tab label="Second">
                                     <ng-template mat-tab-label>

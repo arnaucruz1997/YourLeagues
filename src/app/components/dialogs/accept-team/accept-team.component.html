@@ -1,0 +1,19 @@
+<h2 mat-dialog-title> Invitació a {{title}}</h2>
+<mat-dialog-content>Selecciona el dorsal que voldràs lluir amb l'equip {{title}}.</mat-dialog-content>
+<form novalidate [formGroup]="dorsal">
+    <div style="margin-top:5%;">
+        <mat-form-field appearance="legacy" class="formfield" >
+            <mat-label>Dorsal</mat-label>
+            <mat-select formControlName="dorsal" placeholder="Selecciona el teu dorsal." >
+                <mat-option *ngFor ="let number of dorsalesLibres" [value]="number">{{number}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="dorsal.invalid">{{getErrors('dorsal')}}</mat-error>
+        </mat-form-field>
+    </div>
+</form>
+<mat-dialog-actions>
+    <div class = "col-sm-2">
+        <button mat-button class="btn btn-primary" (click)="accept(dorsal)" mat-dialog-close [disabled]="dorsal.invalid">Acceptar</button>
+    </div>
+</mat-dialog-actions>
+

@@ -30,6 +30,7 @@ import { MatTabsModule } from '@angular/material/tabs'
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule} from '@angular/material/dialog';
 import { UploadImageComponent } from './components/upload-image/upload-image.component'
 import { DatePipe } from '@angular/common';
 import { UserResolver } from './resolvers/user.resolver';
@@ -37,6 +38,8 @@ import { MyTeamsComponent } from './components/my-teams/my-teams.component';
 import { CreateTeamComponent } from './components/create-team/create-team.component';
 import { TeamComponent } from './components/team/team.component';
 import { InvitePlayerComponent } from './components/invite-player/invite-player.component';
+import { ListPlayersComponent } from './components/list-players/list-players.component';
+import { AcceptTeamComponent } from './components/dialogs/accept-team/accept-team.component';
 
 
 
@@ -57,8 +60,11 @@ import { InvitePlayerComponent } from './components/invite-player/invite-player.
     CreateTeamComponent,
     TeamComponent,
     InvitePlayerComponent,
+    ListPlayersComponent,
+    AcceptTeamComponent,
 
   ],
+  entryComponents:[AcceptTeamComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -72,6 +78,7 @@ import { InvitePlayerComponent } from './components/invite-player/invite-player.
     MatStepperModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFirestoreModule,

@@ -14,6 +14,7 @@ export class TeamComponent implements OnInit {
   teamId:string;
   equip:any;
   invitacions:Observable<any[]>;
+  jugadors:Observable<any[]>;
   
   constructor(
     public route: ActivatedRoute,
@@ -22,6 +23,9 @@ export class TeamComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.getInvitations();
+  }
+  getInvitations(){
     this.route.params.subscribe(
       (data)=>{
         this.teamId=data['id'];
@@ -31,7 +35,14 @@ export class TeamComponent implements OnInit {
             this.userService.findUserById(this.equip.invitacions).subscribe(
               data => {
                 this.invitacions = data;
-                console.log("INVITACIONES: ", this.invitacions)
+                console.log("INVITACIONES: ", this.invitacions);
+              }
+            )
+            let listIds = this.equip.jugadors.map((a:any) => a.id);
+            this.userService.findUserById(listIds).subscribe(
+              data => {
+                this.jugadors = data;
+                console.log(this.jugadors);
               }
             )
           }

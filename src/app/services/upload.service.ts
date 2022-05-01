@@ -61,7 +61,6 @@ export class UploadService {
         (data) =>{
           imgURL = data;          
           this.imgsEquips.push({id:equips[i]['id'] , downloadURL:imgURL});
-          console.log(this.imgsEquips);
         }
       );
     }

@@ -40,7 +40,7 @@ import { TeamComponent } from './components/team/team.component';
 import { InvitePlayerComponent } from './components/invite-player/invite-player.component';
 import { ListPlayersComponent } from './components/list-players/list-players.component';
 import { AcceptTeamComponent } from './components/dialogs/accept-team/accept-team.component';
-
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 
@@ -86,6 +86,7 @@ import { AcceptTeamComponent } from './components/dialogs/accept-team/accept-tea
     MatTableModule,
     MatTabsModule,
     MatDividerModule,
+    ImageCropperModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

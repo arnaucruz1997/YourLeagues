@@ -12,6 +12,7 @@ import { UploadImageComponent } from '../upload-image/upload-image.component';
 export class CreateTeamComponent implements OnInit {
   @ViewChild(UploadImageComponent) uploadComponent!: UploadImageComponent;
   team:FormGroup;
+  esEquipo:string = "equipo";
   constructor(
     public snackbar:MatSnackBar,
     public teamService:TeamService,
@@ -74,7 +75,12 @@ export class CreateTeamComponent implements OnInit {
 
   submitFormTeam(){
     if(this.team.valid){
-      this.teamService.createTeam(this.team,this.getImageUrl(),this.getFile());
+      if(this.uploadComponent.uploadService.imageChangedEvent != ''){
+        this.teamService.createTeam(this.team,this.uploadComponent.uploadService.croppedFile);
+      }else{
+        this.teamService.createTeam(this.team,null);
+      }
+
     }else{
       this.snackbar.open('Les dades no són correctes','x');
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Equip } from 'src/app/models/equip';
+import { AuthService } from 'src/app/services/auth.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,15 +16,17 @@ export class TeamComponent implements OnInit {
   equip:any;
   invitacions:Observable<any[]>;
   jugadors:Observable<any[]>;
-  
+  uid:string;
   constructor(
     public route: ActivatedRoute,
     public teamService: TeamService,
     public userService: UserService,
+    public authService: AuthService,
     ) { }
 
   ngOnInit(): void {
     this.getInvitations();
+    this.uid = this.authService.UserId;
   }
   getInvitations(){
     this.route.params.subscribe(
@@ -49,5 +52,13 @@ export class TeamComponent implements OnInit {
         );
       }
     );
+  }
+  getDorsal(idUser:string){
+    for(let jugador of this.equip.jugadors){
+      if (jugador.id == idUser) {
+        return jugador.dorsal;
+      }
+    }
+    return false;
   }
 }

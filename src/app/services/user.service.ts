@@ -31,7 +31,6 @@ export class UserService {
     }
   }
   getUserInvitations(listIds:any[]): Observable<any>{
-    console.log("xdddd");
     if( listIds.length == 0){
       return of();
     }else{

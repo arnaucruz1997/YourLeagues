@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { documentId, DocumentReference, FieldValue} from '@angular/fire/firestore';
 import { Router, RouterLink } from '@angular/router';
 import firebase from 'firebase/compat/app';
@@ -20,32 +22,68 @@ export class TeamService {
     public afs: AngularFirestore,
     public router: Router,
     public uploadService: UploadService,
+    public storage: AngularFireStorage,
+    public datepipe: DatePipe,
   ) { 
     this.userCollectionEquip = this.afs.collection<Equip>('equips');
   }
 
-  async createTeam(team:any,imgurl:string,file:File){
-    const id = this.afs.createId();
-    const jugador = {
-      id: this.authService.UserId,
-      dorsal: team.get('dorsal').value
+  async createTeam(team:any,file:any){
+    let downloadURL = "https://firebasestorage.googleapis.com/v0/b/yourleagues-46263.appspot.com/o/SeekPng.com_espn-logo-png_289657.png?alt=media&token=54e4712a-ff32-4007-a4c1-1472b5e16754"
+    if(file!=null){
+      let currentDateTime = this.datepipe.transform((new Date), 'MM_dd_yyyy_h_mm_ss');
+      let uploadurl = (currentDateTime+"_"+team.get('nom').value);
+
+      this.storage.upload(uploadurl,file).then(rst => {
+        rst.ref.getDownloadURL().then(url => {
+          downloadURL = url;
+          const id = this.afs.createId();
+          const jugador = {
+            id: this.authService.UserId,
+            dorsal: team.get('dorsal').value
+          }
+          const teamInfo:Equip = {
+            id: id,
+            nom: team.get('nom').value,
+            abreviacio: team.get('abreviacio').value,
+            img: downloadURL,
+            capita: this.authService.UserId,
+            jugadors:[jugador],
+            competicions: [],
+            invitacions: [],
+          }
+          this.uploadService.uploadImage(this.authService.UserId,file);
+          this.updateUserEquips(this.authService.UserId,id);
+          this.router.navigate(['my-teams']);
+          this.userCollectionEquip.doc(id).set(teamInfo).catch((error) => {
+            window.alert(error.message);
+          });
+        })
+      })
+    }else{
+      const id = this.afs.createId();
+      const jugador = {
+        id: this.authService.UserId,
+        dorsal: team.get('dorsal').value
+      }
+      const teamInfo:Equip = {
+        id: id,
+        nom: team.get('nom').value,
+        abreviacio: team.get('abreviacio').value,
+        img: downloadURL,
+        capita: this.authService.UserId,
+        jugadors:[jugador],
+        competicions: [],
+        invitacions: [],
+      }
+      this.uploadService.uploadImage(this.authService.UserId,file);
+      this.updateUserEquips(this.authService.UserId,id);
+      this.router.navigate(['my-teams']);
+      this.userCollectionEquip.doc(id).set(teamInfo).catch((error) => {
+        window.alert(error.message);
+      });
     }
-    const teamInfo:Equip = {
-      id: id,
-      nom: team.get('nom').value,
-      abreviacio: team.get('abreviacio').value,
-      img: imgurl,
-      capita: this.authService.UserId,
-      jugadors:[jugador],
-      competicions: [],
-      invitacions: [],
-    }
-    await this.uploadService.uploadImage(imgurl,file);
-    await this.updateUserEquips(this.authService.UserId,id);
-    this.router.navigate(['my-teams']);
-    this.userCollectionEquip.doc(id).set(teamInfo).catch((error) => {
-      window.alert(error.message);
-    });
+    
   }
   updateUserEquips(id: string, value: string) {
     let user = this.afs.collection('usuaris').doc(id);

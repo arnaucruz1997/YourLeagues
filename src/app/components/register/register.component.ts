@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper, MatStepperNext } from '@angular/material/stepper';
 import { Jugador } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { UploadService } from 'src/app/services/upload.service';
 import { UploadImageComponent } from '../upload-image/upload-image.component';
 @Component({
   selector: 'app-register',
@@ -16,6 +17,7 @@ export class RegisterComponent implements OnInit {
   user: FormGroup;
   jugador: FormGroup;
   org: FormGroup;
+ 
   constructor(public authService:AuthService, private snackBar:MatSnackBar,) { }
 
   ngOnInit(): void {
@@ -88,14 +90,17 @@ export class RegisterComponent implements OnInit {
       }
     }else if(step =='jugador'){
       if(this.firstStepValid() && this.secondStepValid() && this.jugador.valid){
-        this.authService.register(this.user,this.jugador,this.org,this.getImageUrl(),this.getFile());
+        if(this.uploadComponent.uploadService.imageChangedEvent != ''){
+          this.authService.register(this.user,this.jugador,this.org, this.uploadComponent.uploadService.croppedFile);
+        }else{
+          this.authService.register(this.user,this.jugador,this.org, null);
+        }
       }else{
         this.snackBar.open('Les dades no són correctes','x');
       }
     }else if(step == 'organitzador'){
-
       if(this.firstStepValid() && this.secondStepValid() && this.org.valid){
-        this.authService.register(this.user,this.jugador,this.org,'./../assets/imgs/maleuser.jpg',null);
+        this.authService.register(this.user,this.jugador,this.org,null);
       }else{
         this.snackBar.open('Les dades no són correctes','x');
       }

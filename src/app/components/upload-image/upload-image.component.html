@@ -1,9 +1,25 @@
 <div class="text-center">
-    <img src={{uploadService.imgurl}} class="avatar-preview">
+    <h5>Imatge de perfil</h5>
+    <img [src]="uploadService.croppedImage" class="avatar-preview">
     <div class="row justify-content-center image-upload">
         <label for="file-input">
             <mat-icon class="icono-upload-img">add_a_photo</mat-icon>
         </label>
-        <input type="file" id="file-input" (change)="uploadService.onFileSelected($event)"/>
+        <input type="file" id="file-input" (change)="uploadService.fileChangeEvent($event)"/>
+    </div>
+    <div *ngIf="uploadService.imageChangedEvent != ''">
+        <h5>Ajusta la imatge</h5>
+        <div class="text-center col-md-8" class="avatar-preview justify-content-center">
+            <image-cropper 
+            [imageChangedEvent]="uploadService.imageChangedEvent" 
+            [maintainAspectRatio]="true" 
+            [aspectRatio]="4 / 4"
+            [resizeToWidth]="256" 
+            format="png" 
+            (imageCropped)="uploadService.imageCropped($event)" 
+            (imageLoaded)="uploadService.imageLoaded()"
+            (cropperReady)="uploadService.cropperReady()" 
+            (loadImageFailed)="uploadService.loadImageFailed()"></image-cropper>
+        </div>
     </div>
 </div>

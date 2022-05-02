@@ -2,17 +2,24 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Imatge</th>
+                <th>Dorsal</th>
                 <th>Nom</th>
-                <th>Email</th>
-                <th></th>
+                <th>Cognoms</th>
+                <th>Rol</th>
             </tr>
         </thead>
         <tbody>
             <ng-container *ngFor="let player of parent?.jugadors"  >
                 <tr>
-                    <td>{{player.nom}}</td>
-                    <td>{{player.email}}</td>
-                    <td><mat-icon class="icono-tab">delete</mat-icon></td>
+                    <td class="align-self-center"><img src={{player.img}} class="avatar"></td>
+                    <td class="align-self-center">{{parent?.getDorsal(player.id)}}</td>
+                    <td class="align-self-center">{{player.nom}}</td>
+                    <td class="align-self-center">{{player.cognoms}}</td>
+                    <td class="align-self-center" *ngIf="(parent?.equip.capita) == player.id; else isJugador ">Capità</td>
+                    <ng-template #isJugador>
+                        <td class="align-self-center">Jugador</td>
+                    </ng-template>
                 </tr>
             </ng-container>
         </tbody>

@@ -25,7 +25,43 @@
 </section>
 <ng-template #loggedIn>
 <section id="home">
-    <h1>ESTAS CONECTAT: {{this.usuari.rol}}</h1>
+    <div class="row-logged justify-content-center">
+        <div style="max-width:1500px; width:100%">
+            <h1>Equips:</h1>
+            <div class ="row">
+                <div class="card team col-sm-3" *ngIf="equips?.length == 0">
+                    <div class ="row card-body team-item text-center justify-content-center">
+                        <img src="../../../assets/imgs/sad_face.png" class ="team-avatar">
+                        <div style="background-color:white">
+                            <p class ="titulo-equipo" style="margin-top:5%;"> Encara no formes part de cap equip. </p>
+                            <button mat-raised-button class="team-btn" [routerLink]="['/create-team']">Crear Equip</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card team col-sm-3" *ngFor="let equip of equips">
+                    <div class ="row card-body team-item text-center justify-content-center">
+                        <img [src]="equip.img" class ="team-avatar">
+                        <div style="background-color:white">
+                            <p class ="titulo-equipo" style="margin-top:5%;"> [{{equip.abreviacio}}]    {{equip.nom}} </p>
+                            <button mat-raised-button class="team-btn" [routerLink]="['/my-teams/',equip.id]">Veure Detalls</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1>Competicions:</h1>
+            <div class ="row">
+                <div class="card comp col-sm-3">
+                    <div class ="row card-body team-comp text-center justify-content-center">
+                        <img src="../../../assets/imgs/trophy.png" class ="team-avatar">
+                        <div style="background-color:white">
+                            <p class ="titulo-equipo" style="margin-top:5%;"> Encara no formes part de cap competició. </p>
+                            <button mat-raised-button class="team-btn" [routerLink]="['/create-team']">Buscar competició</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 </ng-template>

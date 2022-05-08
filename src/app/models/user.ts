@@ -19,7 +19,7 @@ export interface Jugador extends User{
     altura: number;
     pes:number;
     equips:string[];
-    invitacions:string[]
+    invitacions:string[];
  }
 
 export interface Organitzador extends User{
@@ -27,4 +27,5 @@ export interface Organitzador extends User{
     orgEmail: string;
     orgTelefon: string;
     orgDesc: string;
+    competicions: string[];
 }

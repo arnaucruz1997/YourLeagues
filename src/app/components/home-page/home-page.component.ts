@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { TeamService } from 'src/app/services/team.service';
 import { Equip } from 'src/app/models/equip';
+import { Competicio } from 'src/app/models/competicio';
+import { CompetitionService } from 'src/app/services/competition.service';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -15,11 +17,14 @@ export class HomePageComponent implements OnInit {
   jugador:Jugador;
   organitzador:Organitzador;
   equips:Equip[];
+  competicions:Competicio[];
+  
   constructor(
     public authService:AuthService, 
     public userService:UserService,
     public route:ActivatedRoute,
     public teamService:TeamService,
+    public competitionService:CompetitionService,
     ) { 
 
   }
@@ -32,7 +37,6 @@ export class HomePageComponent implements OnInit {
           if(this.jugador.equips.length>0){
             this.teamService.getUserTeams(this.jugador.equips).subscribe(
               data=>{
-                console.log("data: ",data);
                 this.equips = data;
               }
             );
@@ -41,6 +45,15 @@ export class HomePageComponent implements OnInit {
           }
         }else{
           this.organitzador = data['user'][0];
+          console.log(this.organitzador);
+          if(this.organitzador.competicions.length>0){
+            this.competitionService.getOrgCompetitions(this.organitzador.competicions).subscribe(
+              data=>{
+                this.competicions = data;
+                console.log("competicions: ",this.competicions);
+              }
+            );
+          }
         }
 
       }

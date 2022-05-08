@@ -160,8 +160,9 @@ export class AuthService {
         orgEmail: organitzador.get('orgEmail').value,
         orgTelefon: organitzador.get('orgTelefon').value,
         orgDesc: organitzador.get('orgDesc').value,
+        competicions: [],
       }
-      this.userCollectionOrganitzador.add(userInfo).catch((error) => {
+      this.userCollectionOrganitzador.doc(id).set(userInfo).catch((error) => {
         window.alert(error.message);
       });
     }

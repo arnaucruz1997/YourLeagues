@@ -41,6 +41,7 @@ import { InvitePlayerComponent } from './components/invite-player/invite-player.
 import { ListPlayersComponent } from './components/list-players/list-players.component';
 import { AcceptTeamComponent } from './components/dialogs/accept-team/accept-team.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { CreateCompetitionComponent } from './components/create-competition/create-competition.component';
 
 
 
@@ -62,6 +63,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     InvitePlayerComponent,
     ListPlayersComponent,
     AcceptTeamComponent,
+    CreateCompetitionComponent,
 
   ],
   entryComponents:[AcceptTeamComponent],

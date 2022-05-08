@@ -1,0 +1,96 @@
+<app-navbar></app-navbar>
+<section id="home">
+    <div class="row justify-content-center">
+        <div style="max-width:1000px">
+            <div class ="row">
+                <div class="col-sm-5">
+                    <h1>Crear Competició</h1>
+                </div>
+            </div>
+            <div class="card card-bg">
+                <div class="card-body">
+                    <form novalidate [formGroup]="competition">
+                        <div class="container col">
+                            <div class="mb-3 row">
+                                <div class = "col-sm-6 text-center team-form-fields justify-content-center"> 
+                                    <div class = "text-center team-form-fields justify-content-center"> 
+                                        <h1 class="tittle-inputs">Dades de la competició</h1>
+                                        <div class="col-sm-1-12"style = "margin-top:10%;">
+                                            <mat-form-field appearance="legacy" class="formfield">
+                                                <mat-label>Nom de la competició</mat-label>
+                                                <input matInput type="text" placeholder="Introdueix el teu nom." formControlName="nom">
+                                                <mat-error *ngIf="competition.invalid">{{getErrors('nom')}}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-sm-1-12">
+                                            <mat-form-field appearance="legacy" class="formfield" >
+                                                <mat-label>Selecciona un esport</mat-label>
+                                                <mat-select formControlName="esport" placeholder="Selecciona un esport." >
+                                                    <mat-option value="Futbol11">Futbol 11</mat-option>
+                                                    <mat-option value="Futbol7">Futbol 7</mat-option>
+                                                    <mat-option value="FutbolSala">Futbol Sala</mat-option>
+                                                    <mat-option value="Basquet">Bàsquet</mat-option>
+                                                    <mat-option value="Padel">Pàdel</mat-option>
+                                                    <mat-option value="Tennis">Tennis</mat-option>
+                                                    <mat-option value="Volley">Voleibol</mat-option>
+                                                    <mat-option value="Handbol">Handbol</mat-option>
+                                                </mat-select>
+                                                <mat-error *ngIf="competition.invalid">{{getErrors('esport')}}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-sm-1-12">
+                                            <mat-form-field appearance="legacy" class="formfield" >
+                                                <mat-label>Tipus de competició</mat-label>
+                                                <mat-select formControlName="competicio" placeholder="Selecciona el tipus de competició." >
+                                                    <mat-option value="Lliga">Lliga</mat-option>
+                                                    <mat-option value="Torneig">Torneig</mat-option>
+                                                </mat-select>
+                                                <mat-error *ngIf="competition.invalid">{{getErrors('competicio')}}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-sm-1-12">
+                                            <mat-form-field appearance="legacy" class="formfield" >
+                                                <mat-label>Número d'equips</mat-label>
+                                                <mat-select formControlName="numEquips" placeholder="Selecciona el número d'equips que formaran la lliga." >
+                                                    <mat-option value="4">4</mat-option>
+                                                    <mat-option value="5">5</mat-option>
+                                                    <mat-option value="6">6</mat-option>
+                                                    <mat-option value="7">7</mat-option>
+                                                    <mat-option value="8">8</mat-option>
+                                                    <mat-option value="9">9</mat-option>
+                                                    <mat-option value="10">10</mat-option>
+                                                    <mat-option value="11">11</mat-option>
+                                                    <mat-option value="12">12</mat-option>
+                                                </mat-select>
+                                                <mat-error *ngIf="competition.invalid">{{getErrors('numEquips')}}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-sm-1-12">
+                                            <mat-form-field appearance="legacy" class="formfield" >
+                                                <mat-label>Privacitat</mat-label>
+                                                <mat-select formControlName="privacitat" placeholder="Selecciona la privacitat de la teva competició." >
+                                                    <mat-option value="Publica">Pública</mat-option>
+                                                    <mat-option value="Privada">Privada</mat-option>
+                                                </mat-select>
+                                                <mat-error *ngIf="competition.invalid">{{getErrors('privacitat')}}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "col-sm-6 text-center">
+                                    <h1 class="tittle-inputs">Imatge del equip</h1>
+                                    <upload-image [parent]="esEquipo"></upload-image>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class = "col-sm-6 justify-content-center text-center">
+                                <button mat-button class="btn btn-primary" (click)="submitFormComp()">Següent</button>
+                            </div>
+                        </div>     
+                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,80 @@
+#home{
+    background-color: rgb(184, 227, 250);
+    position:relative;
+    background-size: cover;
+    background-position: center center;
+    min-height: 95vh;
+}
+.team-item{
+    background-color: rgb(248,248,248);
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.team-item-invitation{
+    background-color: rgb(248,248,248);
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.teams{
+    background-color: rgb(80,178,230);
+}
+
+.team{
+    margin-bottom: 20px;
+    cursor:pointer;
+}
+
+.accept-button{
+    color:chartreuse;
+    font-size: 35px;
+}
+.decline-button{
+    color:red;
+    font-size: 35px;
+}
+.view-button{
+    color:rgb(80,178,230);
+    font-size: 35px;
+}
+.row{
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    background-color: rgb(71,82,94);
+    color: rgb(255, 255, 255);
+}
+
+.logo-comp{
+    height:70px;
+    border: 2px solid #555;
+}
+.card-lateral{
+    padding:5px;
+    cursor:pointer;
+}
+.wrap-card-lateral{
+    background-color: rgb(80,178,230);
+    border-radius: 3%;
+}
+.teaminfo{
+    background-color: rgb(80,178,230);
+}
+.tabteaminfo{
+    background-color: rgb(255, 255, 255);
+    border-radius: 1%;
+}
+.icono-tab{
+    margin-right:10px;
+}
+::ng-deep .mat-form-field-underline {
+    display: none;
+  }
+::ng-deep .mat-form-field-wrapper .ng-tns-c49-0{
+    padding-bottom: 0px;
+}
+.my-form-field .mat-form-field-wrapper {
+    margin-bottom: -1.25em;
+}

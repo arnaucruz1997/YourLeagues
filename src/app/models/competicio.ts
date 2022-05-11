@@ -10,4 +10,6 @@ export interface Competicio {
     img:string;
     solicituds:string[],
     equips:string[],
+    nomOrganitzacio:string,
+    estatCompeticio:string,
 }

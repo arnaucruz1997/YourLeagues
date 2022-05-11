@@ -80,6 +80,7 @@
                         <img [src]="competicio.img" class ="team-avatar">
                         <div style="background-color:white">
                             <p class ="titulo-equipo" style="margin-top:5%;"> {{competicio.nom}} </p>
+                            <p class ="titulo-equipo" style="margin-top:5%;"> Equips: {{competicio.equips.length}}/{{competicio.numEquips}} </p>
                             <button mat-raised-button class="team-btn" [routerLink]="['']">Veure competició</button>
                         </div>
                     </div>

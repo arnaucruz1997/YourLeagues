@@ -79,6 +79,6 @@ export class CreateCompetitionComponent implements OnInit {
   }
   submitFormComp(){
     console.log(this.competition);
-    this.competitionService.createCompetition(this.usuari, this.uploadComponent.uploadService.croppedFile, this.competition);
+    this.competitionService.createCompetition(this.usuari, this.uploadComponent.uploadService.croppedFile, this.competition,this.usuari.orgName);
   }
 }

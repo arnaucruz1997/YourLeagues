@@ -42,6 +42,7 @@ import { ListPlayersComponent } from './components/list-players/list-players.com
 import { AcceptTeamComponent } from './components/dialogs/accept-team/accept-team.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CreateCompetitionComponent } from './components/create-competition/create-competition.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
 
 
 
@@ -64,6 +65,7 @@ import { CreateCompetitionComponent } from './components/create-competition/crea
     ListPlayersComponent,
     AcceptTeamComponent,
     CreateCompetitionComponent,
+    CompetitionsComponent,
 
   ],
   entryComponents:[AcceptTeamComponent],

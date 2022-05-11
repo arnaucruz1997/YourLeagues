@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { observeOutsideAngular } from '@angular/fire';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { documentId, DocumentReference, FieldValue} from '@angular/fire/firestore';
@@ -27,7 +28,7 @@ export class CompetitionService {
     this.userCollectionCompeticio = this.afs.collection<Competicio>('competicions');
    }
 
-  createCompetition(usuari:any, file:any, competition:any){
+  createCompetition(usuari:any, file:any, competition:any, nomOrg:string){
     let downloadURL = "https://firebasestorage.googleapis.com/v0/b/yourleagues-46263.appspot.com/o/SeekPng.com_espn-logo-png_289657.png?alt=media&token=54e4712a-ff32-4007-a4c1-1472b5e16754"
     const id = this.afs.createId();
     if(file!=null){
@@ -49,6 +50,8 @@ export class CompetitionService {
             img: downloadURL,
             solicituds:[],
             equips:[],
+            nomOrganitzacio: nomOrg,
+            estatCompeticio:"oberta", 
           }
           this.userCollectionCompeticio.doc(id).set(compInfo).catch((error) => {
             window.alert(error.message);
@@ -71,5 +74,8 @@ export class CompetitionService {
     }else{
       return this.afs.collection('competicions', ref => ref.where(documentId(), "in", competitionId)).valueChanges();
     }
+  }
+  getAllCompetitions(): Observable<any>{
+    return this.afs.collection('competicions').valueChanges();
   }
 }

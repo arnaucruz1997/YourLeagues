@@ -1,0 +1,88 @@
+<app-navbar></app-navbar>
+<section id="home">
+    <div class="row justify-content-center" style="margin-right: 0px;">
+        <div style="max-width:1200px">
+            <div class ="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">
+                    <h1>Competicions</h1>
+                </div>
+            </div>
+            <div class ="row">
+                <div class="col-sm-3">
+                    <div class="card wrap-card-lateral">
+                        <div class="card-body">
+                            <div class="card">
+                                <div class="card-body card-lateral">
+                                    <div class ="row">
+                                        <mat-form-field apparance="none" style="margin-bottom: -1.25em" floatLabel="always">
+                                            <mat-label>Esport</mat-label>
+                                            <mat-select placeholder="Esport." >
+                                                <mat-option value="Futbol11">Futbol 11</mat-option>
+                                                <mat-option value="Futbol7">Futbol 7</mat-option>
+                                                <mat-option value="FutbolSala">Futbol Sala</mat-option>
+                                                <mat-option value="Basquet">Bàsquet</mat-option>
+                                                <mat-option value="Padel">Pàdel</mat-option>
+                                                <mat-option value="Tennis">Tennis</mat-option>
+                                                <mat-option value="Volley">Voleibol</mat-option>
+                                                <mat-option value="Handbol">Handbol</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="margin-top:5%;">
+                                <div class="card-body card-lateral">
+                                    <div class ="row">
+                                        <mat-form-field apparance="none" style="margin-bottom: -1.25em" floatLabel="always">
+                                            <mat-label>Estat competició</mat-label>
+                                            <mat-select placeholder="Estat competició." >
+                                                <mat-option value="Started">Començada</mat-option>
+                                                <mat-option value="notStarted">Per començar</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="margin-top:5%;">
+                                <div class="card-body card-lateral">
+                                    <div class ="row">
+                                        <mat-form-field apparance="none" style="margin-bottom: -1.25em" floatLabel="always">
+                                            <mat-label>Nom</mat-label>
+                                            <input matInput type="text" placeholder="Escriue el nom de la competició.">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="justify-content-center text-center" style="margin-top:5%;">
+                                <button mat-raised-button class="btn" [routerLink]="['/create-team']">Filtrar competicions</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="card teams">
+                        <div class="card-body">
+                            <div class="card team" *ngFor="let competicio of competicions">
+                                <div class ="row card-body team-item">
+                                    <div class="col-sm-2">
+                                        <img [src]="competicio.img" class="logo-comp">
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <h2>{{competicio.nom}}</h2>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row" style ="color:rgb(80, 81, 83);">Equips inscrits: {{competicio.equips.length}}/{{competicio.numEquips}}</div>
+                                        <div class="row" style ="color:rgb(80, 81, 83);">Esport: {{competicio.tipusSport}}</div>
+                                        <div class="row" style ="color:rgb(80, 81, 83);">Organització: {{competicio.nomOrganitzacio}}</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

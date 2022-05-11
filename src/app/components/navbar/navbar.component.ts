@@ -25,8 +25,8 @@ export class NavbarComponent implements OnInit {
         data => {
           this.usuari = data['user'][0];
           this.uploadService.getImage(this.usuari.img);
+          console.log(this.usuari.rol);
         }
       );
-      //await this.uploadService.getProfileImage(this.userService.usuari.img);
   }
 }

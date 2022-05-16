@@ -1,0 +1,25 @@
+#home{
+    background-color: rgb(184, 227, 250);
+    position:relative;
+    background-size: cover;
+    background-position: center center;
+    min-height: 95vh;
+}
+.card-lateral{
+    padding:5px;
+    cursor:pointer;
+}
+.wrap-card-lateral{
+    background-color: rgb(80,178,230);
+    border-radius: 3%;
+}
+.teaminfo{
+    background-color: rgb(80,178,230);
+}
+.tabteaminfo{
+    background-color: rgb(255, 255, 255);
+    border-radius: 1%;
+}
+.icono-tab{
+    margin-right:10px;
+}

@@ -11,6 +11,7 @@ import { CreateTeamComponent } from './components/create-team/create-team.compon
 import { TeamComponent } from './components/team/team.component';
 import { CreateCompetitionComponent } from './components/create-competition/create-competition.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { CompetitionComponent } from './components/competition/competition.component';
 
 const routes: Routes = [
   { path: '', component:HomePageComponent, resolve: {user : UserResolver}},
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'my-teams/:id', component:TeamComponent, resolve:{user: UserResolver}},
   { path: 'create-competition', component:CreateCompetitionComponent, resolve:{user: UserResolver}},
   { path: 'competitions', component:CompetitionsComponent, resolve:{user: UserResolver}},
+  { path: 'competition/:id', component:CompetitionComponent, resolve:{user: UserResolver}},
 ];
 
 @NgModule({

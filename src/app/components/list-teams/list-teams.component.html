@@ -1,0 +1,13 @@
+<div class="card team" *ngFor="let equip of parent.equips">
+    <div class ="row card-body team-item" [routerLink]="['/my-teams/',equip.id]">
+        <div class="col-sm-2">
+            <img class="logoEquip" src={{equip.img}}>
+        </div>
+        <div class="col-sm-8">
+            <h2>{{equip.nom}}</h2>
+        </div>
+        <div class="col-sm-2" *ngIf="parent.uid == parent.competicio.organitzador">
+            <mat-icon>delete</mat-icon>
+        </div>
+    </div>
+</div>

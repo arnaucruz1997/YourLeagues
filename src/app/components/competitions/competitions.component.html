@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="justify-content-center text-center" style="margin-top:5%;">
-                                <button mat-raised-button class="btn" [routerLink]="['/create-team']">Filtrar competicions</button>
+                                <button mat-raised-button class="btn" onclick="">Filtrar competicions</button>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                 <div class="col-sm-9">
                     <div class="card teams">
                         <div class="card-body">
-                            <div class="card team" *ngFor="let competicio of competicions">
+                            <div class="card team" *ngFor="let competicio of competicions"  [routerLink]="['/competition/',competicio.id]">
                                 <div class ="row card-body team-item">
                                     <div class="col-sm-2">
                                         <img [src]="competicio.img" class="logo-comp">

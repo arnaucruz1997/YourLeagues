@@ -7,17 +7,17 @@
   <a mat-button routerLink="">Home</a>
   <a mat-button>Qui som?</a>
   <a mat-button>Contacte</a>
-  <a mat-button>Competicions</a>
+  <a mat-button [routerLink]="['/competitions']">Competicions</a>
   <a mat-button [routerLink]="['/register']">Registrar-se</a>
   <a mat-button [routerLink]="['/login']">Iniciar sessió</a>
 </mat-toolbar>
 
-<mat-toolbar class = "app-toolbar" color="primary" style="background-color: rgb(13, 189, 243);  color: rgb(255, 255, 255);" *ngIf="usuari.rol=='Jugador'">
+<mat-toolbar class = "app-toolbar" color="primary" style="background-color: rgb(13, 189, 243);  color: rgb(255, 255, 255);" *ngIf="usuari?.rol=='Jugador' && authService.isLoggedIn">
   <span>
       <img src="../../../assets/imgs/YLBlanco.png" class="logoYL" routerLink="">
   </span>
     <a mat-button routerLink="">Home</a>
-    <a mat-button>Buscar Competicions</a>
+    <a mat-button [routerLink]="['/competitions']">Buscar Competicions</a>
     <div class="spacer"></div>
     <img class="userImg" src={{this.usuari.img}}>
     <a mat-button>{{this.usuari.nom}}</a>
@@ -27,7 +27,7 @@
     <a mat-button (click)="authService.logout()"><mat-icon class="iconExit">exit_to_app</mat-icon></a>
 </mat-toolbar> 
 
-<mat-toolbar class = "app-toolbar" color="primary" style="background-color: rgb(13, 189, 243);  color: rgb(255, 255, 255);" *ngIf="usuari.rol =='Organitzador'">
+<mat-toolbar class = "app-toolbar" color="primary" style="background-color: rgb(13, 189, 243);  color: rgb(255, 255, 255);" *ngIf="usuari?.rol =='Organitzador' && authService.isLoggedIn">
   <span>
       <img src="../../../assets/imgs/YLBlanco.png" class="logoYL" routerLink="">
   </span>

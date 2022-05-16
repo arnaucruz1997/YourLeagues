@@ -43,6 +43,8 @@ import { AcceptTeamComponent } from './components/dialogs/accept-team/accept-tea
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CreateCompetitionComponent } from './components/create-competition/create-competition.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { CompetitionComponent } from './components/competition/competition.component';
+import { ListTeamsComponent } from './components/list-teams/list-teams.component';
 
 
 
@@ -66,6 +68,8 @@ import { CompetitionsComponent } from './components/competitions/competitions.co
     AcceptTeamComponent,
     CreateCompetitionComponent,
     CompetitionsComponent,
+    CompetitionComponent,
+    ListTeamsComponent,
 
   ],
   entryComponents:[AcceptTeamComponent],

@@ -78,4 +78,15 @@ export class CompetitionService {
   getAllCompetitions(): Observable<any>{
     return this.afs.collection('competicions').valueChanges();
   }
+  getAllTeamsFromCompetition(listIds:string[]):Observable<any>{
+    if(listIds.length == 0){
+      return of();
+    }else{
+      return this.afs.collection('equips', ref => ref.where(documentId(), "in", listIds)).valueChanges();
+    }
+
+  }
+  getCompetitionById(id: string):Observable<any>{
+    return this.afs.collection('competicions', ref => ref.where(documentId(), "==", id)).valueChanges();
+  }
 }

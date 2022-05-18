@@ -55,7 +55,7 @@
                         <img src="../../../assets/imgs/trophy.png" class ="team-avatar">
                         <div style="background-color:white">
                             <p class ="titulo-equipo" style="margin-top:5%;"> Encara no formes part de cap competició. </p>
-                            <button mat-raised-button class="team-btn" [routerLink]="['/create-team']">Buscar competició</button>
+                            <button mat-raised-button class="team-btn" [routerLink]="['/competitions']">Buscar competició</button>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                         <div style="background-color:white">
                             <p class ="titulo-equipo" style="margin-top:5%;"> {{competicio.nom}} </p>
                             <p class ="titulo-equipo" style="margin-top:5%;"> Equips: {{competicio.equips.length}}/{{competicio.numEquips}} </p>
-                            <button mat-raised-button class="team-btn" [routerLink]="['']">Veure competició</button>
+                            <button mat-raised-button class="team-btn" [routerLink]="['/competition/',competicio.id]">Veure competició</button>
                         </div>
                     </div>
                 </div>

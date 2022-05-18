@@ -1,0 +1,7 @@
+.equip{
+    cursor:pointer;
+}
+.row{
+    display: flex;
+    align-items: center;
+}

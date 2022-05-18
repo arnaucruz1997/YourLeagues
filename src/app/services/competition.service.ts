@@ -89,4 +89,28 @@ export class CompetitionService {
   getCompetitionById(id: string):Observable<any>{
     return this.afs.collection('competicions', ref => ref.where(documentId(), "==", id)).valueChanges();
   }
+  enviarSolicitud(idEquip: string, idComp: string) {
+    let user = this.afs.collection('competicions').doc(idComp);
+    user.update({
+      'solicituds': firebase.firestore.FieldValue.arrayUnion(idEquip)
+    })
+  }
+  addTeamToCompetition(idEquip:string,idComp:string){
+    let user = this.afs.collection('competicions').doc(idComp);
+    user.update({
+      'equips': firebase.firestore.FieldValue.arrayUnion(idEquip)
+    })
+  }
+  addCompetitionToTeam(idEquip:string,idComp:string){
+    let user = this.afs.collection('equips').doc(idEquip);
+    user.update({
+      'competicions': firebase.firestore.FieldValue.arrayUnion(idComp)
+    })
+  }
+  deleteSolicitud(idEquip:string,idComp:string){
+    let user = this.afs.collection('competicions').doc(idComp);
+    user.update({
+      'solicituds': firebase.firestore.FieldValue.arrayRemove(idEquip)
+    })
+  }
 }

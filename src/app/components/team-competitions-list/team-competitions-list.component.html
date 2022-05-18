@@ -1,0 +1,26 @@
+<div>
+    <div class="card" >
+        <div class="card-body">
+            <div class="card comp" *ngFor="let competicio of parent?.competicions" [routerLink]="['/competition/',competicio.id]">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-2" style="text-align:left;">
+                            <img [src] = "competicio.img" style="height:65px">
+                        </div>
+                        <div class="col-sm-7" style="text-align:left;">
+                            <h3 style="margin-bottom:0px;">{{competicio.nom}}</h3>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row-sm-6" class="text-right-card">
+                                <a>Esport: {{competicio.tipusSport}}</a>
+                            </div>
+                            <div class="row-sm-6" class="text-right-card"  *ngIf="competicio.estatCompeticio=='oberta'">
+                                <a>Inscripcions Obertes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

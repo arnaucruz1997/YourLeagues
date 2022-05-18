@@ -24,6 +24,9 @@
     margin-bottom: 20px;
     cursor:pointer;
 }
+.solicitud{
+    margin-bottom: 20px;
+}
 
 .row{
     display: flex;

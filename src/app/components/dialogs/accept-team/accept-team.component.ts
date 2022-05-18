@@ -48,7 +48,6 @@ export class AcceptTeamComponent implements OnInit {
 
   accept(dorsal:any){
     if(this.dorsal.valid){
-      console.log(this.dorsal.get('dorsal').value);
       this.teamService.deleteTeamInvitacio(this.idteam, this.idusuari);
       this.teamService.deleteUserInvitacio(this.idusuari, this.idteam);
       this.teamService.addTeamToUser(this.idusuari, this.idteam);

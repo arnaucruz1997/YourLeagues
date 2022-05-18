@@ -117,7 +117,7 @@ export class TeamService {
   }
 
   getUserTeams(equipsId:any[]): Observable<any>{
-    if( equipsId.length == 0){
+    if( equipsId.length == 0 ){
       return of();
     }else{
       return this.afs.collection('equips', ref => ref.where(documentId(), "in", equipsId)).valueChanges();
@@ -142,5 +142,12 @@ export class TeamService {
     user.update({
       'equips': firebase.firestore.FieldValue.arrayUnion(id_team)
     })
+  }
+  getTeamCompetitions(listIds:string[]){
+    if( listIds.length == 0){
+      return of();
+    }else{
+      return this.afs.collection('competicions', ref => ref.where(documentId(), "in", listIds)).valueChanges();
+    }
   }
 }

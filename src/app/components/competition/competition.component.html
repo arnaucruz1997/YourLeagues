@@ -1,15 +1,18 @@
 <app-navbar></app-navbar>
-<section id="home">
+<section id="home" *ngIf="competition?.estatCompeticio == 'oberta'">
     <div class="row justify-content-center">
         <div style="max-width:1000px">
             <div class ="row">
                 <div class="col-sm-3">
                 </div>
                 <div class="col-sm-1 align-self-center" style="margin-bottom:1%; margin-top:1%;">
-                    <img [src]="competition.img">
+                    <img [src]="competition?.img">
                 </div>
-                <div class="col-sm-8 align-self-center">
-                    <h1>{{competition.nom}}</h1>
+                <div class="col-sm-6 align-self-center">
+                    <h1>{{competition?.nom}}</h1>
+                </div>
+                <div class="col-sm-2 align-self-center" *ngIf="usuari.rol=='Jugador' && competition?.equips.length < competition?.numEquips">
+                    <button class="btn-join" mat-raised-button (click)="openDialog()">Unir-se</button>
                 </div>
             </div>
             <div class ="row">
@@ -24,14 +27,14 @@
                                             <mat-icon style="margin-top:5px;" >group</mat-icon>
                                         </div>
                                         <div class="col-sm-8 align-self-center">
-                                            <div class="align-self-center">Equips</div>
+                                            <div class="align-self-center">Equips: {{competition?.equips.length}}/{{competition?.numEquips}} </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card" style="margin-top:5%;" (click)="tabGroup.selectedIndex=1" 
                             [ngStyle]="{'background-color':tabGroup.selectedIndex == 1 ? 'white' : 'rgb(71,82,94)','color':tabGroup.selectedIndex == 1 ? 'rgb(71,82,94)':'white'}"
-                            *ngIf="(competition.organitzador == uid)"
+                            *ngIf="(competition?.organitzador == uid)"
                             >
                                 <div class="card-body card-lateral">
                                     <div class ="row">
@@ -45,7 +48,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card" style="margin-top:5%; background-color:rgb(95, 249, 164); color:white" (click)="iniciarCompeticio()" *ngIf="(competition.equips.length == competition.numEquips && competition.organitzador == uid)">
+                            <div class="card" style="margin-top:5%; background-color:rgb(95, 249, 164); color:white" (click)="iniciarCompeticio()" *ngIf="(competition?.equips.length == competition?.numEquips && competition?.organitzador == uid)">
                                 <div class="card-body card-lateral">
                                     <div class ="row">
                                         <div class="col-sm-2 align-self-center" style="margin-left:5%">
@@ -57,13 +60,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card" style="margin-top:5%; background-color:rgb(249,95,98); color:white" (click)="iniciarCompeticio()" *ngIf="!(competition.equips.length == competition.numEquips) && (competition.organitzador == uid)" >
+                            <div class="card" style="margin-top:5%; background-color:rgb(249,95,98); color:white" (click)="iniciarCompeticio()" *ngIf="!(competition?.equips.length == competition?.numEquips) && (competition?.organitzador == uid)" >
                                 <div class="card-body card-lateral">
                                     <div class ="row" >
                                         <div class="col-sm-2 align-self-center" style="margin-left:5%">
                                             <mat-icon style="margin-top:5px;" >lock</mat-icon>
                                         </div>
-                                        <div class="col-sm-9 align-self-center">
+                                        <div class="col-sm-9 align-self-center" (click)="iniciarCompeticio()">
                                             <div class="align-self-center">Iniciar Competició</div>
                                         </div>
                                     </div>
@@ -83,7 +86,7 @@
                                     </ng-template>
                                     <list-teams [parent]="this"></list-teams>
                                 </mat-tab>
-                                <mat-tab label="Second">
+                                <mat-tab label="Second" *ngIf="competition?.organitzador == uid">
                                     <ng-template mat-tab-label>
                                         <mat-icon class="icono-tab">edit</mat-icon>
                                         Dades

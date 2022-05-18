@@ -1,13 +1,42 @@
-<div class="card team" *ngFor="let equip of parent.equips">
-    <div class ="row card-body team-item" [routerLink]="['/my-teams/',equip.id]">
-        <div class="col-sm-2">
-            <img class="logoEquip" src={{equip.img}}>
-        </div>
-        <div class="col-sm-8">
-            <h2>{{equip.nom}}</h2>
-        </div>
-        <div class="col-sm-2" *ngIf="parent.uid == parent.competicio.organitzador">
-            <mat-icon>delete</mat-icon>
+<h5 style="text-align: left;">Equips Inscrits</h5>
+<div class="card">
+    <div class = "card-body">
+        <div class="card team" *ngFor="let equip of parent.equips">
+            <div class ="row card-body team-item" [routerLink]="['/my-teams/',equip.id]">
+                <div class="col-sm-2">
+                    <img class="logoEquip" src={{equip?.img}}>
+                </div>
+                <div class="col-sm-8">
+                    <h2>{{equip.nom}}</h2>
+                </div>
+                <div class="col-sm-2" *ngIf="parent.uid == parent.competition?.organitzador">
+                    <mat-icon>delete</mat-icon>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<section *ngIf="parent.uid == parent.competition?.organitzador">
+    <h5 style="text-align: left;">Sol.licituds</h5>
+    <div class="card">
+        <div class = "card-body">
+            <div class="card solicitud" *ngFor="let solicitud of parent.equipsSolicitud">
+                <div class ="row card-body team-item">
+                    <div class="col-sm-2">
+                        <img class="logoEquip" src={{solicitud?.img}}>
+                    </div>
+                    <div class="col-sm-8">
+                        <h2>{{solicitud.nom}}</h2>
+                    </div>
+                    <div class="col-sm-1">
+                        <mat-icon style="cursor:pointer" (click)="accept(solicitud.id)">check_circle</mat-icon>
+                    </div>
+                    <div class="col-sm-1">
+                        <mat-icon style="cursor:pointer" (click)="decline(solicitud.id)">cancel</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

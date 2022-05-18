@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Competicio } from 'src/app/models/competicio';
 import { Equip } from 'src/app/models/equip';
 import { AuthService } from 'src/app/services/auth.service';
 import { TeamService } from 'src/app/services/team.service';
@@ -16,6 +17,7 @@ export class TeamComponent implements OnInit {
   equip:any;
   invitacions:Observable<any[]>;
   jugadors:Observable<any[]>;
+  competicions:Observable<any[]>;
   uid:string;
   constructor(
     public route: ActivatedRoute,
@@ -24,7 +26,7 @@ export class TeamComponent implements OnInit {
     public authService: AuthService,
     ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getInvitations();
     this.uid = this.authService.UserId;
   }
@@ -45,7 +47,13 @@ export class TeamComponent implements OnInit {
             this.userService.findUserById(listIds).subscribe(
               data => {
                 this.jugadors = data;
-                console.log(this.jugadors);
+              }
+            )
+            let listComps = this.equip.competicions
+            this.teamService.getTeamCompetitions(listComps).subscribe(
+              (data:any) =>{
+                this.competicions = data;
+                console.log("compes",this.competicions);
               }
             )
           }

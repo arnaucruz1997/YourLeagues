@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card" style="margin-top:5%;" (click)="tabGroup.selectedIndex=2" *ngIf="(uid == equip.capita)" [ngStyle]="{'background-color':tabGroup.selectedIndex == 2 ? 'white' : 'rgb(71,82,94)','color':tabGroup.selectedIndex == 2 ? 'rgb(71,82,94)':'white'}">
+                            <div class="card" style="margin-top:5%;" (click)="tabGroup.selectedIndex=2" *ngIf="(uid == equip?.capita)" [ngStyle]="{'background-color':tabGroup.selectedIndex == 2 ? 'white' : 'rgb(71,82,94)','color':tabGroup.selectedIndex == 2 ? 'rgb(71,82,94)':'white'}">
                                 <div class="card-body card-lateral">
                                     <div class ="row">
                                         <div class=" col-sm-1"></div>
@@ -74,8 +74,9 @@
                                         <mat-icon class="icono-tab">leaderboard</mat-icon>
                                         Competicions
                                     </ng-template>
+                                    <team-competitions-list [parent]="this"></team-competitions-list>
                                 </mat-tab>
-                                <mat-tab label="Third" *ngIf="(uid == equip.capita)">
+                                <mat-tab label="Third" *ngIf="(uid == equip?.capita)">
                                     <ng-template mat-tab-label>
                                         <mat-icon class="icono-tab">group_add</mat-icon>
                                         Invitar Jugador

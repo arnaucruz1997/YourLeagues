@@ -72,7 +72,6 @@ export class MyTeamsComponent implements OnInit {
   }
 
   openDialog(equipid:string){
-
     this.teamService.getTeamById(equipid).pipe(take(1)).subscribe(
       data => {
         const listaDorsales = this.getDorsales(data[0].jugadors);

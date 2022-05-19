@@ -1,4 +1,4 @@
-<h5 style="text-align: left;">Equips Inscrits</h5>
+<h5 style="text-align: left; margin-left:3%;">Equips Inscrits</h5>
 <div class="card">
     <div class = "card-body">
         <div class="card team" *ngFor="let equip of parent.equips">
@@ -18,7 +18,7 @@
 </div>
 
 <section *ngIf="parent.uid == parent.competition?.organitzador">
-    <h5 style="text-align: left;">Sol.licituds</h5>
+    <h5 style="text-align: left; margin-left:3%;">Sol.licituds</h5>
     <div class="card">
         <div class = "card-body">
             <div class="card solicitud" *ngFor="let solicitud of parent.equipsSolicitud">

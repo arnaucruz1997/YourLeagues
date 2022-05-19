@@ -1,3 +1,4 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 #home{
     background-color: rgb(184, 227, 250);
     position:relative;
@@ -27,3 +28,4 @@
     background-color: rgb(80,178,230);
     color:white;
 }
+

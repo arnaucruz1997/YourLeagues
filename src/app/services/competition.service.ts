@@ -7,6 +7,7 @@ import { documentId, DocumentReference, FieldValue} from '@angular/fire/firestor
 import { Router, RouterLink } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { Observable, of, take } from 'rxjs';
+import { ClassificacioPunts, ClassificacioSets } from '../models/classificacio';
 import { Competicio } from '../models/competicio';
 import { Equip } from '../models/equip';
 import { AuthService } from './auth.service';
@@ -17,6 +18,8 @@ import { UploadService } from './upload.service';
 })
 export class CompetitionService {
   userCollectionCompeticio!: AngularFirestoreCollection<Competicio>;
+  userCollectionClassificacioPunts!: AngularFirestoreCollection<ClassificacioPunts>;
+  userCollectionClassificacioSets!: AngularFirestoreCollection<ClassificacioSets>;
   constructor(
     public authService:AuthService,
     public afs: AngularFirestore,
@@ -26,6 +29,8 @@ export class CompetitionService {
     public datepipe: DatePipe,
   ) {
     this.userCollectionCompeticio = this.afs.collection<Competicio>('competicions');
+    this.userCollectionClassificacioPunts = this.afs.collection<ClassificacioPunts>('classificacions');
+    this.userCollectionClassificacioSets = this.afs.collection<ClassificacioSets>('classificacions');
    }
 
   createCompetition(usuari:any, file:any, competition:any, nomOrg:string){
@@ -112,5 +117,33 @@ export class CompetitionService {
     user.update({
       'solicituds': firebase.firestore.FieldValue.arrayRemove(idEquip)
     })
+  }
+
+  createClassificacio(idEquip:string, idComp:string, esport:string , imgEquip:string, nomEquip:string){
+    let id = this.afs.createId();
+    if(esport == "Futbol 11" || esport == "Futbol 7" || esport == "Futbol Sala"|| esport == "Basquet"|| esport == "Handbol"){
+      const classificacioInfo:ClassificacioPunts = {
+        id: id,
+        competicioID: idComp,
+        equipId: idEquip,
+        equipImg: imgEquip,
+        equipNom: nomEquip,
+        partitsJugats: 0,
+        partitsGuanyats: 0,
+        partitsPerduts: 0,
+        puntuacio: 0,
+        partitsEmpatats: 0,
+        golsAFavor: 0,
+        golsEnContra:0,
+      }
+      this.userCollectionClassificacioPunts.doc(id).set(classificacioInfo).catch((error) => {
+        window.alert(error.message);
+      });
+    }else{ 
+    } 
+  }
+
+  getClassificacio(id: string):Observable<any>{
+    return this.afs.collection('classificacions', ref => ref.where('competicioID', "==", id)).valueChanges();
   }
 }

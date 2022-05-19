@@ -7,7 +7,5 @@ export interface Equip {
     jugadors: any[];
     invitacions: string[];
     competicions: string[];
-  
-
 }
 

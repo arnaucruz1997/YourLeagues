@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-body" style="width:auto">
+        <table class = "table table-striped" >
+            <thead>
+                <tr>
+                    <th style="width: 5%"></th>
+                    <th style="width: 10%"></th>
+                    <th style="width: 30%; text-align:left;">Equip</th>
+                    <th>PT</th>
+                    <th>PJ</th>
+                    <th>PG</th>
+                    <th>PP</th>
+                    <th>PE</th>
+                    <th>GF</th>
+                    <th>GC</th>
+                    <th>DG</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="esPunts">
+                <ng-container *ngFor="let classificacio of classificacioPunts; let i=index" >
+                    <tr style="border-bottom: 1px solid #000;">
+                        <td>{{i+1}}</td>
+                        <td><img src="{{classificacio.equipImg}}" class="escut"></td>
+                        <td class="nom">{{classificacio.equipNom}}</td>
+                        <td>{{classificacio.puntuacio}}</td>
+                        <td>{{classificacio.partitsJugats}}</td>
+                        <td>{{classificacio.partitsGuanyats}}</td>
+                        <td>{{classificacio.partitsPerduts}}</td>
+                        <td>{{classificacio.partitsEmpatats}}</td>
+                        <td>{{classificacio.golsAFavor}}</td>
+                        <td>{{classificacio.golsEnContra}}</td>
+                        <td>{{classificacio.golsAFavor - classificacio.golsEnContra}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -81,7 +81,9 @@ export class CompetitionComponent implements OnInit {
     })
   }
   iniciarCompeticio(){
-    console.log("INICIADO CRACK");
+    for(let i =0; i < this.equips.length; i++){
+      this.compService.createClassificacio(this.equips[i].id, this.competition.id, this.competition.tipusSport,this.equips[i].img,this.equips[i].nom);
+    }
   }
 
 }

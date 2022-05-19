@@ -47,6 +47,7 @@ import { CompetitionComponent } from './components/competition/competition.compo
 import { ListTeamsComponent } from './components/list-teams/list-teams.component';
 import { JoinCompetitionComponent } from './components/dialogs/join-competition/join-competition.component';
 import { TeamCompetitionsListComponent } from './components/team-competitions-list/team-competitions-list.component';
+import { ClassificacioComponent } from './components/classificacio/classificacio.component';
 
 
 
@@ -74,6 +75,7 @@ import { TeamCompetitionsListComponent } from './components/team-competitions-li
     ListTeamsComponent,
     JoinCompetitionComponent,
     TeamCompetitionsListComponent,
+    ClassificacioComponent,
 
   ],
   entryComponents:[AcceptTeamComponent],

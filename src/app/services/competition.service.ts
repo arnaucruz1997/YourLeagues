@@ -211,4 +211,8 @@ export class CompetitionService {
   getPartits(id: string){
     return this.afs.collection('partits', ref => ref.where('competicioID', "==", id)).valueChanges();
   }
+
+  getPartit(id:string){
+    return this.afs.collection('partits', ref => ref.where('id', "==", id)).valueChanges();
+  }
 }

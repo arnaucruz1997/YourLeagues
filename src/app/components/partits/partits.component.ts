@@ -22,12 +22,12 @@ export class PartitsComponent implements OnInit {
         for(let partit of this.partits){
           this.parent.teamService.getTeamById(partit.equipLocal).subscribe(
             (dataEquipLocal:Equip)=>{
-              partit['infoLocal'] = dataEquipLocal;
+              partit['infoLocal'] = dataEquipLocal[0];
             }
           );
           this.parent.teamService.getTeamById(partit.equipVisitant).subscribe(
             (dataEquipVis:Equip)=>{
-              partit['infoVis'] = dataEquipVis;
+              partit['infoVis'] = dataEquipVis[0];
             }
           );
           if(this.totalJornades<partit.jornada){

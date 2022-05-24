@@ -1,9 +1,10 @@
 <div class="card">
     <div class="card-body">
-        <div class="card" *ngFor="let partit of getPartits()" style="margin-top:15px">
-            <div class="card-body ficha-partit">
-                <div class="col-sm-2"><img class="escut" [src]="partit?.infoLocal[0]?.img"></div>
-                <div class="col-sm-3"><h4>{{partit?.infoLocal[0]?.nom}}</h4></div>
+        <h1 style="color:rgb(138, 138, 138)">Jornada {{numJornada}}</h1>
+        <div class="card" *ngFor="let partit of getPartits()" style="margin-top:15px"  [routerLink]="['/competition/',partit.competicioID,'partit',partit.id]">
+            <div class="card-body ficha-partit" >
+                <div class="col-sm-2"><img class="escut" [src]="partit?.infoLocal?.img"></div>
+                <div class="col-sm-3" style="text-align: left;"><h4>{{partit?.infoLocal?.nom}}</h4></div>
                 <div class="col-sm-2 text-center">
                     <div class="row score text-center">
                         <p>1-0</p>
@@ -13,13 +14,13 @@
                         <p *ngIf="(partit.horari==null)">Horari no especificat</p>
                     </div>
                 </div>
-                <div class="col-sm-3"><h4>{{partit?.infoVis[0]?.nom}}</h4></div>
-                <div class="col-sm-2"><img class="escut" [src]="partit?.infoVis[0]?.img"></div>
+                <div class="col-sm-3" style="text-align: right;"><h4>{{partit?.infoVis?.nom}}</h4></div>
+                <div class="col-sm-2"><img class="escut" [src]="partit?.infoVis?.img"></div>
             </div>
         </div>
-        <div class="row justify-content-center" style="display: inline-block; align-items: center; justify-content: center; width:auto">
-            <div class="col" *ngFor="let item of [].constructor(11); let i = index">
-                <button style="width:45px;" (click)="setNumJornada(i+1)" class="btn-jornada"> {{i+1}} </button>
+        <div class="row justify-content-center" style="margin-top:1%">
+            <div class="col btn-wrap" *ngFor="let item of [].constructor(totalJornades); let i = index">
+                <button (click)="setNumJornada(i+1)" class="btn-jornada" [ngStyle]="{'background-color':numJornada== i+1 ? 'rgb(13, 189, 243)' : 'rgb(71,82,94)'}"> {{i+1}} </button>
             </div>
         </div>
     </div>

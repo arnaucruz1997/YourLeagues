@@ -51,6 +51,10 @@ import { TeamCompetitionsListComponent } from './components/team-competitions-li
 import { ClassificacioComponent } from './components/classificacio/classificacio.component';
 import { EstadistiquesComponent } from './components/estadistiques/estadistiques.component';
 import { PartitsComponent } from './components/partits/partits.component';
+import { PartitComponent } from './components/partit/partit.component';
+import { XatComponent } from './components/xat/xat.component';
+import { EstadistiquesPartitComponent } from './components/estadistiques-partit/estadistiques-partit.component';
+import { ResumPartitComponent } from './components/resum-partit/resum-partit.component';
 
 
 
@@ -82,6 +86,10 @@ import { PartitsComponent } from './components/partits/partits.component';
     ClassificacioComponent,
     EstadistiquesComponent,
     PartitsComponent,
+    PartitComponent,
+    XatComponent,
+    EstadistiquesPartitComponent,
+    ResumPartitComponent,
 
   ],
   entryComponents:[AcceptTeamComponent],

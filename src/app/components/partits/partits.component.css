@@ -1,0 +1,25 @@
+.escut{
+    height:50px;
+    width:50px;
+}
+.info-under-score{
+    font-size:12px;
+}
+.score{
+    font-size:25px;
+}
+
+.ficha-partit{
+    display: flex;
+    align-items: center;
+}
+h4{
+    margin-bottom: 0px;
+}
+p{
+    margin-bottom:0px;
+}
+.btn-jornada{
+    color:white;
+    background-color: rgb(13, 189, 243);
+}

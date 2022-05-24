@@ -21,7 +21,6 @@ export class ClassificacioComponent implements OnInit {
         let esport = this.parent.competition.tipusSport;
         if(esport == "Futbol 11" || esport == "Futbol 7" || esport == "Futbol Sala"|| esport == "Basquet"|| esport == "Handbol"){
             this.classificacioPunts = data;
-            console.log(this.classificacioPunts);
             this.esPunts=true;
             this.classificacioPunts.sort((a,b) => b.puntuacio - a.puntuacio);
         }else{

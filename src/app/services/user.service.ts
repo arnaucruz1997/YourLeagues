@@ -30,6 +30,9 @@ export class UserService {
       return this.afs.collection('usuaris', ref => ref.where(documentId(),'in',listIds)).valueChanges();
     }
   }
+  getUserDataById(id:string): Observable<any>{
+    return this.afs.collection('usuaris', ref => ref.where(documentId(),'==',id)).valueChanges();
+  }
   getUserInvitations(listIds:any[]): Observable<any>{
     if( listIds.length == 0){
       return of();

@@ -1,0 +1,10 @@
+.avatar{
+    height:50px;
+    width:50px;
+    border-radius: 50%;
+}
+::ng-deep .mat-paginator-container {
+
+    justify-content: center!important;
+
+}

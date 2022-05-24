@@ -2,6 +2,7 @@ table {
     table-layout:fixed;
     width:100%;
     font-family: Lato;
+    border-bottom-width: 0px;
 }
 .escut{
     width:50px;
@@ -11,6 +12,12 @@ table {
 table td{
     vertical-align: middle;
     color:rgb(109, 109, 109);
+    border-color:rgb(80,178,230);
+    padding-top:2px;
+}
+th{
+    border-color:rgb(80,178,230);
+    border-bottom-width:3px;
 }
 .nom{
     text-align:left;

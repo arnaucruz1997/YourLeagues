@@ -7,9 +7,12 @@ import { documentId, DocumentReference, FieldValue} from '@angular/fire/firestor
 import { Router, RouterLink } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { Observable, of, take } from 'rxjs';
+import { generateSchedule } from 'sports-schedule-generator';
 import { ClassificacioPunts, ClassificacioSets } from '../models/classificacio';
 import { Competicio } from '../models/competicio';
 import { Equip } from '../models/equip';
+import { EstadisticaBasquet, EstadisticaGoal } from '../models/estadistica';
+import { Partit } from '../models/partit';
 import { AuthService } from './auth.service';
 import { UploadService } from './upload.service';
 
@@ -20,6 +23,9 @@ export class CompetitionService {
   userCollectionCompeticio!: AngularFirestoreCollection<Competicio>;
   userCollectionClassificacioPunts!: AngularFirestoreCollection<ClassificacioPunts>;
   userCollectionClassificacioSets!: AngularFirestoreCollection<ClassificacioSets>;
+  userCollectionEstadisticaGoals!: AngularFirestoreCollection<EstadisticaGoal>;
+  userCollectionEstadisticaBasquet!: AngularFirestoreCollection<EstadisticaBasquet>;
+  partitsCollectionPartits!: AngularFirestoreCollection<Partit>;
   constructor(
     public authService:AuthService,
     public afs: AngularFirestore,
@@ -31,6 +37,9 @@ export class CompetitionService {
     this.userCollectionCompeticio = this.afs.collection<Competicio>('competicions');
     this.userCollectionClassificacioPunts = this.afs.collection<ClassificacioPunts>('classificacions');
     this.userCollectionClassificacioSets = this.afs.collection<ClassificacioSets>('classificacions');
+    this.userCollectionEstadisticaGoals = this.afs.collection<EstadisticaGoal>('estadistica');
+    this.userCollectionEstadisticaBasquet = this.afs.collection<EstadisticaBasquet>('estadistica');
+    this.partitsCollectionPartits = this.afs.collection<Partit>('partits');
    }
 
   createCompetition(usuari:any, file:any, competition:any, nomOrg:string){
@@ -145,5 +154,61 @@ export class CompetitionService {
 
   getClassificacio(id: string):Observable<any>{
     return this.afs.collection('classificacions', ref => ref.where('competicioID', "==", id)).valueChanges();
+  }
+
+  createEstadistiques(equipId:string, equipNom:string, jugadorId:string, compId:string, esport:string){
+    let id = this.afs.createId();
+    if(esport == "Futbol 11" || esport == "Futbol 7" || esport == "Futbol Sala"||  esport == "Handbol"){
+      const estadisticaInfo:EstadisticaGoal= {
+        id: id,
+        competicioID: compId,
+        equipId: equipId,
+        equipNom: equipNom,
+        jugadorId: jugadorId,
+        gols: 0,
+        partitsJugats: 0,
+        targetesGrogues: 0,
+        targetesVermelles: 0,
+      }
+      this.userCollectionEstadisticaGoals.doc(id).set(estadisticaInfo).catch((error) => {
+        window.alert(error.message);
+      });
+    }else if(esport == "Basquet"){
+
+    }
+  }
+  getEstadistiques(id: string){
+    return this.afs.collection('estadistica', ref => ref.where('competicioID', "==", id)).valueChanges();
+  }
+
+  createPartits(equips:any[],compId:string){
+    const schedule = generateSchedule(equips);
+    let i = 0;
+    for(let jornada of schedule){
+      i++;
+      console.log("jornada: ",i);
+      for(let partit of jornada){
+        let id = this.afs.createId();
+        const partitInfo:Partit= {
+          id: id,
+          competicioID: compId,
+          jornada: i,
+          equipLocal: partit['home'],
+          equipVisitant: partit['away'],
+          lloc: '',
+          horari: null,
+          infoLocal:null,
+          infoVis:null,
+        }
+        console.log(partitInfo);
+        this.partitsCollectionPartits.doc(id).set(partitInfo).catch((error) => {
+          window.alert(error.message);
+        });
+      }
+    }
+  }
+
+  getPartits(id: string){
+    return this.afs.collection('partits', ref => ref.where('competicioID', "==", id)).valueChanges();
   }
 }

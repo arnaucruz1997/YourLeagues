@@ -102,9 +102,9 @@
 </section>
 <section id="home" *ngIf="competition?.estatCompeticio == 'tancada'">
     <div class="row justify-content-center">
-        <div style="max-width:1000px">
+        <div style="max-width:1500px">
             <div class ="row">
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                 </div>
                 <div class="col-sm-1 align-self-center" style="margin-bottom:1%; margin-top:1%;">
                     <img [src]="competition?.img">
@@ -114,7 +114,7 @@
                 </div>
             </div>
             <div class ="row">
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="card wrap-card-lateral">
                         <div class="card-body">
                             <div class="card" (click)="tabGroup.selectedIndex=0" [ngStyle]="{'background-color':tabGroup.selectedIndex == 0 ? 'white' : 'rgb(71,82,94)','color':tabGroup.selectedIndex == 0 ? 'rgb(71,82,94)':'white'}">
@@ -189,12 +189,14 @@
                                         <mat-icon class="icono-tab">event</mat-icon>
                                         Resultats
                                     </ng-template>
+                                    <partits [parent]="this"></partits>
                                 </mat-tab>
                                 <mat-tab label="Third">
                                     <ng-template mat-tab-label>
                                         <mat-icon class="icono-tab">bar_chart</mat-icon>
                                         Estadístiques
                                     </ng-template>
+                                    <estadistiques [parent]="this"></estadistiques>
                                 </mat-tab>
                                 <mat-tab label="Fourth">
                                     <ng-template mat-tab-label>

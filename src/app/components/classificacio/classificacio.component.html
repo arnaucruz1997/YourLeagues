@@ -1,8 +1,8 @@
 <div class="card">
     <div class="card-body" style="width:auto">
-        <table class = "table table-striped" >
+        <table class = "table table-striped">
             <thead>
-                <tr>
+                <tr class="head">
                     <th style="width: 5%"></th>
                     <th style="width: 10%"></th>
                     <th style="width: 30%; text-align:left;">Equip</th>
@@ -19,7 +19,7 @@
             <tbody *ngIf="esPunts">
                 <ng-container *ngFor="let classificacio of classificacioPunts; let i=index" >
                     <tr style="border-bottom: 1px solid #000;">
-                        <td>{{i+1}}</td>
+                        <td style="border-left-width:6px" [ngStyle]="{'border-left-color':i == 0 ? 'green' : 'rgb(80,178,230)'}">{{i+1}}</td>
                         <td><img src="{{classificacio.equipImg}}" class="escut"></td>
                         <td class="nom">{{classificacio.equipNom}}</td>
                         <td>{{classificacio.puntuacio}}</td>

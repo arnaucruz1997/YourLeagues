@@ -31,6 +31,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule} from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { UploadImageComponent } from './components/upload-image/upload-image.component'
 import { DatePipe } from '@angular/common';
 import { UserResolver } from './resolvers/user.resolver';
@@ -48,6 +49,9 @@ import { ListTeamsComponent } from './components/list-teams/list-teams.component
 import { JoinCompetitionComponent } from './components/dialogs/join-competition/join-competition.component';
 import { TeamCompetitionsListComponent } from './components/team-competitions-list/team-competitions-list.component';
 import { ClassificacioComponent } from './components/classificacio/classificacio.component';
+import { EstadistiquesComponent } from './components/estadistiques/estadistiques.component';
+import { PartitsComponent } from './components/partits/partits.component';
+
 
 
 
@@ -76,6 +80,8 @@ import { ClassificacioComponent } from './components/classificacio/classificacio
     JoinCompetitionComponent,
     TeamCompetitionsListComponent,
     ClassificacioComponent,
+    EstadistiquesComponent,
+    PartitsComponent,
 
   ],
   entryComponents:[AcceptTeamComponent],
@@ -93,6 +99,7 @@ import { ClassificacioComponent } from './components/classificacio/classificacio
     MatSelectModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatPaginatorModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFirestoreModule,

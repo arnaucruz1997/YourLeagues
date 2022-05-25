@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <section id="home">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="width: 99%;">
         <div style="max-width:1000px">
             <div class="row">
                 <h2 style="padding-left:0px;">{{partit?.infoLocal?.nom}} vs {{partit?.infoVis?.nom}}</h2>
@@ -42,7 +42,7 @@
                                 </ng-template>
                                 <estadistiques-partit [parent]="this"></estadistiques-partit>
                             </mat-tab>
-                            <mat-tab label="Second">
+                            <mat-tab label="Second" *ngIf="(uid == org.id) || (uid == capiLocal.id) || (uid == capiVis.id) ">
                                 <ng-template mat-tab-label>
                                     <mat-icon class="icono-tab">chat</mat-icon>
                                         Xat

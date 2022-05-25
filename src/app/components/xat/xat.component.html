@@ -1,1 +1,62 @@
-<p>xat works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="row row-chat-wrap">
+            <div class="col-sm-9">
+                <div class="card chat-wrap">
+                    <div class="card-body">
+                        <div class="row" style="height: 410px;">
+                            <div class="card" style="height: 410px; border:none;">
+                                <div class="card-body" style="overflow:auto;">
+                                    <div *ngFor="let missatge of parent.xat.missatges">
+                                        <div class="row row-msg" *ngIf="missatge.enviador == parent.uid">
+                                            <p class="enviado">{{missatge.missatge}}</p>
+                                        </div>
+                                        <div class="row" *ngIf="missatge.enviador != parent.uid">
+                                            <p class="user-msg-recibido">{{missatge.nomEnviador}}</p>
+                                            <p class="recibido">{{missatge.missatge}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row field-wrap" style="height: 50px;">
+                            <div class="col-sm-11" style="padding-right:0px;">
+                                <mat-form-field class="form-missatge" appearance="outline">
+                                    <mat-label>Escriu un missatge...</mat-label>
+                                    <input matInput type="text" placeholder="Escriu un missatge..." autocapitalize="on" autocomplete="off" #msg id="msg">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-1">
+                                <mat-icon (click)="sendMessage(msg.value)" class="btn-send" style="font-size:35px; width:35px;">send</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <h4 style="margin-bottom:3px;">Participants</h4>
+                <div class="card chat-users">
+                    <div class="card-body" style="padding-top:0px; padding-bottom:10px;">
+
+                        <div class="row row-participant">
+                            <img src="../../../assets/imgs/captain.png" style="width:60px;"> {{parent?.capiLocal?.nom}} {{parent?.capiLocal?.cognoms}}
+
+                        </div>
+
+                        <div class="row row-participant">
+                            <img src="../../../assets/imgs/captain2.png" style="width:60px;"> {{parent?.capiVis?.nom}} {{parent?.capiVis?.cognoms}}
+
+                        </div>    
+
+                        <div class="row row-participant"> 
+                            <img src="../../../assets/imgs/org.png" style="width:60px;"> {{parent?.org?.orgName}}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

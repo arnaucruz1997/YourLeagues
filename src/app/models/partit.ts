@@ -1,4 +1,5 @@
 import { Equip } from "./equip";
+import { Xat } from "./xat";
 
 export interface Partit {
     id: string;

@@ -13,7 +13,9 @@ import { Competicio } from '../models/competicio';
 import { Equip } from '../models/equip';
 import { EstadisticaBasquet, EstadisticaGoal } from '../models/estadistica';
 import { Partit } from '../models/partit';
+import { Xat } from '../models/xat';
 import { AuthService } from './auth.service';
+import { TeamService } from './team.service';
 import { UploadService } from './upload.service';
 
 @Injectable({
@@ -26,6 +28,7 @@ export class CompetitionService {
   userCollectionEstadisticaGoals!: AngularFirestoreCollection<EstadisticaGoal>;
   userCollectionEstadisticaBasquet!: AngularFirestoreCollection<EstadisticaBasquet>;
   partitsCollectionPartits!: AngularFirestoreCollection<Partit>;
+  xatsCollection!: AngularFirestoreCollection<Xat>;
   constructor(
     public authService:AuthService,
     public afs: AngularFirestore,
@@ -33,6 +36,7 @@ export class CompetitionService {
     public uploadService: UploadService,
     public storage: AngularFireStorage,
     public datepipe: DatePipe,
+    public teamService:TeamService,
   ) {
     this.userCollectionCompeticio = this.afs.collection<Competicio>('competicions');
     this.userCollectionClassificacioPunts = this.afs.collection<ClassificacioPunts>('classificacions');
@@ -40,6 +44,7 @@ export class CompetitionService {
     this.userCollectionEstadisticaGoals = this.afs.collection<EstadisticaGoal>('estadistica');
     this.userCollectionEstadisticaBasquet = this.afs.collection<EstadisticaBasquet>('estadistica');
     this.partitsCollectionPartits = this.afs.collection<Partit>('partits');
+    this.xatsCollection = this.afs.collection<Xat>('xats');
    }
 
   createCompetition(usuari:any, file:any, competition:any, nomOrg:string){
@@ -181,7 +186,7 @@ export class CompetitionService {
     return this.afs.collection('estadistica', ref => ref.where('competicioID', "==", id)).valueChanges();
   }
 
-  createPartits(equips:any[],compId:string){
+  createPartits(equips:any[],compId:string, orgId:string){
     const schedule = generateSchedule(equips);
     let i = 0;
     for(let jornada of schedule){
@@ -200,12 +205,36 @@ export class CompetitionService {
           infoLocal:null,
           infoVis:null,
         }
-        console.log(partitInfo);
         this.partitsCollectionPartits.doc(id).set(partitInfo).catch((error) => {
           window.alert(error.message);
         });
+        let id2 = this.afs.createId();
+        this.teamService.getTeamById(partit['home']).subscribe(
+          data=>{
+            let capitaLoc = data[0].capita;
+            this.teamService.getTeamById(partit['away']).subscribe(
+              data2=>{
+                let capitaVis = data2[0].capita;
+                const xatInfo:Xat={
+                  id: id2,
+                  organitzadorID: orgId,
+                  partitID: id,
+                  capLocalId: capitaLoc,
+                  capVisId: capitaVis,
+                  missatges: [],
+                }
+                this.xatsCollection.doc(id2).set(xatInfo).catch((error) => {
+                  window.alert(error.message);
+                });
+              }
+            )
+          }
+        )
       }
     }
+    this.userCollectionCompeticio.doc(compId).update({estatCompeticio:'tancada'}).catch((error)=>{
+      window.alert(error.message);
+    });
   }
 
   getPartits(id: string){
@@ -214,5 +243,9 @@ export class CompetitionService {
 
   getPartit(id:string){
     return this.afs.collection('partits', ref => ref.where('id', "==", id)).valueChanges();
+  }
+
+  getXat(id:string){
+    return this.afs.collection('xats', ref => ref.where('partitID', "==", id)).valueChanges();
   }
 }

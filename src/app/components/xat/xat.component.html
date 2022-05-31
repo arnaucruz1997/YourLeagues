@@ -6,7 +6,7 @@
                     <div class="card-body">
                         <div class="row" style="height: 410px;">
                             <div class="card" style="height: 410px; border:none;">
-                                <div class="card-body" style="overflow:auto;">
+                                <div class="card-body" style="overflow:auto;" #scrollMe [scrollTop]="scrollMe.scrollHeight">
                                     <div *ngFor="let missatge of parent.xat.missatges">
                                         <div class="row row-msg" *ngIf="missatge.enviador == parent.uid">
                                             <p class="enviado">{{missatge.missatge}}</p>

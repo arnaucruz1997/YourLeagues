@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EnterResultComponent } from '../dialogs/enter-result/enter-result.component';
 
 @Component({
   selector: 'resum-partit',
@@ -8,9 +10,21 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ResumPartitComponent implements OnInit {
   @Input()
   parent: any;
-  constructor() { }
+  constructor(
+    public dialog:MatDialog,
+  ) { }
 
   ngOnInit(): void {
   }
-
+  openDialog(){
+    const ref = this.dialog.open(EnterResultComponent, {
+      width:'700px',
+      height:'700px',
+      data:{
+        partit: this.parent.partit,
+        resultat :this.parent.resultat,
+        competicio: this.parent.competicio,
+      }
+    })
+  }
 }

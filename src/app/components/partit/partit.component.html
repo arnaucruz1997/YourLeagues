@@ -4,6 +4,7 @@
         <div style="max-width:1000px">
             <div class="row">
                 <h2 style="padding-left:0px;">{{partit?.infoLocal?.nom}} vs {{partit?.infoVis?.nom}}</h2>
+                <button mat-raised-button class="tornar-btn" [routerLink]="['/competition/',competicio.id]">Tornar</button>
             </div>
             <div class="row">
                 <div class="card teaminfo" style="width:1500px;">
@@ -15,7 +16,8 @@
                                     <div class="col-sm-3" style="text-align: left;"><h6>{{partit?.infoLocal?.nom}}</h6></div>
                                     <div class="col-sm-2 text-center">
                                         <div class="row score text-center">
-                                            <p>1-0</p>
+                                            <p *ngIf="resultat?.guanyador == ''">N/D</p>
+                                            <p *ngIf="resultat?.guanyador != ''">{{resultat?.puntsEquipLocal}} - {{resultat?.puntsEquipVis}}</p>
                                         </div>
                                         <div class="row info-under-score">
                                             <p *ngIf="!(partit?.horari==null)">{{partit?.horari}}</p>
@@ -35,14 +37,14 @@
                                 </ng-template>
                                 <resum-partit [parent]="this"></resum-partit>
                             </mat-tab>
-                            <mat-tab label="Second">
+                            <mat-tab *ngIf="competicio.tipusSport == 'Futbol 7' || competicio.tipusSport == 'Futbol 11' || competicio.tipusSport == 'Futbol Sala'" label="Second">
                                 <ng-template mat-tab-label>
                                     <mat-icon class="icono-tab">bar_chart</mat-icon>
                                         Estadistiques
                                 </ng-template>
                                 <estadistiques-partit [parent]="this"></estadistiques-partit>
                             </mat-tab>
-                            <mat-tab label="Second" *ngIf="(uid == org.id) || (uid == capiLocal.id) || (uid == capiVis.id) ">
+                            <mat-tab label="Second" *ngIf="(uid == org?.id) || (uid == capiLocal?.id) || (uid == capiVis?.id) ">
                                 <ng-template mat-tab-label>
                                     <mat-icon class="icono-tab">chat</mat-icon>
                                         Xat

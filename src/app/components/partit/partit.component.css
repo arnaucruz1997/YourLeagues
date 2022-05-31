@@ -50,3 +50,11 @@ h6{
 p{
     margin-bottom:0px;
 }
+
+.tornar-btn{
+    background-color:rgb(71,82,94);
+    color:white;
+    margin-bottom: 1%;
+    width:auto;
+    height:auto;
+}

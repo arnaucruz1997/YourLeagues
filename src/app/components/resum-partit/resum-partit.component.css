@@ -1,0 +1,21 @@
+.vl {
+    border-left: 4px solid rgb(80,178,230);
+    height: 50px;
+    left: 50%;
+    margin-left: 50%;
+    top: 0;
+}
+.add-btn{
+    background-color:rgb(71,82,94);
+    color:white;
+    margin-bottom: 1%;
+    width:auto;
+    height:auto;
+}
+.row-quart{
+    display: flex;
+    align-items: center;
+}
+p{
+    margin-bottom: 0px;
+}

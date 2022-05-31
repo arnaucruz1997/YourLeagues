@@ -1,4 +1,5 @@
 import { Equip } from "./equip";
+import { Resultat } from "./resultat";
 import { Xat } from "./xat";
 
 export interface Partit {
@@ -11,4 +12,5 @@ export interface Partit {
     horari: Date;
     infoLocal: Equip;
     infoVis: Equip;
+    resultat: Resultat;
 }

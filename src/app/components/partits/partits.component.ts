@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Equip } from 'src/app/models/equip';
 import { Partit } from 'src/app/models/partit';
+import { Resultat } from 'src/app/models/resultat';
 
 @Component({
   selector: 'partits',
@@ -11,6 +12,7 @@ export class PartitsComponent implements OnInit {
   @Input()
   parent: any;
   partits: Partit[] = [];
+  resultats: Resultat[] = [];
   numJornada: number = 1;
   totalJornades: number = 0;
   constructor() { }
@@ -30,10 +32,17 @@ export class PartitsComponent implements OnInit {
               partit['infoVis'] = dataEquipVis[0];
             }
           );
+          this.parent.compService.getResultat(partit.id).subscribe(
+            (dataResultats:Resultat) =>{
+              partit['resultat'] = dataResultats[0];
+
+            }
+          )
           if(this.totalJornades<partit.jornada){
             this.totalJornades=partit.jornada;
           }
         }
+        console.log(this.partits);
       }
     )
   }

@@ -1,1 +1,124 @@
-<p>resum-partit works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="row" *ngIf="(parent?.uid == parent?.competicio?.organitzador)">
+            <button mat-raised-button class="add-btn" (click)="openDialog()">Editar Resultat</button>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{{parent?.partit?.infoLocal?.nom}}</h3>
+            </div>
+            <div class="col-sm-6">
+                <h3>{{parent?.partit?.infoVis?.nom}}</h3>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row" *ngIf="(parent?.competicio?.tipusSport == 'Futbol 11' || parent?.competicio?.tipusSport == 'Futbol Sala'  || parent?.competicio?.tipusSport == 'Futbol 7' || parent?.competicio?.tipusSport == 'Handbol')">
+            <div class="col-sm-5">
+                Bien
+            </div>
+            <div class="col-sm-2">
+                <div class="vl"></div>
+            </div>
+            <div class="col-sm-5">
+                
+            </div>
+        </div>
+        <div class="row" *ngIf="(parent?.competicio?.tipusSport == 'Basquet')">
+            <!--QUARTS-->
+            <div class="row"  *ngFor="let part of parent?.resultat?.parts; let i = index">
+                <div class="row text-center">
+                    <p>Quart nº {{i+1}}</p>
+                </div>
+                <div class="row row-quart">
+                    <div class="col-sm-5">
+                        <p [ngStyle]="{'color':part.puntsEquipLocal > part.puntsEquipVis ? 'green' : part.puntsEquipVis > part.puntsEquipLocal ?'red': 'orange'}">
+                            {{part.puntsEquipLocal}}
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="vl"></div>
+                    </div>
+                    <div class="col-sm-5">
+                        <p [ngStyle]="{'color':part.puntsEquipVis > part.puntsEquipLocal ? 'green' : part.puntsEquipLocal > part.puntsEquipVis ?'red': 'orange'}">
+                            {{part.puntsEquipVis}}
+                        </p>
+                    </div>   
+                </div>
+            </div>
+            <!--TOTAL-->
+            <div class="row">
+                <div class="row text-center">
+                    <p>Resultat Final</p>
+                </div>
+                <div class="row row-quart">
+                    <div class="col-sm-5">
+                        <p [ngStyle]="{'color':parent.resultat?.puntsEquipLocal > parent.resultat?.puntsEquipVis ? 'green' : 
+                            parent.resultat?.puntsEquipVis > parent.resultat?.puntsEquipLocal ?'red': 'orange'}"
+                            style="text-align:right; font-size: 20px;">
+                            {{parent.resultat?.puntsEquipLocal}}
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-5">
+                        <p [ngStyle]="{'color': parent.resultat?.puntsEquipVis > parent.resultat?.puntsEquipLocal ? 'green' :
+                             parent.resultat?.puntsEquipLocal > parent.resultat?.puntsEquipVis ?'red': 'orange'}"
+                             style="text-align:left; font-size: 20px;"
+                             >
+                            {{parent.resultat?.puntsEquipVis}}
+                        </p>
+                    </div> 
+                </div>  
+            </div>
+        </div>
+        <div class="row" *ngIf="(parent?.competicio?.tipusSport == 'Tennis' || parent?.competicio?.tipusSport == 'Padel' || parent?.competicio?.tipusSport == 'Volley')">
+           <!--QUARTS-->
+           <div class="row"  *ngFor="let part of parent?.resultat?.parts; let i = index">
+            <div class="row text-center">
+                <p>Set nº {{i+1}}</p>
+            </div>
+            <div class="row row-quart">
+                <div class="col-sm-5">
+                    <p [ngStyle]="{'color':part.puntsEquipLocal > part.puntsEquipVis ? 'green' : part.puntsEquipVis > part.puntsEquipLocal ?'red': 'orange'}">
+                        {{part.puntsEquipLocal}}
+                    </p>
+                </div>
+                <div class="col-sm-2">
+                    <div class="vl"></div>
+                </div>
+                <div class="col-sm-5">
+                    <p [ngStyle]="{'color':part.puntsEquipVis > part.puntsEquipLocal ? 'green' : part.puntsEquipLocal > part.puntsEquipVis ?'red': 'orange'}">
+                        {{part.puntsEquipVis}}
+                    </p>
+                </div>   
+            </div>
+        </div>
+        <!--TOTAL-->
+        <div class="row">
+            <div class="row text-center">
+                <p>Resultat Final</p>
+            </div>
+            <div class="row row-quart">
+                <div class="col-sm-5">
+                    <p [ngStyle]="{'color':parent.resultat?.puntsEquipLocal > parent.resultat?.puntsEquipVis ? 'green' : 
+                        parent.resultat?.puntsEquipVis > parent.resultat?.puntsEquipLocal ?'red': 'orange'}"
+                        style="text-align:right; font-size: 20px;">
+                        {{parent.resultat?.puntsEquipLocal}}
+                    </p>
+                </div>
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-5">
+                    <p [ngStyle]="{'color': parent.resultat?.puntsEquipVis > parent.resultat?.puntsEquipLocal ? 'green' :
+                         parent.resultat?.puntsEquipLocal > parent.resultat?.puntsEquipVis ?'red': 'orange'}"
+                         style="text-align:left; font-size: 20px;"
+                         >
+                        {{parent.resultat?.puntsEquipVis}}
+                    </p>
+                </div> 
+            </div>  
+        </div>
+        </div>
+    </div>
+</div>

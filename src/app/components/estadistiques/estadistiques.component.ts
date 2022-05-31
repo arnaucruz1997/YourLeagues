@@ -20,6 +20,7 @@ export class EstadistiquesComponent implements OnInit {
   estadistiquesPunts:EstadisticaBasquet[];
   esGols:boolean;
   columnas: string[] = ['pos','img','nom', 'equip', 'targetesGrogues', 'targetesVermelles','gols', 'partits']
+  columnas2: string[] = ['pos','img','nom', 'equip', 'punts', 'triples']
   constructor( private cdr: ChangeDetectorRef, public userService:UserService) { }
 
   ngOnInit(){
@@ -50,6 +51,23 @@ export class EstadistiquesComponent implements OnInit {
         }else if(esport == "Basquet"){
           this.estadistiquesPunts = data;
           this.esGols=false;
+          this.estadistiquesPunts.sort((a,b) => b.punts - a.punts);
+
+          //get noms
+          for(let estadistica of this.estadistiquesPunts){
+            this.userService.getUserDataById(estadistica.jugadorId['id']).subscribe(
+              data=>{
+                estadistica['nomJugador'] = data[0].nom;
+                estadistica['cognomJugador'] = data[0].cognoms;
+                estadistica['imgJugador'] = data[0].img;
+              }
+            )
+          }
+
+          this.dataSource = new MatTableDataSource(this.estadistiquesPunts);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.paginator.length = this.estadistiquesPunts.length;
+          this.dataSource.paginator._intl.itemsPerPageLabel = 'Pàgina';
         }
       }
     );

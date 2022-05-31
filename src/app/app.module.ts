@@ -55,6 +55,7 @@ import { PartitComponent } from './components/partit/partit.component';
 import { XatComponent } from './components/xat/xat.component';
 import { EstadistiquesPartitComponent } from './components/estadistiques-partit/estadistiques-partit.component';
 import { ResumPartitComponent } from './components/resum-partit/resum-partit.component';
+import { EnterResultComponent } from './components/dialogs/enter-result/enter-result.component';
 
 
 
@@ -90,6 +91,7 @@ import { ResumPartitComponent } from './components/resum-partit/resum-partit.com
     XatComponent,
     EstadistiquesPartitComponent,
     ResumPartitComponent,
+    EnterResultComponent,
 
   ],
   entryComponents:[AcceptTeamComponent],

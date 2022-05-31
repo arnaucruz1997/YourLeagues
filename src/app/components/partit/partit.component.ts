@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Competicio } from 'src/app/models/competicio';
 import { Equip } from 'src/app/models/equip';
 import { Partit } from 'src/app/models/partit';
+import { Resultat } from 'src/app/models/resultat';
 import { Jugador, Organitzador } from 'src/app/models/user';
 import { Xat } from 'src/app/models/xat';
 import { AuthService } from 'src/app/services/auth.service';
@@ -21,6 +23,8 @@ export class PartitComponent implements OnInit {
   capiVis:Jugador;
   org:Organitzador;
   uid:string;
+  competicio:Competicio;
+  resultat:Resultat;
   constructor(
     public route:ActivatedRoute,
     public compService:CompetitionService,
@@ -36,6 +40,11 @@ export class PartitComponent implements OnInit {
         this.compService.getPartit(data['idpartit']).subscribe(
           (data:any)=>{
             this.partit = data[0];
+            this.compService.getCompetitionById(this.partit.competicioID).subscribe(
+              (dataCompeticio:Competicio) => {
+                this.competicio = dataCompeticio[0];
+              }
+            )
             this.teamService.getTeamById(this.partit.equipLocal).subscribe(
               (dataEquipLocal:Equip)=>{
                 this.partit['infoLocal'] = dataEquipLocal[0];
@@ -65,6 +74,11 @@ export class PartitComponent implements OnInit {
                     this.org= dataOrg[0];
                   }
                 );
+              }
+            )
+            this.compService.getResultat(this.partit.id).subscribe(
+              (dataResultat:any)=>{
+                this.resultat = dataResultat[0];
               }
             )
           }

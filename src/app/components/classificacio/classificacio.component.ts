@@ -12,6 +12,7 @@ export class ClassificacioComponent implements OnInit {
   classificacioPunts:ClassificacioPunts[];
   classificacioSets:ClassificacioSets[];
   esPunts:boolean;
+  esport:string;
   constructor() { }
 
   ngOnInit(): void {
@@ -19,14 +20,11 @@ export class ClassificacioComponent implements OnInit {
     this.parent.compService.getClassificacio(this.parent.competition.id).subscribe(
       (data:any)=>{
         let esport = this.parent.competition.tipusSport;
-        if(esport == "Futbol 11" || esport == "Futbol 7" || esport == "Futbol Sala"|| esport == "Basquet"|| esport == "Handbol"){
-            this.classificacioPunts = data;
-            this.esPunts=true;
-            this.classificacioPunts.sort((a,b) => b.puntuacio - a.puntuacio);
-        }else{
-          this.classificacioSets = data;
-          this.esPunts=false;
-        }
+        this.esport = this.parent.competition.tipusSport;
+        this.classificacioPunts = data;
+        this.esPunts=true;
+        this.classificacioPunts.sort((a,b) => b.puntuacio - a.puntuacio);
+
       }
     );
   }

@@ -2,7 +2,7 @@
     <div class="card-body" style="width:auto">
         <table class = "table table-striped">
             <thead>
-                <tr class="head">
+                <tr class="head" *ngIf="esport == 'Futbol 11' || esport == 'Futbol 7' || esport == 'Futbol Sala' || esport == 'Handbol'">
                     <th style="width: 5%"></th>
                     <th style="width: 10%"></th>
                     <th style="width: 30%; text-align:left;">Equip</th>
@@ -15,8 +15,34 @@
                     <th>GC</th>
                     <th>DG</th>
                 </tr>
+                <tr class="head" *ngIf="esport == 'Basquet'">
+                    <th style="width: 5%"></th>
+                    <th style="width: 10%"></th>
+                    <th style="width: 30%; text-align:left;">Equip</th>
+                    <th>PT</th>
+                    <th>PJ</th>
+                    <th>PG</th>
+                    <th>PP</th>
+                    <th>PE</th>
+                    <th>CF</th>
+                    <th>CC</th>
+                    <th>DC</th>
+                </tr>
+                <tr class="head" *ngIf="esport == 'Tennis' || esport == 'Padel' || esport == 'Volley'">
+                    <th style="width: 5%"></th>
+                    <th style="width: 10%"></th>
+                    <th style="width: 30%; text-align:left;">Equip</th>
+                    <th>PT</th>
+                    <th>PJ</th>
+                    <th>PG</th>
+                    <th>PP</th>
+                    <th>PE</th>
+                    <th>SF</th>
+                    <th>SC</th>
+                    <th>DS</th>
+                </tr>
             </thead>
-            <tbody *ngIf="esPunts">
+            <tbody>
                 <ng-container *ngFor="let classificacio of classificacioPunts; let i=index" >
                     <tr style="border-bottom: 1px solid #000;">
                         <td style="border-left-width:6px" [ngStyle]="{'border-left-color':i == 0 ? 'green' : 'rgb(80,178,230)'}">{{i+1}}</td>

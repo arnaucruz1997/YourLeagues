@@ -87,6 +87,6 @@ export class CompetitionComponent implements OnInit {
         this.compService.createEstadistiques(this.equips[i].id, this.equips[i].nom, this.equips[i].jugadors[j], this.competition.id, this.competition.tipusSport);
       }
     }
-    this.compService.createPartits(this.competition.equips, this.competition.id, this.competition.organitzador);
+    this.compService.createPartits(this.competition.equips, this.competition.id, this.competition.organitzador, this.competition.tipusSport);
   }
 }

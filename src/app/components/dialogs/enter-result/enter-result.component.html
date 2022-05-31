@@ -1,0 +1,63 @@
+<div *ngIf="data?.competicio?.tipusSport == 'Basquet'">
+    <h1 class="text-center">Editar Resultat</h1>
+    <div class="row" *ngFor="let part of data?.resultat?.parts; let i = index">
+        <p>Quart nº{{i+1}}</p>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <h6>{{data?.partit?.infoLocal?.nom}}</h6>
+            </div>
+            <div class="col-sm-6 text-center">
+                <h6>{{data?.partit?.infoVis?.nom}}</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <mat-form-field class="form-punts" appearance="outline">
+                    <input matInput type="number" autocomplete="off" value="{{part?.puntsEquipLocal}}" id="loc_{{i}}" >
+                </mat-form-field>
+            </div>
+            <div class="col-sm-6 text-center">
+                <mat-form-field class="form-punts" appearance="outline">
+                    <input matInput type="number" autocomplete="off" value="{{part?.puntsEquipVis}}" id="vis_{{i}}">
+                </mat-form-field>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <button mat-raised-button class="save-btn" (click)="saveResult()"  mat-dialog-close>Guardar</button>
+    </div>
+</div>
+
+<div *ngIf="data?.competicio?.tipusSport == 'Padel' || data?.competicio?.tipusSport == 'Tennis' 
+    || data?.competicio?.tipusSport == 'Volley'">
+    <h1 class="text-center">Editar Resultat</h1>
+    <div class="row" *ngFor="let part of data?.resultat?.parts; let i = index">
+        <p>Quart nº{{i+1}}</p>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <h6>{{data?.partit?.infoLocal?.nom}}</h6>
+            </div>
+            <div class="col-sm-6 text-center">
+                <h6>{{data?.partit?.infoVis?.nom}}</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <mat-form-field class="form-punts" appearance="outline">
+                    <input matInput type="number" max="7" min="0" autocomplete="off" value="{{part?.puntsEquipLocal}}" id="loc_{{i}}" >
+                </mat-form-field>
+            </div>
+            <div class="col-sm-6 text-center">
+                <mat-form-field class="form-punts" appearance="outline">
+                    <input matInput type="number" max="7" min="0" autocomplete="off" value="{{part?.puntsEquipVis}}" id="vis_{{i}}">
+                </mat-form-field>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <button mat-raised-button class="save-btn" (click)="saveResult()"  mat-dialog-close>Guardar</button>
+    </div>
+</div>
+

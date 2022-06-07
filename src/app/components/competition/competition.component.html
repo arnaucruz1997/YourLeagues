@@ -143,7 +143,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card" style="margin-top:5%;" (click)="tabGroup.selectedIndex=2" [ngStyle]="{'background-color':tabGroup.selectedIndex == 2 ? 'white' : 'rgb(71,82,94)','color':tabGroup.selectedIndex == 2 ? 'rgb(71,82,94)':'white'}">
+                            <div class="card" style="margin-top:5%;" (click)="tabGroup.selectedIndex=2" [ngStyle]="{'background-color':tabGroup.selectedIndex == 2 ? 'white' : 'rgb(71,82,94)','color':tabGroup.selectedIndex == 2 ? 'rgb(71,82,94)':'white'}"
+                            *ngIf="(competition.tipusSport == 'Futbol 11' || competition.tipusSport == 'Futbol Sala' || competition.tipusSport == 'Futbol 7')"
+                            >
                                 <div class="card-body card-lateral">
                                     <div class ="row">
                                         <div class=" col-sm-1"></div>

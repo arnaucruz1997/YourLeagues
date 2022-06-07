@@ -14,9 +14,21 @@ export class ResumPartitComponent implements OnInit {
     public dialog:MatDialog,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(){
+    console.log("resultat",this.parent);
   }
   openDialog(){
+    const ref = this.dialog.open(EnterResultComponent, {
+      width:'700px',
+      height:'700px',
+      data:{
+        partit: this.parent.partit,
+        resultat :this.parent.resultat,
+        competicio: this.parent.competicio,
+      }
+    })
+  }
+  openDialogHour(){
     const ref = this.dialog.open(EnterResultComponent, {
       width:'700px',
       height:'700px',

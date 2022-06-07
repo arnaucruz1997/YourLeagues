@@ -1,7 +1,8 @@
 <div class="card">
     <div class="card-body">
         <div class="row" *ngIf="(parent?.uid == parent?.competicio?.organitzador)">
-            <button mat-raised-button class="add-btn" (click)="openDialog()">Editar Resultat</button>
+            <button mat-raised-button class="add-btn" (click)="openDialog()" style="margin-right:2%;">Editar Resultat</button>
+            <button mat-raised-button class="add-btn" (click)="openDialogHour()">Editar Horari</button>
         </div>
         <div class="row">
             <div class="col-sm-6">
@@ -11,18 +12,45 @@
                 <h3>{{parent?.partit?.infoVis?.nom}}</h3>
             </div>
         </div>
+        <hr>
         <div class="row">
         </div>
-        <div class="row" *ngIf="(parent?.competicio?.tipusSport == 'Futbol 11' || parent?.competicio?.tipusSport == 'Futbol Sala'  || parent?.competicio?.tipusSport == 'Futbol 7' || parent?.competicio?.tipusSport == 'Handbol')">
-            <div class="col-sm-5">
-                Bien
+        <div class="row" *ngIf="(parent?.competicio?.tipusSport == 'Futbol 11' || parent?.competicio?.tipusSport == 'Futbol Sala' || parent?.competicio?.tipusSport == 'Futbol 7' || parent?.competicio?.tipusSport == 'Handbol')">
+         <div class="row" *ngFor="let event of this.parent?.resultat?.events">
+            <div class="col-sm-5" >
+                <div class="row linia-event-local" *ngIf="event.jugadorEquip == this.parent.partit.equipLocal">
+                    <div class="col-sm-8">
+                        <p style="text-align:right;"> {{event.jugadorNom}} </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p> {{event.minut}} ' </p> 
+                    </div>
+                    <div class="col-sm-2">
+                        <img *ngIf="event.tipusEvent == 'Gol'" src="../../../assets/imgs/ball.png" class="event">
+                        <img *ngIf="event.tipusEvent == 'Targeta Groga'" src="../../../assets/imgs/yellow-card.png" class="event">
+                        <img *ngIf="event.tipusEvent == 'Targeta Vermella'" src="../../../assets/imgs/red-card.png" class="event">
+                    </div>
+                </div>
             </div>
             <div class="col-sm-2">
                 <div class="vl"></div>
             </div>
-            <div class="col-sm-5">
-                
+            <div class="col-sm-5" >
+                <div class="row linia-event-vis" *ngIf="event.jugadorEquip == this.parent.partit.equipVisitant">
+                    <div class="col-sm-2">
+                        <img *ngIf="event.tipusEvent == 'Gol'" src="../../../assets/imgs/ball.png" class="event">
+                        <img *ngIf="event.tipusEvent == 'Targeta Groga'" src="../../../assets/imgs/yellow-card.png" class="event">
+                        <img *ngIf="event.tipusEvent == 'Targeta Vermella'" src="../../../assets/imgs/red-card.png" class="event">
+                    </div>
+                    <div class="col-sm-2">
+                        <p> {{event.minut}} ' </p> 
+                    </div>
+                    <div class="col-sm-8">
+                        <p style="text-align:left;"> {{event.jugadorNom}} </p>
+                    </div>
+                </div>
             </div>
+         </div>
         </div>
         <div class="row" *ngIf="(parent?.competicio?.tipusSport == 'Basquet')">
             <!--QUARTS-->

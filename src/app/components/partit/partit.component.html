@@ -4,7 +4,7 @@
         <div style="max-width:1000px">
             <div class="row">
                 <h2 style="padding-left:0px;">{{partit?.infoLocal?.nom}} vs {{partit?.infoVis?.nom}}</h2>
-                <button mat-raised-button class="tornar-btn" [routerLink]="['/competition/',competicio.id]">Tornar</button>
+                <button mat-raised-button class="tornar-btn" [routerLink]="['/competition/',competicio?.id]">Tornar</button>
             </div>
             <div class="row">
                 <div class="card teaminfo" style="width:1500px;">
@@ -37,7 +37,7 @@
                                 </ng-template>
                                 <resum-partit [parent]="this"></resum-partit>
                             </mat-tab>
-                            <mat-tab *ngIf="competicio.tipusSport == 'Futbol 7' || competicio.tipusSport == 'Futbol 11' || competicio.tipusSport == 'Futbol Sala'" label="Second">
+                            <mat-tab *ngIf="competicio?.tipusSport == 'Futbol 7' || competicio?.tipusSport == 'Futbol 11' || competicio?.tipusSport == 'Futbol Sala'" label="Second">
                                 <ng-template mat-tab-label>
                                     <mat-icon class="icono-tab">bar_chart</mat-icon>
                                         Estadistiques

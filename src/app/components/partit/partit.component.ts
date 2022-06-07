@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Competicio } from 'src/app/models/competicio';
 import { Equip } from 'src/app/models/equip';
 import { Partit } from 'src/app/models/partit';
@@ -48,11 +49,26 @@ export class PartitComponent implements OnInit {
             this.teamService.getTeamById(this.partit.equipLocal).subscribe(
               (dataEquipLocal:Equip)=>{
                 this.partit['infoLocal'] = dataEquipLocal[0];
+                for(let i = 0; i < this.partit['infoLocal'].jugadors.length; i++){
+                  this.userService.getUserDataById(this.partit['infoLocal'].jugadors[i].id).subscribe(
+                    data=>{
+                      this.partit['infoLocal'].jugadors[i]['nom'] = data[0].nom +' '+ data[0].cognoms;
+                    }
+                  )
+                }
               }
             );
             this.teamService.getTeamById(this.partit.equipVisitant).subscribe(
               (dataEquipVis:Equip)=>{
                 this.partit['infoVis'] = dataEquipVis[0];
+                for(let i = 0; i < this.partit['infoVis'].jugadors.length; i++){
+                  this.userService.getUserDataById(this.partit['infoVis'].jugadors[i].id).subscribe(
+                    data=>{
+                      this.partit['infoVis'].jugadors[i]['nom'] = data[0].nom +' '+ data[0].cognoms;
+                    }
+                  )
+                }
+                console.log(this.partit['infoVis']);
               }
             );
             this.compService.getXat(this.partit.id).subscribe(
@@ -79,6 +95,8 @@ export class PartitComponent implements OnInit {
             this.compService.getResultat(this.partit.id).subscribe(
               (dataResultat:any)=>{
                 this.resultat = dataResultat[0];
+                this.resultat.events.sort((a,b) => a.minut - b.minut);
+                console.log(this.resultat.events);
               }
             )
           }

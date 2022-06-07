@@ -19,3 +19,18 @@
 p{
     margin-bottom: 0px;
 }
+.event{
+    height:25px;
+}
+
+.linia-event-local{
+   text-align:right;
+   display: flex;
+   align-items: center;
+}
+.linia-event-vis{
+    text-align:left;
+    display: flex;
+    align-items: center;
+
+}

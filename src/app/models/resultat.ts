@@ -1,4 +1,4 @@
-import { Evento } from "./evento";
+import { Evento } from "./event";
 import { Part } from "./part";
 
 export interface Resultat {

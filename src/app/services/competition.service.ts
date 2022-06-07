@@ -4,6 +4,7 @@ import { observeOutsideAngular } from '@angular/fire';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { documentId, DocumentReference, FieldValue} from '@angular/fire/firestore';
+import { FormGroup } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { Observable, of, take } from 'rxjs';
@@ -12,6 +13,7 @@ import { Classificacio, ClassificacioPunts, ClassificacioSets } from '../models/
 import { Competicio } from '../models/competicio';
 import { Equip } from '../models/equip';
 import { EstadisticaBasquet, EstadisticaGoal } from '../models/estadistica';
+import { Evento } from '../models/event';
 import { Part } from '../models/part';
 import { Partit } from '../models/partit';
 import { Resultat } from '../models/resultat';
@@ -387,5 +389,19 @@ export class CompetitionService {
       }
       classiDoc.update(classi);
     }
+  }
+  addEvent(form:FormGroup, idComp:string, partit:Partit, resultatId:string, nomJugador:string, idEquip:string){
+    let eventInfo:Evento = {
+      tipusEvent: form.get('tipus').value,
+      minut: form.get('minut').value,
+      jugadorId: form.get('nom').value,
+      jugadorNom: nomJugador,
+      jugadorEquip: idEquip,
+    };
+    let user = this.afs.collection('resultats').doc(resultatId);
+    user.update({
+      'events': firebase.firestore.FieldValue.arrayUnion(eventInfo)
+    });
+
   }
 }

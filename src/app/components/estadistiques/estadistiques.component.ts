@@ -19,7 +19,7 @@ export class EstadistiquesComponent implements OnInit {
   estadistiquesGoals:EstadisticaGoal[];
   estadistiquesPunts:EstadisticaBasquet[];
   esGols:boolean;
-  columnas: string[] = ['pos','img','nom', 'equip', 'targetesGrogues', 'targetesVermelles','gols', 'partits']
+  columnas: string[] = ['pos','img','nom', 'equip', 'targetesGrogues', 'targetesVermelles','gols']
   columnas2: string[] = ['pos','img','nom', 'equip', 'punts', 'triples']
   constructor( private cdr: ChangeDetectorRef, public userService:UserService) { }
 

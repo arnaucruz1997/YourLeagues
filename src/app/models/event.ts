@@ -1,6 +1,7 @@
 export interface Evento {
     tipusEvent: string;
-    minut: string;
+    minut: number;
     jugadorId: string;
-    quantitat: number;
+    jugadorNom: string;
+    jugadorEquip: string;
 }

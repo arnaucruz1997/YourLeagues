@@ -31,6 +31,7 @@
     "jszip": "^3.7.1",
     "minireset.css": "~0.0.4",
     "ngx-image-cropper": "^6.1.0",
+    "ngx-material-timepicker": "^5.5.3",
     "rxjs": "~7.4.0",
     "sports-schedule-generator": "^0.0.7",
     "tslib": "^2.3.0",

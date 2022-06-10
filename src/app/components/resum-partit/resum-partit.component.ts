@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EnterResultComponent } from '../dialogs/enter-result/enter-result.component';
+import { UpdateDatePartitComponent } from '../dialogs/update-date-partit/update-date-partit.component';
 
 @Component({
   selector: 'resum-partit',
@@ -15,12 +16,11 @@ export class ResumPartitComponent implements OnInit {
   ) { }
 
   ngOnInit(){
-    console.log("resultat",this.parent);
   }
   openDialog(){
     const ref = this.dialog.open(EnterResultComponent, {
       width:'700px',
-      height:'700px',
+      height:'630px',
       data:{
         partit: this.parent.partit,
         resultat :this.parent.resultat,
@@ -29,13 +29,11 @@ export class ResumPartitComponent implements OnInit {
     })
   }
   openDialogHour(){
-    const ref = this.dialog.open(EnterResultComponent, {
+    const ref = this.dialog.open(UpdateDatePartitComponent, {
       width:'700px',
-      height:'700px',
+      height:'300px',
       data:{
         partit: this.parent.partit,
-        resultat :this.parent.resultat,
-        competicio: this.parent.competicio,
       }
     })
   }

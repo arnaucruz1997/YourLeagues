@@ -30,7 +30,6 @@ export class AcceptTeamComponent implements OnInit {
         this.dorsalesLibres.push(i);
       }
     }
-    console.log("lista dorsales: ",this.dorsalesLibres);
     this.dorsal = new FormGroup({
       dorsal: new FormControl('',Validators.compose([Validators.required])),
     });

@@ -25,7 +25,6 @@ export class EnterResultComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log("resultat",this.data.resultat);
     this.event = new FormGroup({
       nom: new FormControl('',Validators.required),
       minut: new FormControl('',Validators.required),
@@ -39,16 +38,13 @@ export class EnterResultComponent implements OnInit {
     this.events = this.data.resultat.events;
   }
   getErrors(formName:string):string{
-    return('xd');
+    return('');
   }
   deleteEvent(event:Evento){
     this.compService.deleteEvent(this.data.resultat.id, event.id, event.tipusEvent, this.data.partit, event.jugadorEquip, event, this.classificacio);
     this.events.splice(this.events.indexOf(event), 1);
   }
   submitFormEvent(){
-    console.log('Formulario: ',this.event);
-    console.log('JugadorId: ',this.event.get('nom').value.id);
-    console.log('teamId: ',this.event.get('nom').value.teamId);
     if (this.event.valid){
       let nomJugador = '';
       let idEquip = '';

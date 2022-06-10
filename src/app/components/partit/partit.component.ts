@@ -68,13 +68,11 @@ export class PartitComponent implements OnInit {
                     }
                   )
                 }
-                console.log(this.partit['infoVis']);
               }
             );
             this.compService.getXat(this.partit.id).subscribe(
               (dataXat:any)=>{
                 this.xat = dataXat[0];
-                console.log(this.xat);
                 this.userService.getUserDataById(this.xat.capLocalId).subscribe(
                   dataCapiLocal=>{
                     this.capiLocal= dataCapiLocal[0];
@@ -96,7 +94,6 @@ export class PartitComponent implements OnInit {
               (dataResultat:any)=>{
                 this.resultat = dataResultat[0];
                 this.resultat.events.sort((a,b) => a.minut - b.minut);
-                console.log(this.resultat.events);
               }
             )
           }

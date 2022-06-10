@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="card-body">
+        <h1 class="tittle-inputs">Horari</h1>
+        <form novalidate [formGroup]="hora">
+            <div class="row">
+                <div class="col-sm-6 justify-content-center text-center">
+                    <h6>Dia</h6>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Dia</mat-label>
+                        <input  readonly matInput [matDatepicker]="picker" formControlName="dia">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6 justify-content-center text-center">
+                    <h6>Hora</h6>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Hora</mat-label>
+                        <input matInput type="time" formControlName="hora">
+                     </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class = "justify-content-center text-center">
+                    <button  mat-raised-button class="save-btn" (click)="submitFormHora()"  mat-dialog-close >Guardar Horari</button>
+                </div>
+            </div>     
+         </form>
+    </div>
+</div>

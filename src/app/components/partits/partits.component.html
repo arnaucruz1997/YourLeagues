@@ -11,7 +11,7 @@
                         <p *ngIf="partit?.resultat?.guanyador != ''">{{partit?.resultat?.puntsEquipLocal}} - {{partit?.resultat?.puntsEquipVis}}</p>
                     </div>
                     <div class="row info-under-score">
-                        <p *ngIf="!(partit.horari==null)">partit.horari</p>
+                        <p *ngIf="!(partit.horari==null)">{{partit?.horari.toDate() | date: 'dd-MM-yyy HH:mm' }}</p>
                         <p *ngIf="(partit.horari==null)">Horari no especificat</p>
                     </div>
                 </div>

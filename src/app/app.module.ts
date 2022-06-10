@@ -32,6 +32,8 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { UploadImageComponent } from './components/upload-image/upload-image.component'
 import { DatePipe } from '@angular/common';
 import { UserResolver } from './resolvers/user.resolver';
@@ -56,6 +58,8 @@ import { XatComponent } from './components/xat/xat.component';
 import { EstadistiquesPartitComponent } from './components/estadistiques-partit/estadistiques-partit.component';
 import { ResumPartitComponent } from './components/resum-partit/resum-partit.component';
 import { EnterResultComponent } from './components/dialogs/enter-result/enter-result.component';
+import { UpdateDatePartitComponent } from './components/dialogs/update-date-partit/update-date-partit.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 
 
@@ -92,6 +96,7 @@ import { EnterResultComponent } from './components/dialogs/enter-result/enter-re
     EstadistiquesPartitComponent,
     ResumPartitComponent,
     EnterResultComponent,
+    UpdateDatePartitComponent,
 
   ],
   entryComponents:[AcceptTeamComponent],
@@ -110,6 +115,8 @@ import { EnterResultComponent } from './components/dialogs/enter-result/enter-re
     MatProgressSpinnerModule,
     MatDialogModule,
     MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFirestoreModule,
@@ -124,7 +131,7 @@ import { EnterResultComponent } from './components/dialogs/enter-result/enter-re
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
   ],
-  providers: [AuthService, DatePipe, UserResolver],
+  providers: [AuthService, DatePipe, UserResolver,{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

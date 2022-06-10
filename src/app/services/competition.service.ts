@@ -446,6 +446,24 @@ export class CompetitionService {
       }
     )
   }
+  deleteGoalClassi(equipGol:string, equipRep:string,partit:Partit){
+    this.getClassiByCompAndTeam(equipGol,partit.competicioID).pipe(take(1)).subscribe(
+      data => {
+        let classi = this.afs.collection('classificacions').doc(data[0].id);
+        classi.update({
+          'golsAFavor': firebase.firestore.FieldValue.increment(-1)
+        });
+      }
+    );
+    this.getClassiByCompAndTeam(equipRep,partit.competicioID).pipe(take(1)).subscribe(
+      data => {
+        let classi2 = this.afs.collection('classificacions').doc(data[0].id);
+        classi2.update({
+          'golsEnContra': firebase.firestore.FieldValue.increment(-1)
+        });
+      }
+    )
+  }
   getClassiByCompAndTeam(idEquip:string, idComp: string ):Observable<any>{
     return this.afs.collection('classificacions', ref => ref.where('competicioID', "==", idComp).where('equipId', "==", idEquip)).valueChanges();
   }
@@ -560,6 +578,7 @@ export class CompetitionService {
       this.deleteGoalResultFutbol(partit,idEquip,resultatId, classificacio);
     }
     this.deleteEstadistica(partit.competicioID, idEquip, event.jugadorId, event.tipusEvent);
+    
   }
 
   deleteGoalResultFutbol(partit:Partit, idEquip:string, resultatId:string,  classificacio:ClassificacioPunts[]){
@@ -574,6 +593,12 @@ export class CompetitionService {
       });
     }
     this.recalcularGuanyador(partit.id, partit.equipLocal, partit.equipVisitant,  classificacio);
+    if(partit.equipLocal == idEquip){
+      this.deleteGoalClassi(idEquip, partit.equipVisitant, partit);
+    }else{
+      this.deleteGoalClassi(idEquip, partit.equipLocal, partit);
+    }
+
   }
 
   getEstadistica(idComp: string, idEquip:string, idJugador:string):Observable<any>{
@@ -600,7 +625,12 @@ export class CompetitionService {
       }
     )
   }
-
+  setDate(newDate:Date,partitId:string){
+    let partit = this.afs.collection('partits').doc(partitId);
+    partit.update({
+      'horari': newDate
+    });
+  }
   addEstadistica(idComp:string, idEquip:string, idJugador:string, tipusEvent:string){
     this.getEstadistica(idComp, idEquip, idJugador).pipe(take(1)).subscribe(
       data => {

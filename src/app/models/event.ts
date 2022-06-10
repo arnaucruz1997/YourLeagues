@@ -4,4 +4,5 @@ export interface Evento {
     jugadorId: string;
     jugadorNom: string;
     jugadorEquip: string;
+    id:string;
 }

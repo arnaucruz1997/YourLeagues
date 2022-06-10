@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,10 +16,12 @@ export class EnterResultComponent implements OnInit {
   classificacio:ClassificacioPunts[];
   event:FormGroup;
   events:Evento[];
+  equipId:string;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public compService:CompetitionService,
     public snackbar:MatSnackBar,
+    public afs: AngularFirestore,
   ) { }
 
   ngOnInit(): void {
@@ -38,37 +41,43 @@ export class EnterResultComponent implements OnInit {
   getErrors(formName:string):string{
     return('xd');
   }
+  deleteEvent(event:Evento){
+    this.compService.deleteEvent(this.data.resultat.id, event.id, event.tipusEvent, this.data.partit, event.jugadorEquip, event, this.classificacio);
+    this.events.splice(this.events.indexOf(event), 1);
+  }
   submitFormEvent(){
+    console.log('Formulario: ',this.event);
+    console.log('JugadorId: ',this.event.get('nom').value.id);
+    console.log('teamId: ',this.event.get('nom').value.teamId);
     if (this.event.valid){
       let nomJugador = '';
       let idEquip = '';
       for (let jugador of this.data.partit.infoLocal.jugadors){
-        if(jugador.id == this.event.get('nom').value){
+        if(jugador.id == this.event.get('nom').value.id){
           nomJugador = jugador.nom;
-          idEquip = this.data.partit.infoLocal.id;
         }
       }
       for (let jugador of this.data.partit.infoVis.jugadors){
-        if(jugador.id == this.event.get('nom').value){
+        if(jugador.id == this.event.get('nom').value.id){
           nomJugador = jugador.nom;
-          idEquip = this.data.partit.infoVis.id;
         }
       }
+      let idEvent = this.afs.createId();
       let eventInfo:Evento = {
         tipusEvent: this.event.get('tipus').value,
         minut: this.event.get('minut').value,
-        jugadorId: this.event.get('nom').value,
+        jugadorId: this.event.get('nom').value.id,
         jugadorNom:  nomJugador,
-        jugadorEquip: idEquip,
+        jugadorEquip: this.event.get('nom').value.teamId,
+        id: idEvent
       };
 
-      this.compService.addEvent(this.event, this.data.competicio.id, this.data.partit, this.data.resultat.id, nomJugador, idEquip);
+      this.compService.addEvent(this.event, this.data.competicio.id, this.data.partit, this.data.resultat.id, nomJugador, this.event.get('nom').value.teamId, idEvent, this.classificacio);
       this.events.push(eventInfo);
       this.snackbar.open('Event afegit','x');
     }else{
       this.snackbar.open('Omple tots els camps','x');
     }
-
   }
   saveResult(){
 
@@ -95,5 +104,8 @@ export class EnterResultComponent implements OnInit {
       this.compService.updateResultatGeneral(this.data.resultat.id, puntsEquipLocal, puntsEquipVis, this.data.partit.equipLocal,
       this.data.partit.equipVisitant , this.data.competicio.id, resPrevi, this.classificacio);
 
+  }
+  changeTeam(idEquip:string){
+    this.equipId = idEquip;
   }
 }

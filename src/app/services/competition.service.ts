@@ -390,18 +390,235 @@ export class CompetitionService {
       classiDoc.update(classi);
     }
   }
-  addEvent(form:FormGroup, idComp:string, partit:Partit, resultatId:string, nomJugador:string, idEquip:string){
+  addEvent(form:FormGroup, idComp:string, partit:Partit, resultatId:string, nomJugador:string, idEquip:string, idEvent:string,  classificacio:ClassificacioPunts[]){
     let eventInfo:Evento = {
       tipusEvent: form.get('tipus').value,
       minut: form.get('minut').value,
-      jugadorId: form.get('nom').value,
+      jugadorId: form.get('nom').value.id,
       jugadorNom: nomJugador,
-      jugadorEquip: idEquip,
+      jugadorEquip: form.get('nom').value.teamId,
+      id:idEvent
     };
-    let user = this.afs.collection('resultats').doc(resultatId);
-    user.update({
+    let result = this.afs.collection('resultats').doc(resultatId);
+    result.update({
       'events': firebase.firestore.FieldValue.arrayUnion(eventInfo)
     });
+    if(eventInfo.tipusEvent == 'Gol'){
+      this.addGoalResultFutbol(partit, idEquip, resultatId, classificacio);
+    }
+    this.addEstadistica(idComp, idEquip, form.get('nom').value.id, eventInfo.tipusEvent);
+  }
+  addGoalResultFutbol(partit:Partit, idEquip:string, resultatId:string, classificacio:ClassificacioPunts[]){
+    let result = this.afs.collection('resultats').doc(resultatId);
+    if(partit.equipLocal == idEquip){
+      result.update({
+        'puntsEquipLocal': firebase.firestore.FieldValue.increment(1)
+      });
+    }else if(partit.equipVisitant == idEquip){
+      result.update({
+        'puntsEquipVis': firebase.firestore.FieldValue.increment(1)
+      });
+    }
+    this.recalcularGuanyador(partit.id, partit.equipLocal, partit.equipVisitant, classificacio);
+    if(partit.equipLocal == idEquip){
+      this.addGoalClassi(idEquip, partit.equipVisitant, partit);
+    }else{
+      this.addGoalClassi(idEquip, partit.equipLocal, partit);
+    }
 
+  }
+  addGoalClassi(equipGol:string, equipRep:string,partit:Partit){
+    this.getClassiByCompAndTeam(equipGol,partit.competicioID).pipe(take(1)).subscribe(
+      data => {
+        console.log(data);
+        let classi = this.afs.collection('classificacions').doc(data[0].id);
+        classi.update({
+          'golsAFavor': firebase.firestore.FieldValue.increment(+1)
+        });
+      }
+    );
+    this.getClassiByCompAndTeam(equipRep,partit.competicioID).pipe(take(1)).subscribe(
+      data => {
+        let classi2 = this.afs.collection('classificacions').doc(data[0].id);
+        classi2.update({
+          'golsEnContra': firebase.firestore.FieldValue.increment(+1)
+        });
+      }
+    )
+  }
+  getClassiByCompAndTeam(idEquip:string, idComp: string ):Observable<any>{
+    return this.afs.collection('classificacions', ref => ref.where('competicioID', "==", idComp).where('equipId', "==", idEquip)).valueChanges();
+  }
+  recalcularGuanyador(partitId:string, localId:string, visId:string,  classificacio:ClassificacioPunts[]){
+    this.getResultat(partitId).pipe(take(1)).subscribe(
+      (data) => {
+        let result = this.afs.collection('resultats').doc(data[0].id);
+        let resPrevi = data[0].guanyador;
+        let resPost = ''
+        if (data[0].puntsEquipLocal > data[0].puntsEquipVis){
+          result.update({
+            'guanyador': localId
+          });
+          resPost = localId
+
+        }else if(data[0].puntsEquipLocal < data[0].puntsEquipVis){
+          result.update({
+            'guanyador': visId
+          });
+          resPost = visId
+        }else if(data[0].puntsEquipLocal == data[0].puntsEquipVis){
+          result.update({
+            'guanyador': 'empat'
+          });
+          resPost = 'empat'
+        }
+        for(let classi of classificacio){
+          let classiDoc = this.afs.collection('classificacions').doc(classi.id);
+          if(localId == classi.equipId){
+            if(resPrevi == ''){
+              if(resPost == localId){
+                classi.puntuacio = classi.puntuacio + 3;
+                classi.partitsGuanyats = classi.partitsGuanyats + 1;
+              }else if(resPost == 'empat'){
+                classi.puntuacio = classi.puntuacio + 1;
+                classi.partitsEmpatats = classi.partitsEmpatats + 1;
+              }else{
+                classi.partitsPerduts = classi.partitsPerduts + 1;
+              }
+              classi.partitsJugats = classi.partitsJugats + 1;
+            }else{
+              if(resPrevi != resPost){
+                if(resPrevi == localId){
+                  classi.puntuacio = classi.puntuacio - 3;
+                  classi.partitsGuanyats = classi.partitsGuanyats - 1;
+                }else if(resPrevi == 'empat'){
+                  classi.puntuacio = classi.puntuacio - 1;
+                  classi.partitsEmpatats = classi.partitsEmpatats - 1;
+                }else{
+                  classi.partitsPerduts = classi.partitsPerduts - 1;
+                }
+                if(resPost == localId){
+                  classi.puntuacio = classi.puntuacio + 3;
+                  classi.partitsGuanyats = classi.partitsGuanyats + 1;
+                }else if(resPost == 'empat'){
+                  classi.puntuacio = classi.puntuacio + 1;
+                  classi.partitsEmpatats = classi.partitsEmpatats + 1;
+                }else{
+                  classi.partitsPerduts = classi.partitsPerduts + 1;
+                }
+              }
+            } 
+          }else if(visId == classi.equipId){
+            if(resPrevi == ''){
+              if(resPost == visId){
+                classi.puntuacio = classi.puntuacio + 3;
+                classi.partitsGuanyats = classi.partitsGuanyats + 1;
+              }else if(resPost == 'empat'){
+                classi.puntuacio = classi.puntuacio + 1;
+                classi.partitsEmpatats = classi.partitsEmpatats + 1;
+              }else{
+                classi.partitsPerduts = classi.partitsPerduts + 1;
+              }
+              classi.partitsJugats = classi.partitsJugats + 1;
+            }else{
+              if(resPrevi != resPost){
+                if(resPrevi == visId){
+                  classi.puntuacio = classi.puntuacio - 3;
+                  classi.partitsGuanyats = classi.partitsGuanyats - 1;
+                }else if(resPrevi == 'empat'){
+                  classi.puntuacio = classi.puntuacio - 1;
+                  classi.partitsEmpatats = classi.partitsEmpatats - 1;
+                }else{
+                  classi.partitsPerduts = classi.partitsPerduts - 1;
+                }
+                if(resPost == visId){
+                  classi.puntuacio = classi.puntuacio + 3;
+                  classi.partitsGuanyats = classi.partitsGuanyats + 1;
+                }else if(resPost == 'empat'){
+                  classi.puntuacio = classi.puntuacio + 1;
+                  classi.partitsEmpatats = classi.partitsEmpatats + 1;
+                }else{
+                  classi.partitsPerduts = classi.partitsPerduts + 1;
+                }
+              }
+            } 
+          }
+          classiDoc.update(classi);
+        }
+      }
+    )
+
+  }
+  deleteEvent(resultatId:string, idEvent:string, tipusEvent:string, partit:Partit, idEquip:string, event:Evento, classificacio:ClassificacioPunts[]){
+    console.log(resultatId);
+    let result = this.afs.collection('resultats').doc(resultatId);
+    console.log(idEvent);
+    result.update({
+      'events': firebase.firestore.FieldValue.arrayRemove(event)
+    });
+    if(tipusEvent == 'Gol'){
+      this.deleteGoalResultFutbol(partit,idEquip,resultatId, classificacio);
+    }
+    this.deleteEstadistica(partit.competicioID, idEquip, event.jugadorId, event.tipusEvent);
+  }
+
+  deleteGoalResultFutbol(partit:Partit, idEquip:string, resultatId:string,  classificacio:ClassificacioPunts[]){
+    let result = this.afs.collection('resultats').doc(resultatId);
+    if(partit.equipLocal == idEquip){
+      result.update({
+        'puntsEquipLocal': firebase.firestore.FieldValue.increment(-1)
+      });
+    }else if(partit.equipVisitant == idEquip){
+      result.update({
+        'puntsEquipVis': firebase.firestore.FieldValue.increment(-1)
+      });
+    }
+    this.recalcularGuanyador(partit.id, partit.equipLocal, partit.equipVisitant,  classificacio);
+  }
+
+  getEstadistica(idComp: string, idEquip:string, idJugador:string):Observable<any>{
+    return this.afs.collection('estadistica', ref => ref.where('competicioID', "==", idComp).where('equipId', "==", idEquip).where('jugadorId.id', "==", idJugador)).valueChanges();
+  }
+
+  deleteEstadistica(idComp:string, idEquip:string, idJugador:string, tipusEvent:string){
+    this.getEstadistica(idComp, idEquip, idJugador).pipe(take(1)).subscribe(
+      data => {
+        let estadistica = this.afs.collection('estadistica').doc(data[0].id);
+        if(tipusEvent == 'Gol'){
+          estadistica.update({
+            'gols': firebase.firestore.FieldValue.increment(-1)
+          });
+        }else if(tipusEvent == 'Targeta Groga'){
+          estadistica.update({
+            'targetesGrogues': firebase.firestore.FieldValue.increment(-1)
+          });
+        }else if(tipusEvent == 'Targeta Vermella'){
+          estadistica.update({
+            'targetesVermelles': firebase.firestore.FieldValue.increment(-1)
+          });
+        }
+      }
+    )
+  }
+
+  addEstadistica(idComp:string, idEquip:string, idJugador:string, tipusEvent:string){
+    this.getEstadistica(idComp, idEquip, idJugador).pipe(take(1)).subscribe(
+      data => {
+        let estadistica = this.afs.collection('estadistica').doc(data[0].id);
+        if(tipusEvent == 'Gol'){
+          estadistica.update({
+            'gols': firebase.firestore.FieldValue.increment(1)
+          });
+        }else if(tipusEvent == 'Targeta Groga'){
+          estadistica.update({
+            'targetesGrogues': firebase.firestore.FieldValue.increment(1)
+          });
+        }else if(tipusEvent == 'Targeta Vermella'){
+          estadistica.update({
+            'targetesVermelles': firebase.firestore.FieldValue.increment(1)
+          });
+        }
+      }
+    )
   }
 }

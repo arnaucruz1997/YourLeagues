@@ -37,13 +37,6 @@
                                 </ng-template>
                                 <resum-partit [parent]="this"></resum-partit>
                             </mat-tab>
-                            <mat-tab *ngIf="competicio?.tipusSport == 'Futbol 7' || competicio?.tipusSport == 'Futbol 11' || competicio?.tipusSport == 'Futbol Sala'" label="Second">
-                                <ng-template mat-tab-label>
-                                    <mat-icon class="icono-tab">bar_chart</mat-icon>
-                                        Estadistiques
-                                </ng-template>
-                                <estadistiques-partit [parent]="this"></estadistiques-partit>
-                            </mat-tab>
                             <mat-tab label="Second" *ngIf="(uid == org?.id) || (uid == capiLocal?.id) || (uid == capiVis?.id) ">
                                 <ng-template mat-tab-label>
                                     <mat-icon class="icono-tab">chat</mat-icon>

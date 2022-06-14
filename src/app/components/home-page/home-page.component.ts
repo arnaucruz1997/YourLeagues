@@ -32,30 +32,32 @@ export class HomePageComponent implements OnInit {
     this.route.data.subscribe(
       data => {
         this.usuari = data['user'][0];
-        if(this.usuari.rol == "Jugador"){
-          this.jugador = data['user'][0];
-          if(this.jugador.equips.length>0){
-            this.teamService.getUserTeams(this.jugador.equips).subscribe(
-              data=>{
-                this.equips = data;
-              }
-            );
+        console.log(data);
+        if(data['user'].length != 0){
+          if(this.usuari?.rol == "Jugador"){
+            this.jugador = data['user'][0];
+            if(this.jugador.equips.length>0){
+              this.teamService.getUserTeams(this.jugador.equips).subscribe(
+                data=>{
+                  this.equips = data;
+                }
+              );
+            }else{
+              this.equips=[];
+            }
           }else{
-            this.equips=[];
-          }
-        }else{
-          this.organitzador = data['user'][0];
-          console.log(this.organitzador);
-          if(this.organitzador.competicions.length>0){
-            this.competitionService.getOrgCompetitions(this.organitzador.competicions).subscribe(
-              data=>{
-                this.competicions = data;
-                console.log("competicions: ",this.competicions);
-              }
-            );
+            this.organitzador = data['user'][0];
+            console.log(this.organitzador);
+            if(this.organitzador.competicions.length>0){
+              this.competitionService.getOrgCompetitions(this.organitzador.competicions).subscribe(
+                data=>{
+                  this.competicions = data;
+                  console.log("competicions: ",this.competicions);
+                }
+              );
+            }
           }
         }
-
       }
     )
   }

@@ -13,6 +13,8 @@ import { CreateCompetitionComponent } from './components/create-competition/crea
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { CompetitionComponent } from './components/competition/competition.component';
 import { PartitComponent } from './components/partit/partit.component';
+import { ContacteComponent } from './components/contacte/contacte.component';
+import { QuiSomComponent } from './components/qui-som/qui-som.component';
 
 const routes: Routes = [
   { path: '', component:HomePageComponent, resolve: {user : UserResolver}},
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: 'competitions', component:CompetitionsComponent, resolve:{user: UserResolver}},
   { path: 'competition/:id', component:CompetitionComponent, resolve:{user: UserResolver}},
   { path: 'competition/:id/partit/:idpartit', component:PartitComponent, resolve:{user: UserResolver}},
+  { path: 'contacte', component:ContacteComponent, canActivate:[AuthGuard], },
+  { path: 'qui-som', component:QuiSomComponent, canActivate:[AuthGuard], },
 ];
 
 @NgModule({

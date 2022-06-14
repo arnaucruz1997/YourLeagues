@@ -69,12 +69,7 @@
 .icono-tab{
     margin-right:10px;
 }
-::ng-deep .mat-form-field-underline {
-    display: none;
-  }
-::ng-deep .mat-form-field-wrapper .ng-tns-c49-0{
-    padding-bottom: 0px;
-}
+
 .my-form-field .mat-form-field-wrapper {
     margin-bottom: -1.25em;
 }

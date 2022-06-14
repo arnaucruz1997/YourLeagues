@@ -77,7 +77,8 @@ export class CompetitionService {
             solicituds:[],
             equips:[],
             nomOrganitzacio: nomOrg,
-            estatCompeticio:"oberta", 
+            estatCompeticio:"oberta",
+            numVoltes: competition.get('numVoltes').value,
           }
           this.userCollectionCompeticio.doc(id).set(compInfo).catch((error) => {
             window.alert(error.message);
@@ -188,8 +189,14 @@ export class CompetitionService {
     return this.afs.collection('estadistica', ref => ref.where('competicioID', "==", id)).valueChanges();
   }
 
-  createPartits(equips:any[],compId:string, orgId:string, tipusSport:string){
-    const schedule = generateSchedule(equips);
+  createPartits(equips:any[],compId:string, orgId:string, tipusSport:string, tipusVolta:number){
+    let schedule:any = [];
+    if(tipusVolta == 1){
+      schedule = generateSchedule(equips);
+    }else{
+      schedule = generateSchedule(equips,true);
+    }
+
     let i = 0;
     for(let jornada of schedule){
       i++;

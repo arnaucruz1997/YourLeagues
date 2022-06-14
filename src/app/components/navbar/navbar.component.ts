@@ -23,7 +23,9 @@ export class NavbarComponent implements OnInit {
     async ngOnInit() {
       this.route.data.subscribe(
         data => {
-          this.usuari = data['user'][0];
+          if(data['user'].length !=0){
+            this.usuari = data['user'][0];
+          }
         }
       );
   }

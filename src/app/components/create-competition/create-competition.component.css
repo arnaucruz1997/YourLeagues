@@ -19,3 +19,10 @@
 .tittle-inputs{
     color: rgb(13, 189, 243);
 }
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle , .mat-radio-outer-circle {
+    border-color:rgb(13, 189, 243)!important;
+}
+  
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle{
+    background-color: rgb(13, 189, 243)!important;
+}

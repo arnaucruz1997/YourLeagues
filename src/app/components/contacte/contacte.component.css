@@ -1,0 +1,66 @@
+#home{
+    background-color: rgb(184, 227, 250);
+    position:relative;
+    background-size: cover;
+    background-position: center center;
+    min-height: 95vh;
+}
+.social-card{
+    height:280px;
+    text-align: center;
+    width: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.social-card-wrap{
+    padding-right: 10%;
+    padding-left: 10%;
+}
+.social-logo{
+    border-radius:110px;
+    height:175px;
+}
+.titulo-social{
+    font-size: 18px;
+    font-family: Lato;
+    color:rgb(71,82,94);
+    margin-bottom:0px;
+}
+.arroba{
+    font-family: Lato;
+    color:rgb(184, 227, 250);
+}
+.locate-card{
+    color:rgb(80,178,230);
+}
+.metodes-contacte{
+
+    background-color:rgb(255, 255, 255);
+}
+.contacte{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.map{
+    background-color:rgb(255, 255, 255);
+    height:50px;
+}
+.row{
+    margin-right:0px;
+    margin-left:0px;
+}
+.contact-method{
+    margin-top:5%;
+}
+.contact-method-p{
+    font-family: Lato;
+    margin-left:6%;
+    font-size:15px;
+    color:rgb(184, 227, 250);
+    text-align: left;
+}
+.iconos{
+    color:rgb(71,82,94);
+}
+.titulo-general{
+    font-family: Lato;
+    color:rgb(71,82,94);
+}

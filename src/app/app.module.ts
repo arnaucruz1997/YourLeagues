@@ -34,6 +34,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatRadioModule} from '@angular/material/radio';
 import { UploadImageComponent } from './components/upload-image/upload-image.component'
 import { DatePipe } from '@angular/common';
 import { UserResolver } from './resolvers/user.resolver';
@@ -60,6 +61,8 @@ import { ResumPartitComponent } from './components/resum-partit/resum-partit.com
 import { EnterResultComponent } from './components/dialogs/enter-result/enter-result.component';
 import { UpdateDatePartitComponent } from './components/dialogs/update-date-partit/update-date-partit.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { QuiSomComponent } from './components/qui-som/qui-som.component';
+import { ContacteComponent } from './components/contacte/contacte.component';
 
 
 
@@ -97,6 +100,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     ResumPartitComponent,
     EnterResultComponent,
     UpdateDatePartitComponent,
+    QuiSomComponent,
+    ContacteComponent,
 
   ],
   entryComponents:[AcceptTeamComponent],
@@ -112,6 +117,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     MatInputModule,
     MatStepperModule,
     MatSelectModule,
+    MatRadioModule,
     MatProgressSpinnerModule,
     MatDialogModule,
     MatPaginatorModule,

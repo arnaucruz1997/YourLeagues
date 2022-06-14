@@ -12,4 +12,5 @@ export interface Competicio {
     equips:string[],
     nomOrganitzacio:string,
     estatCompeticio:string,
+    numVoltes:number,
 }

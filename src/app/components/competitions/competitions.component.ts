@@ -24,5 +24,7 @@ export class CompetitionsComponent implements OnInit {
       }
     )
   }
-
+  filtrar(){
+    
+  }
 }

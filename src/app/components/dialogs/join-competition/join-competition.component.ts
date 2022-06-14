@@ -27,7 +27,7 @@ export class JoinCompetitionComponent implements OnInit {
     for(let i =0; i < equipsUsuari.length; i++){
       if(equipsUsuari[i].capita == idUsuari){
         let trobat = false;
-        for(let j = 0; j <equipsCompeticio.length; j++){
+        for(let j = 0; j <equipsCompeticio?.length; j++){
           if (equipsUsuari[i].id == equipsCompeticio[j].id){
             trobat=true;
           }

@@ -36,6 +36,7 @@ export class CreateCompetitionComponent implements OnInit {
       competicio: new FormControl('',Validators.required),
       numEquips: new FormControl('',Validators.required),
       privacitat: new FormControl('',Validators.required),
+      numVoltes: new FormControl('',Validators.required),
     })
   }
   getErrors (formName:string):string{

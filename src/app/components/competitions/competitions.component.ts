@@ -10,7 +10,11 @@ import { CompetitionService } from 'src/app/services/competition.service';
   styleUrls: ['./competitions.component.css']
 })
 export class CompetitionsComponent implements OnInit {
-  competicions:Competicio[]
+  competicions:Competicio[];
+  compsFiltrades:Competicio[];
+  filtreEsport:string = '';
+  filtreEstat:string = '';
+  filtrat:boolean = false;
   constructor(
     public route:ActivatedRoute,
     public compService:CompetitionService
@@ -19,12 +23,43 @@ export class CompetitionsComponent implements OnInit {
   async ngOnInit() {
     this.compService.getAllCompetitions().subscribe(
       data=>{
-        console.log(data);
         this.competicions = data;
       }
     )
   }
+  changeFiltreEsport(esport:string){
+    this.filtreEsport = esport;
+  }
+  changeFiltreEstat(estat:string){
+    console.log(estat)
+    this.filtreEstat = estat;
+  }
   filtrar(){
-    
+    let compsFiltrades:Competicio[] = [];
+    if(this.filtreEstat != '' && this.filtreEsport != ''){
+      for(let competicio of this.competicions){
+        if(competicio.estatCompeticio == this.filtreEstat){
+          if(competicio.tipusSport == this.filtreEsport){
+            compsFiltrades.push(competicio);
+          }
+        }
+      }
+      this.filtrat=true;
+    }else if(this.filtreEstat !='' && this.filtreEsport == ''){
+      for(let competicio of this.competicions){
+        if(competicio.estatCompeticio == this.filtreEstat){
+          compsFiltrades.push(competicio);
+        }
+      }
+      this.filtrat=true;
+    }else if(this.filtreEstat =='' && this.filtreEsport != ''){
+      for(let competicio of this.competicions){
+        if(competicio.tipusSport == this.filtreEsport){
+          compsFiltrades.push(competicio);
+        }
+      }
+      this.filtrat=true;
+    }
+    this.compsFiltrades = compsFiltrades;
   }
 }

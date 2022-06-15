@@ -5,7 +5,6 @@
   </span>
   <div class="spacer"></div>
   <a mat-button routerLink="">Home</a>
-  <a mat-button [routerLink]="['/qui-som']">Qui som?</a>
   <a mat-button [routerLink]="['/contacte']">Contacte</a>
   <a mat-button [routerLink]="['/competitions']">Competicions</a>
   <a mat-button [routerLink]="['/register']">Registrar-se</a>
@@ -22,8 +21,8 @@
     <img class="userImg" src={{this.usuari.img}}>
     <a mat-button>{{this.usuari.nom}}</a>
     <a mat-button [routerLink]="['/my-teams']">Equips</a>
-    <a mat-button>Competicions</a>
-    <a mat-button>Partits</a>
+    <a mat-button [routerLink]="['/my-competitions']">Competicions</a>
+    <a mat-button [routerLink]="['/my-games']">Partits</a>
     <a mat-button (click)="authService.logout()"><mat-icon class="iconExit">exit_to_app</mat-icon></a>
 </mat-toolbar> 
 
@@ -35,8 +34,8 @@
     <a mat-button [routerLink]="['/competitions']">Buscar Competicions</a>
     <div class="spacer"></div>
     <img class="userImg" [src]="this.usuari.img">
-    <a mat-button>{{this.usuari.nom}}</a>
-    <a mat-button>Competicions</a>
+    <a>{{this.usuari.nom}}</a>
+    <a mat-button [routerLink]="['/my-competitions']">Competicions</a>
     <a mat-button>Partits</a>
     <a mat-button (click)="authService.logout()"><mat-icon class="iconExit">exit_to_app</mat-icon></a>
 </mat-toolbar> 

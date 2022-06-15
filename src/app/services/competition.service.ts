@@ -7,7 +7,7 @@ import { documentId, DocumentReference, FieldValue} from '@angular/fire/firestor
 import { FormGroup } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import firebase from 'firebase/compat/app';
-import { Observable, of, take } from 'rxjs';
+import { combineLatest, Observable, of, take } from 'rxjs';
 import { generateSchedule } from 'sports-schedule-generator';
 import { Classificacio, ClassificacioPunts, ClassificacioSets } from '../models/classificacio';
 import { Competicio } from '../models/competicio';
@@ -115,6 +115,33 @@ export class CompetitionService {
   }
   getCompetitionById(id: string):Observable<any>{
     return this.afs.collection('competicions', ref => ref.where(documentId(), "==", id)).valueChanges();
+  }
+  getCompDependingOnTeams(ids:string[]):Observable<any>{
+    if(ids.length == 0){
+      return of();
+    }else{
+      console.log(ids);
+      return this.afs.collection('competicions', ref => ref.where('equips', 'array-contains-any', ids)).valueChanges();
+    }
+  }
+  getPartitsDependingOnTeamsLocal(ids:string[]):Observable<any>{
+    if(ids.length == 0){
+      return of();
+    }else{
+      const q1 = this.afs.collection('partits', ref => ref.where('equipLocal', 'in', ids)).valueChanges();
+      const q2 = this.afs.collection('partits', ref => ref.where('equipVisitant', 'in', ids)).valueChanges()
+      const qfinal = combineLatest(q1,q2);
+      return qfinal;
+    }
+   
+  }
+  getPartitsDependingOnTeamsVis(ids:string[]):Observable<any>{
+    if(ids.length == 0){
+      return of();
+    }else{
+      return this.afs.collection('partits', ref => ref.where('equipLocal', 'in', ids)).valueChanges();
+    }
+   
   }
   enviarSolicitud(idEquip: string, idComp: string) {
     let user = this.afs.collection('competicions').doc(idComp);

@@ -1,0 +1,41 @@
+#home{
+    background-color: rgb(184, 227, 250);
+    position:relative;
+    background-size: cover;
+    background-position: center center;
+    min-height: 95vh;
+}
+.escut{
+    height:50px;
+    width:50px;
+}
+.info-under-score{
+    font-size:12px;
+}
+.score{
+    font-size:25px;
+}
+
+.ficha-partit{
+    display: flex;
+    align-items: center;
+    cursor:pointer;
+}
+h4{
+    margin-bottom: 0px;
+}
+p{
+    margin-bottom:0px;
+}
+.btn-jornada{
+    color:white;
+    background-color: rgb(13, 189, 243);
+    width:35px;
+    height:35px;
+    border-radius: 50%;
+    border-color: white;
+}
+.btn-wrap{
+    flex:0 6 0%;
+    padding:3px;
+}

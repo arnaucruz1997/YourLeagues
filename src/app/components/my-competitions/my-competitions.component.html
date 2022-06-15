@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<section id="home">
+    <div class="row justify-content-center" style="margin-right: 0px;">
+        <div style="max-width:1200px">
+            <div class ="row">
+                <h1>Les meves Competicions</h1>
+            </div>
+            <div class ="row">
+                <div class="card teams">
+                    <div class="card-body">
+                        <div class="card team" *ngFor="let competicio of competicions"  [routerLink]="['/competition/',competicio.id]">
+                            <div class ="row card-body team-item">
+                                <div class="col-sm-2">
+                                    <img [src]="competicio.img" class="logo-comp">
+                                </div>
+                                <div class="col-sm-7">
+                                    <h2>{{competicio.nom}}</h2>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="row" style ="color:rgb(80, 81, 83);">Equips inscrits: {{competicio.equips.length}}/{{competicio.numEquips}}</div>
+                                    <div class="row" style ="color:rgb(80, 81, 83);">Esport: {{competicio.tipusSport}}</div>
+                                    <div class="row" style ="color:rgb(80, 81, 83);">Organització: {{competicio.nomOrganitzacio}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -63,6 +63,8 @@ import { UpdateDatePartitComponent } from './components/dialogs/update-date-part
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { QuiSomComponent } from './components/qui-som/qui-som.component';
 import { ContacteComponent } from './components/contacte/contacte.component';
+import { MyCompetitionsComponent } from './components/my-competitions/my-competitions.component';
+import { MyGamesComponent } from './components/my-games/my-games.component';
 
 
 
@@ -102,6 +104,8 @@ import { ContacteComponent } from './components/contacte/contacte.component';
     UpdateDatePartitComponent,
     QuiSomComponent,
     ContacteComponent,
+    MyCompetitionsComponent,
+    MyGamesComponent,
 
   ],
   entryComponents:[AcceptTeamComponent],
